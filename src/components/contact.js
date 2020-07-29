@@ -30,7 +30,7 @@ export const Contact = () => {
               className="pl-2"
               target="__blank"
             >
-              iliasshaddaddev@gmail.com
+              iliashaddaddev@gmail.com
             </a>
           </p>
 
