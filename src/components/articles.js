@@ -29,6 +29,7 @@ export const Articles = () => {
                   title
                   slug
                   tag
+                  description
                   featuredImage {
                     childImageSharp {
                       fixed(
@@ -56,6 +57,7 @@ export const Articles = () => {
                 frontmatter {
                   title
                   slug
+                  description
                   tag
                   featuredImage {
                     childImageSharp {
@@ -76,7 +78,7 @@ export const Articles = () => {
         `}
         render={({ featuredPost, allPosts }) => (
           <>
-            <div className="grid  grid-cols-1 md:grid-cols-2 py-12 col-gap-24 row-gap-8">
+            <div className="grid  grid-cols-1 md:grid-cols-2 py-12 col-gap-24 row-gap-12">
               <Img
                 imgStyle={{ objectFit: "cover" }}
                 fixed={
@@ -94,10 +96,7 @@ export const Articles = () => {
                   {featuredPost.nodes[0].frontmatter.title}
                 </h2>
                 <p className="text-lg text-gray-500 py-4">
-                  Shopify has bee growing so fast in the last couple of years.
-                  “We made history in 2018: no other SaaS company has crossed
-                  the $1 billion-dollar revenue mark at a faster growth rate
-                  than Shopify has,” said Tobi Lütke
+                  {featuredPost.nodes[0].frontmatter.description}
                 </p>
                 <button className=" border-b-2 pt-4 pb-1 text-lg hover:border-b-2 focus:border-b-2">
                   <Link to={featuredPost.nodes[0].frontmatter.slug}>
@@ -124,10 +123,7 @@ export const Articles = () => {
                     {post.frontmatter.title}
                   </p>
                   <p className="text-lg text-gray-500 py-4">
-                    Speed plays a major role in the success of any online store.
-                    The faster your store loads, the lower the bounce rate. If
-                    your store is fast, you have a better chance of ranking on
-                    Google over slow sites that drive high bounce rates.
+                    {post.frontmatter.description}
                   </p>
                   <button className="pt-4 pb-1 text-lg border-b-2">
                     <Link to={post.frontmatter.slug}>Read Article</Link>
