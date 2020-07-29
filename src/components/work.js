@@ -33,14 +33,14 @@ export const Work = () => {
                     description
                     featuredImage {
                       childImageSharp {
-                        fixed(
-                          height: 250
-                          width: 500
+                        fluid(
+                          maxHeight: 250
+                          maxWidth: 500
                           quality: 100
                           fit: COVER
                           cropFocus: CENTER
                         ) {
-                          ...GatsbyImageSharpFixed
+                          ...GatsbyImageSharpFluid
                         }
                       }
                     }
@@ -55,8 +55,8 @@ export const Work = () => {
                 <div key={index}>
                   <Img
                     imgStyle={{ objectFit: "cover" }}
-                    fixed={
-                      project.frontmatter.featuredImage.childImageSharp.fixed
+                    fluid={
+                      project.frontmatter.featuredImage.childImageSharp.fluid
                     }
                     className="rounded h-f"
                   />

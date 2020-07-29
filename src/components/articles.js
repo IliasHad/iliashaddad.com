@@ -32,13 +32,13 @@ export const Articles = () => {
                   description
                   featuredImage {
                     childImageSharp {
-                      fixed(
-                        height: 300
-                        width: 600
+                      fluid(
+                        maxHeight: 300
+                        maxWidth: 600
                         quality: 100
                         cropFocus: ATTENTION
                       ) {
-                        ...GatsbyImageSharpFixed
+                        ...GatsbyImageSharpFluid
                       }
                     }
                   }
@@ -62,13 +62,13 @@ export const Articles = () => {
                   category
                   featuredImage {
                     childImageSharp {
-                      fixed(
-                        height: 250
-                        width: 350
+                      fluid(
+                        maxHeight: 250
+                        maxWidth: 350
                         quality: 100
                         cropFocus: ATTENTION
                       ) {
-                        ...GatsbyImageSharpFixed
+                        ...GatsbyImageSharpFluid
                       }
                     }
                   }
@@ -82,9 +82,9 @@ export const Articles = () => {
             <div className="grid  grid-cols-1 md:grid-cols-2 py-12 col-gap-24 row-gap-12">
               <Img
                 imgStyle={{ objectFit: "cover" }}
-                fixed={
+                fluid={
                   featuredPost.nodes[0].frontmatter.featuredImage
-                    .childImageSharp.fixed
+                    .childImageSharp.fluid
                 }
                 className="rounded"
               />
@@ -112,7 +112,7 @@ export const Articles = () => {
                 <div key={index}>
                   <Img
                     imgStyle={{ objectFit: "cover" }}
-                    fixed={post.frontmatter.featuredImage.childImageSharp.fixed}
+                    fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
                     className="rounded"
                   />
 

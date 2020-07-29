@@ -13,20 +13,25 @@ export const Hero = () => {
           }
           heroImage: file(base: { eq: "setup.jpg" }) {
             childImageSharp {
-              fixed(
-                height: 350
-                width: 550
+              fluid(
+                maxHeight: 350
+                maxWidth: 550
                 quality: 100
                 cropFocus: ATTENTION
               ) {
-                ...GatsbyImageSharpFixed
+                ...GatsbyImageSharpFluid
               }
             }
           }
           smallImage: file(base: { eq: "hero.jpeg" }) {
             childImageSharp {
-              fixed(height: 40, width: 40, quality: 100, cropFocus: ATTENTION) {
-                ...GatsbyImageSharpFixed
+              fluid(
+                maxHeight: 40
+                maxWidth: 40
+                quality: 100
+                cropFocus: ATTENTION
+              ) {
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -40,12 +45,12 @@ export const Hero = () => {
               Freelancer.
             </h1>
 
-            <div className="flex overflow-hidden items-center relative mt-2">
+            <div className="flex overflow-hidden max-w-full items-center relative mt-2">
               <div className="relative">
                 <Img
                   imgStyle={{ objectFit: "cover" }}
-                  fixed={data.smallImage.childImageSharp.fixed}
-                  className="inline-block h-10 w-10  mr-4 rounded-full text-white shadow-solid"
+                  fluid={data.smallImage.childImageSharp.fluid}
+                  className="inline-block h-10 w-10   mr-4 rounded-full text-white shadow-solid"
                 />{" "}
                 <span className="h-4 w-4 bg-green-400 mx-4 -mt-1 border-gray-100 border-2   rounded-full right-0 top-0  absolute"></span>
               </div>{" "}
@@ -58,7 +63,7 @@ export const Hero = () => {
           <div>
             <Img
               imgStyle={{ objectFit: "cover" }}
-              fixed={data.heroImage.childImageSharp.fixed}
+              fluid={data.heroImage.childImageSharp.fluid}
               className="rounded"
             />{" "}
           </div>
