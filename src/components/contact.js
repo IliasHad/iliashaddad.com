@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaMedium,
+  FaGithub,
+  FaProductHunt,
+} from "react-icons/fa";
 
 export const Contact = () => {
   return (
@@ -15,9 +23,37 @@ export const Contact = () => {
         </p>
 
         <div>
-          <p>Email: iliasshaddaddev@gmail.com</p>
+          <p className="py-2">
+            Email:
+            <a
+              href="mailto:iliasshaddaddev@gmail.com"
+              className="pl-2"
+              target="__blank"
+            >
+              iliasshaddaddev@gmail.com
+            </a>
+          </p>
 
-          <p className="py-4">Social Media Icons</p>
+          <div className="grid grid-cols-6  w-1/2 py-3">
+            <a href="https://web.facebook.com/iliasshaddad99/" target="__blank">
+              <FaFacebook className="h-6 w-6" />
+            </a>
+            <a href="https://www.instagram.com/iliashaddad3" target="__blank">
+              <FaInstagram className="h-6 w-6" />
+            </a>
+            <a href="https://medium.com/@iliashaddad" target="__blank">
+              <FaMedium className="h-6 w-6" />
+            </a>
+            <a href="https://twitter.com/IliasHaddad3" target="__blank">
+              <FaTwitter className="h-6 w-6" />
+            </a>
+            <a href="https://twitter.com/IliasHaddad3" target="__blank">
+              <FaGithub className="h-6 w-6" />
+            </a>
+            <a href="https://twitter.com/IliasHaddad3" target="__blank">
+              <FaProductHunt className="h-6 w-6" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
