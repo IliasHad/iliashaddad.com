@@ -11,7 +11,7 @@ import {
 export const Contact = () => {
   return (
     <section className="p-12">
-      <div className=" w-full w-2/4 ">
+      <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">
           Let&apos;s Build Something Together
         </h5>
@@ -47,10 +47,10 @@ export const Contact = () => {
             <a href="https://twitter.com/IliasHaddad3" target="__blank">
               <FaTwitter className="h-6 w-6" />
             </a>
-            <a href="https://twitter.com/IliasHaddad3" target="__blank">
+            <a href="https://github.com/IliasHad" target="__blank">
               <FaGithub className="h-6 w-6" />
             </a>
-            <a href="https://twitter.com/IliasHaddad3" target="__blank">
+            <a href="https://producthunt.com/IliasHaddad3" target="__blank">
               <FaProductHunt className="h-6 w-6" />
             </a>
           </div>
