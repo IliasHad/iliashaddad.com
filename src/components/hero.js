@@ -11,7 +11,7 @@ export const Hero = () => {
               title
             }
           }
-          heroImage: file(absolutePath: { regex: "//.*\\\\hero.jpeg$/" }) {
+          heroImage: file(base: { eq: "setup.jpg" }) {
             childImageSharp {
               fixed(
                 height: 350
@@ -23,7 +23,7 @@ export const Hero = () => {
               }
             }
           }
-          smallImage: file(absolutePath: { regex: "//.*\\\\hero.jpeg$/" }) {
+          smallImage: file(base: { eq: "hero.jpeg" }) {
             childImageSharp {
               fixed(height: 40, width: 40, quality: 100, cropFocus: ATTENTION) {
                 ...GatsbyImageSharpFixed
