@@ -20,8 +20,10 @@ jobs:
       - run: yarn
       - run: yarn clean
       - run: yarn build 
-      - name: publish to netlify
+
+      - name: Deploy to netlify
         run: npx netlify-cli deploy --dir dist --site ${{ env.NETLIFY_SITE_ID }} --auth ${{ env.NETLIFY_AUTH_TOKEN }} --message "Publishing app" --prod
-         env:
-             NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-             NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_SITE_ID }}
+  
