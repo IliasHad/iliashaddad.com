@@ -28,7 +28,7 @@ export const Articles = () => {
                 frontmatter {
                   title
                   slug
-                  tag
+                  category
                   description
                   featuredImage {
                     childImageSharp {
@@ -51,14 +51,15 @@ export const Articles = () => {
                 frontmatter: { featured: { ne: true } }
                 fileAbsolutePath: { regex: "/(blogs)/.*\\\\.md$/" }
               }
-              sort: { fields: frontmatter___date, order: ASC }
+              sort: { fields: frontmatter___date, order: DESC }
+              limit: 3
             ) {
               nodes {
                 frontmatter {
                   title
                   slug
                   description
-                  tag
+                  category
                   featuredImage {
                     childImageSharp {
                       fixed(
@@ -90,7 +91,7 @@ export const Articles = () => {
 
               <div>
                 <h5 className="text-xl  py-4 text-gray-600">
-                  {featuredPost.nodes[0].frontmatter.tag}
+                  {featuredPost.nodes[0].frontmatter.category}
                 </h5>
                 <h2 className="text-2xl font-semibold">
                   {featuredPost.nodes[0].frontmatter.title}
@@ -117,7 +118,7 @@ export const Articles = () => {
 
                   <h5 className="text-xl  py-4 text-gray-600">
                     {" "}
-                    {post.frontmatter.tag}
+                    {post.frontmatter.category}
                   </h5>
                   <p className="text-2xl font-semibold">
                     {post.frontmatter.title}
