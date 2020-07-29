@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: 12.x
       - run: yarn
+      - run: yarn clean
       - run: yarn build 
 
       - name: Deploy to netlify
