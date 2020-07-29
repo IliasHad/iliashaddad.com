@@ -30,7 +30,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     if (node.frontmatter.slug.includes("blog")) {
       createPage({
-        path: node.frontmatter.slug.toLowerCase().replace(" ", "-"),
+        path: node.frontmatter.slug,
         component: blogPostTemplate,
         context: {
           // additional data can be passed via context
@@ -39,7 +39,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       });
     } else {
       createPage({
-        path: node.frontmatter.slug.toLowerCase().replace(" ", "-"),
+        path: node.frontmatter.slug,
         component: projectTemplate,
         context: {
           // additional data can be passed via context
