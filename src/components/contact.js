@@ -50,7 +50,7 @@ export const Contact = () => {
             <a href="https://github.com/IliasHad" target="__blank">
               <FaGithub className="h-6 w-6" />
             </a>
-            <a href="https://producthunt.com/IliasHaddad3" target="__blank">
+            <a href="https://producthunt.com/@IliasHaddad3" target="__blank">
               <FaProductHunt className="h-6 w-6" />
             </a>
           </div>
