@@ -37,7 +37,8 @@ export const Work = () => {
                           height: 250
                           width: 500
                           quality: 100
-                          cropFocus: ATTENTION
+                          fit: COVER
+                          cropFocus: CENTER
                         ) {
                           ...GatsbyImageSharpFixed
                         }
@@ -57,7 +58,7 @@ export const Work = () => {
                     fixed={
                       project.frontmatter.featuredImage.childImageSharp.fixed
                     }
-                    className="rounded"
+                    className="rounded h-f"
                   />
                   <h5 className="text-xl  py-4 text-gray-600">
                     {project.frontmatter.title}
