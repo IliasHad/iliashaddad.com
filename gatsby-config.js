@@ -38,6 +38,16 @@ module.exports = {
       },
     },
 
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -52,6 +62,5 @@ module.exports = {
         name: `projects`,
       },
     },
-    `gatsby-transformer-remark`,
   ],
 };
