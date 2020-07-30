@@ -34,7 +34,12 @@ export const Contact = () => {
             </a>
           </p>
 
-          <div className="grid grid-cols-6 sm:col-gap-8  lg:col-gap-4  w-1/2 py-3">
+          <div
+            className="grid grid-cols-6 w-1/2 py-3"
+            style={{
+              columnGap: "2rem",
+            }}
+          >
             <a href="https://web.facebook.com/iliasshaddad99/" target="__blank">
               <FaFacebook className="h-6 w-6" />
             </a>
