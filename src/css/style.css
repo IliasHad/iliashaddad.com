@@ -3,3 +3,13 @@
 @tailwind components;
 /*! purgecss end ignore */
 @tailwind utilities;
+.gatsby-resp-image-wrapper {
+
+    margin:  1.5rem 0;
+}
+p + .gatsby-resp-image-wrapper  {
+color: rgba(117, 117, 117, 1);
+    font-weight: 300;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;}
