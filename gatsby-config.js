@@ -11,6 +11,26 @@ module.exports = {
     author: `@iliashaddad`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/layouts/post-layout.js"),
+        },
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 1000,
+            },
+          },
+        ],
+      },
+    },
     `gatsby-plugin-eslint`,
     `gatsby-plugin-react-helmet`,
     {
@@ -37,23 +57,13 @@ module.exports = {
         ],
       },
     },
+
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-sharp`,
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 590,
-            },
-          },
-        ],
+        defaultQuality: 100,
       },
     },
-    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
 
     {
