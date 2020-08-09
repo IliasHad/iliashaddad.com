@@ -19,10 +19,9 @@ export const Work = () => {
         <StaticQuery
           query={graphql`
             {
-              allProjects: allMarkdownRemark(
+              allProjects: allMdx(
                 filter: {
-                  frontmatter: { featured: { ne: true } }
-                  fileAbsolutePath: { regex: "/(projects)/.*\\\\.md$/" }
+                  fileAbsolutePath: { regex: "/(projects)/.*\\\\.mdx$/" }
                 }
                 sort: { fields: frontmatter___date, order: ASC }
               ) {

@@ -17,11 +17,8 @@ export const Articles = () => {
       <StaticQuery
         query={graphql`
           {
-            featuredPost: allMarkdownRemark(
-              filter: {
-                frontmatter: { featured: { eq: true } }
-                fileAbsolutePath: { regex: "/(blogs)/.*\\\\.md$/" }
-              }
+            featuredPost: allMdx(
+              filter: { fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" } }
               limit: 1
             ) {
               nodes {
@@ -46,11 +43,8 @@ export const Articles = () => {
               }
             }
 
-            allPosts: allMarkdownRemark(
-              filter: {
-                frontmatter: { featured: { ne: true } }
-                fileAbsolutePath: { regex: "/(blogs)/.*\\\\.md$/" }
-              }
+            allPosts: allMdx(
+              filter: { fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" } }
               sort: { fields: frontmatter___date, order: DESC }
               limit: 3
             ) {
