@@ -10,8 +10,8 @@ import { Footer } from "../components/footer";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
-  const { markdownRemark } = data; // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark;
+  const { mdx } = data; // data.mdx holds your post data
+  const { frontmatter, html } = mdx;
   return (
     <Layout>
       <SEO
@@ -20,7 +20,8 @@ export default function Template({
       />
       <div className=" p-12  grid grid-cols-1 items-center gap-4">
         <div className="blog-post">
-          <h1>{frontmatter.title}</h1>
+          <h1 className="text-3xl">{frontmatter.title}</h1>
+
           <h2>{frontmatter.date}</h2>
           <div
             className="blog-post-content"
@@ -36,7 +37,7 @@ export default function Template({
 
 export const pageQuery = graphql`
   query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
