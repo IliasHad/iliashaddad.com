@@ -4,28 +4,43 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-
+import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Contact } from "../components/contact";
 import { Footer } from "../components/footer";
+import Img from "gatsby-image";
+import { Author } from "../components/author";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
-  const { markdownRemark } = data; // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark;
+  const { mdx } = data; // data.mdx holds your post data
+  const { frontmatter, body, timeToRead } = mdx;
   return (
     <Layout>
       <SEO
         keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
         title={frontmatter.title}
       />
-      <div className=" p-12  grid grid-cols-1 items-center gap-4">
-        <div className="blog-post">
-          <h1>{frontmatter.title}</h1>
-          <h2>{frontmatter.date}</h2>
-          <div
-            className="blog-post-content"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+      <div>
+        <div className="py-10 ">
+          <Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
+        </div>
+
+        <div
+          className="my-12 md:px-12 px-5 "
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div className="blog-post md:max-w-2xl max-w-3xl ">
+            <h1 className="md:text-4xl text-2xl  tracking-tighter">
+              {frontmatter.title}
+            </h1>
+            <Author date={frontmatter.date} timeToRead={timeToRead} />
+
+            <MDXRenderer>{body}</MDXRenderer>
+          </div>
         </div>
       </div>
       <Contact />
@@ -36,12 +51,26 @@ export default function Template({
 
 export const pageQuery = graphql`
   query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-      html
+    mdx(frontmatter: { slug: { eq: $slug } }) {
+      body
+      timeToRead
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug
         title
+
+        featuredImage {
+          childImageSharp {
+            fluid(
+              quality: 100
+              jpegQuality: 100
+              maxHeight: 400
+              maxWidth: 1000
+            ) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
