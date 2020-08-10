@@ -26,9 +26,8 @@ export default function Template({
         <div className="py-10 ">
           <Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
         </div>
-
         <div
-          className="my-12 px-12 md:px-5 "
+          className="my-12  md:px-12 px-5 "
           style={{
             width: "100%",
             display: "flex",
