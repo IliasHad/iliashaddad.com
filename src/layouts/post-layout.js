@@ -11,6 +11,15 @@ const paragraph = (props) => (
 );
 const h3 = (props) => (
   <h3
+    className="my-8 md:text-2xl text-xl tracking-tighter"
+    style={{
+      lineHeight: "40px",
+    }}
+    {...props}
+  />
+);
+const h2 = (props) => (
+  <h2
     className="my-8 md:text-4xl text-2xl tracking-tighter"
     style={{
       lineHeight: "40px",
@@ -71,4 +80,5 @@ export const components = {
   a,
   li,
   h4,
+  h2,
 };
