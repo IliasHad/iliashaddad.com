@@ -9,6 +9,8 @@ import { Contact } from "../components/contact";
 import { Footer } from "../components/footer";
 import Img from "gatsby-image";
 import { Author } from "../components/author";
+import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
@@ -38,8 +40,9 @@ export default function Template({
               {frontmatter.title}
             </h1>
             <Author date={frontmatter.date} timeToRead={timeToRead} />
-
-            <MDXRenderer>{body}</MDXRenderer>
+            <MdxEmbedProvider>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MdxEmbedProvider>
           </div>
         </div>
       </div>

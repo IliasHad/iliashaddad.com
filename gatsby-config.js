@@ -11,6 +11,7 @@ module.exports = {
     author: `@iliashaddad`,
   },
   plugins: [
+    `@pauliescanlon/gatsby-mdx-embed`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
