@@ -26,7 +26,7 @@ export default function Template({
         <div className="py-10 ">
           <Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
         </div>
-        <div
+        <article
           className="my-12  md:px-12 px-5 "
           style={{
             width: "100%",
@@ -43,7 +43,7 @@ export default function Template({
               <MDXRenderer>{body}</MDXRenderer>
             </MdxEmbedProvider>
           </div>
-        </div>
+        </article>
       </div>
       <Contact />
       <Footer />
@@ -65,7 +65,7 @@ export const pageQuery = graphql`
           childImageSharp {
             fluid(
               quality: 100
-              jpegQuality: 100
+              pngQuality: 100
               maxHeight: 400
               maxWidth: 1000
             ) {
