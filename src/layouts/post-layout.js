@@ -4,16 +4,44 @@ const paragraph = (props) => (
   <p
     className="my-6"
     style={{
-      marginBottom: "0.8125rem",
+      letterSpacing: "-0.003em",
+      lineHeight: "32px",
+      marginTop: "2em",
+      wordBreak: "break-word",
     }}
     {...props}
   />
 );
+
 const h3 = (props) => (
   <h3
     className="my-8 md:text-2xl text-xl tracking-tighter"
     style={{
       lineHeight: "40px",
+    }}
+    {...props}
+  />
+);
+
+const h1 = (props) => (
+  <h1
+    className="my-8 md:text-2xl text-xl tracking-tighter"
+    style={{
+      lineHeight: "40px",
+      marginTop: "1.95em",
+      marginBottom: "-0.28em",
+      letterSpacing: "-0.022em",
+    }}
+    {...props}
+  />
+);
+
+const blockquote = (props) => (
+  <blockquote
+    style={{
+      background: "rgb(242, 242, 242)",
+      marginTop: "56px",
+      padding: "5px 20px",
     }}
     {...props}
   />
@@ -81,4 +109,6 @@ export const components = {
   li,
   h4,
   h2,
+  h1,
+  blockquote,
 };
