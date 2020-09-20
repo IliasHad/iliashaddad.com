@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 export const Author = ({ date, timeToRead }) => {
   return (
-    <div className="grid  grid-cols-1 md:grid-cols-2 py-12 col-gap-24 row-gap-12">
+    <div className="grid  grid-cols-1 py-12 col-gap-24 row-gap-12">
       <StaticQuery
         query={graphql`
           query {
@@ -38,7 +38,7 @@ export const Author = ({ date, timeToRead }) => {
             </div>
             <div>
               <p className="text-md">{site.siteMetadata.title}</p>
-              <p className="text-gray-700 text-md">
+              <p className="text-gray-700 block text-md">
                 {date} - {timeToRead} min read
               </p>
             </div>
