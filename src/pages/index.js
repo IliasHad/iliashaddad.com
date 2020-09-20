@@ -5,7 +5,7 @@ import { Hero } from "../components/hero";
 import { About } from "../components/about";
 import { Contact } from "../components/contact";
 import { Articles } from "../components/articles";
-import { Footer } from "../components/footer";
+import { Testimonials } from "../components/testimonials";
 
 function IndexPage() {
   return (
@@ -18,8 +18,8 @@ function IndexPage() {
       <Hero />
       <About />
       <Articles />
+      <Testimonials />
       <Contact />
-      <Footer />
     </Layout>
   );
 }
