@@ -13,3 +13,29 @@ color: rgba(117, 117, 117, 1);
     line-height: 20px;
     font-size: 16px;
     text-align: center;}
+
+    .blog-page  .gatsby-image-wrapper img {
+   
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 10px 20px rgba(0,0,0,.05);
+        margin-bottom: 20px;
+        transition: .8s cubic-bezier(.2,.8,.2,1);
+    }
+   
+
+    @media only screen and (max-width: 600px) {
+        .contact-page {
+
+            grid-template-columns: 1fr !important 
+        }
+      }
+  
+
+      .dark-theme .contact-page input, .dark-theme .contact-page select,  .dark-theme .contact-page textarea  {
+
+        background-color: black !important;
+      }
+      .dark-theme .contact-page button{
+
+        background-color: white !important;
+      }
