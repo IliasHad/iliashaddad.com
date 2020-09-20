@@ -42,6 +42,13 @@ module.exports = {
               maxWidth: 1000,
             },
           },
+          // The only required option is the domain
+          {
+            resolve: `gatsby-plugin-plausible`,
+            options: {
+              domain: `iliashaddad.com`,
+            },
+          },
         ],
       },
     },
