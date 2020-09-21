@@ -63,7 +63,12 @@ function ContactPage() {
           </div>
         </div>
         <div>
-          <div className="grid md:grid-cols-2 grid-cols-1 ">
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            className="grid md:grid-cols-2 grid-cols-1 "
+          >
             <div className="p-2 ">
               <label htmlFor="name" className="text-base ">
                 Name
@@ -72,7 +77,7 @@ function ContactPage() {
                 className="w-full rounded border my-2  focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
                 placeholder="Name"
                 type="text"
-                name="name"
+                name="Name"
                 id="name"
               />
             </div>
@@ -85,7 +90,7 @@ function ContactPage() {
                 className="w-full  rounded border my-2  focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
                 placeholder="Email"
                 type="email"
-                name="email"
+                name="Email"
                 id="email"
               />
             </div>
@@ -95,7 +100,7 @@ function ContactPage() {
               </label>
               <select
                 id="project-type"
-                name="project type"
+                name="Project Type"
                 required
                 className="w-full my-2  rounded border focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
               >
@@ -147,7 +152,7 @@ function ContactPage() {
                 Submit
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
 
