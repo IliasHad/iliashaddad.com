@@ -9,7 +9,7 @@ function Layout({ children }) {
     <ThemeContext.Consumer>
       {(theme) => (
         <div
-          className={theme.darkMode ? "text-white  bg-black " : "dark-theme"}
+          className={theme.darkMode ? "text-white  bg-black  dark-theme" : ""}
         >
           <Header />
 

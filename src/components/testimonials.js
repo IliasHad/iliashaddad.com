@@ -2,7 +2,7 @@ import React from "react";
 
 export const Testimonials = () => {
   return (
-    <section className="p-12">
+    <section className="p-12 testimonials">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">Testimonials</h5>
       </div>
@@ -11,7 +11,7 @@ export const Testimonials = () => {
       </div>
       <div className="flex flex-wrap  py-4">
         <div className="p-4 md:w-1/2 w-full">
-          <div className="h-full bg-gray-200 p-8 rounded">
+          <div className="h-full bg-gray-200  testimonials-item p-8 rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"

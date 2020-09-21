@@ -34,8 +34,22 @@ color: rgba(117, 117, 117, 1);
       .dark-theme .contact-page input, .dark-theme .contact-page select,  .dark-theme .contact-page textarea  {
 
         background-color: black !important;
+        color: #fff !important;
       }
       .dark-theme .contact-page button{
 
         background-color: white !important;
+        color:#000 !important
       }
+
+
+      .dark-theme  .testimonials-item {
+        color:#000 !important
+
+      }
+
+
+    .dark-theme a {
+        color: #fff !important;
+    }
+    
