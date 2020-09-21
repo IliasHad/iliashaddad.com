@@ -7,6 +7,7 @@
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
     "@pauliescanlon/gatsby-mdx-embed": "^0.0.25",
+    "axios": "^0.20.0",
     "gatsby": "^2.24.63",
     "gatsby-image": "^2.4.14",
     "gatsby-plugin-manifest": "2.4.22",

@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Contact } from "../components/contact";
+import axios from "axios";
+
 import {
   FaFacebook,
   FaTwitter,
@@ -26,13 +28,11 @@ function ContactPage() {
       email: email.current.value,
       message: message.current.value,
     };
-    fetch("https://my-portfolio-serveless.vercel.app/contact", {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data); // JSON data parsed by `data.json()` call
+    axios
+      .post(`https://my-portfolio-serveless.vercel.app/contact`, { data })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
       });
   };
   return (
