@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Contact } from "../components/contact";
@@ -18,6 +18,7 @@ function ContactPage() {
   const name = useRef();
   const email = useRef();
   const message = useRef();
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,12 +29,12 @@ function ContactPage() {
       email: email.current.value,
       message: message.current.value,
     };
-    axios
-      .post(`https://my-portfolio-serveless.vercel.app/contact`, { data })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+    axios.post(`/.netlify/functions/contact-form`, { data }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+
+      setSuccess(JSON.parse(res.data.success));
+    });
   };
   return (
     <Layout>
@@ -92,6 +93,33 @@ function ContactPage() {
             name="contact"
             className="grid md:grid-cols-2 grid-cols-1 "
           >
+            {success && (
+              <div
+                style={{
+                  gridColumn: "1/-1",
+                }}
+                className="bg-teal-100 my-2 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                role="alert"
+              >
+                <div className="flex">
+                  <div className="py-1">
+                    <svg
+                      className="fill-current h-6 w-6 text-teal-500 mr-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-bold">Your project details has sent</p>
+                    <p className="text-sm">
+                      Reply time: within 1-2 working days
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="p-2 ">
               <label htmlFor="name" className="text-base ">
                 Name
@@ -170,6 +198,7 @@ function ContactPage() {
                 placeholder="Project Details"
               ></textarea>
             </div>
+
             <div
               className="p-2 "
               style={{
