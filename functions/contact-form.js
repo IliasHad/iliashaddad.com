@@ -15,19 +15,19 @@ const mailer = nodemailer.createTransport({
 });
 
 exports.handler = function (event, context, callback) {
-  const subject = `New ${req.body.projectType} Project with ${req.body.budget}`;
-
+  const body = JSON.parse(event.body);
+  const subject = `New ${body.projectType} Project with ${body.budget}`;
   mailer.sendMail(
     {
-      from: req.body.email,
+      from: body.email,
       to: [contactAddress],
       subject: subject || "[No subject]",
       html:
         `  
-        <h2> ${req.body.projectType} - ${req.body.budget} </h2>
-        <p>${req.body.message}</p>
+        <h2> ${body.projectType} - ${body.budget} </h2>
+        <p>${body.message}</p>
       <br>
-      This email sent by ${req.body.email}
+      This email sent by ${body.email}
       ` || "[No message]",
     },
     function (error, info) {
