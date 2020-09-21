@@ -14,7 +14,7 @@ const mailer = nodemailer.createTransport({
   },
 });
 
-exports.handler = async function () {
+exports.handler = function (event, context, callback) {
   const subject = `New ${req.body.projectType} Project with ${req.body.budget}`;
 
   mailer.sendMail(
@@ -30,16 +30,15 @@ exports.handler = async function () {
       This email sent by ${req.body.email}
       ` || "[No message]",
     },
-    function (err, info) {
-      if (!err)
-        return {
+    function (error, info) {
+      if (error) {
+        callback(error);
+      } else {
+        callback(null, {
           statusCode: 200,
-          body: "Success",
-        };
-      return {
-        statusCode: 500,
-        body: "Error",
-      };
+          body: "Ok",
+        });
+      }
     }
   );
 };
