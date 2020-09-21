@@ -1,37 +1,45 @@
 const nodemailer = require("nodemailer");
 
-exports.handler = function (event, context, callback) {
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      type: "OAuth2",
-      user: process.env.MAIL_LOGIN,
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      refreshToken: process.env.REFRESH_TOKEN,
-      accessToken: process.env.ACCESS_TOKEN,
-    },
-  });
-  console.log(event.body);
+const contactAddress = process.env.EMAIL;
+const mailer = nodemailer.createTransport({
+  service: "gmail", //smtp.gmail.com  //in place of service use host...
+  secure: false, //true
+  port: 25, //465
+  auth: {
+    user: process.env.GMAIL_ADDRESS,
+    pass: process.env.GMAIL_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
-  transporter.sendMail(
+exports.handler = async function () {
+  const subject = `New ${req.body.projectType} Project with ${req.body.budget}`;
+
+  mailer.sendMail(
     {
-      from: process.env.MAIL_LOGIN,
-      to: process.env.MAIL_TO,
-      subject: process.env.SUBJECT + new Date().toLocaleString(),
-      text: event.body,
+      from: req.body.email,
+      to: [contactAddress],
+      subject: subject || "[No subject]",
+      html:
+        `  
+        <h2> ${req.body.projectType} - ${req.body.budget} </h2>
+        <p>${req.body.message}</p>
+      <br>
+      This email sent by ${req.body.email}
+      ` || "[No message]",
     },
-    function (error, info) {
-      if (error) {
-        callback(error);
-      } else {
-        callback(null, {
+    function (err, info) {
+      if (!err)
+        return {
           statusCode: 200,
-          body: "Ok",
-        });
-      }
+          body: "Success",
+        };
+      return {
+        statusCode: 500,
+        body: "Error",
+      };
     }
   );
 };
