@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Contact } from "../components/contact";
@@ -11,6 +11,30 @@ import {
   FaProductHunt,
 } from "react-icons/fa";
 function ContactPage() {
+  const projectType = useRef();
+  const budget = useRef();
+  const name = useRef();
+  const email = useRef();
+  const message = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      projectType: projectType.current.value,
+      budget: budget.current.value,
+      name: name.current.value,
+      email: email.current.value,
+      message: message.current.value,
+    };
+    fetch("https://my-portfolio-serveless.vercel.app/contact", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data); // JSON data parsed by `data.json()` call
+      });
+  };
   return (
     <Layout>
       <SEO
@@ -64,9 +88,8 @@ function ContactPage() {
         </div>
         <div>
           <form
+            onSubmit={handleSubmit}
             name="contact"
-            method="POST"
-            data-netlify="true"
             className="grid md:grid-cols-2 grid-cols-1 "
           >
             <div className="p-2 ">
@@ -74,6 +97,7 @@ function ContactPage() {
                 Name
               </label>
               <input
+                ref={name}
                 className="w-full rounded border my-2  focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
                 placeholder="Name"
                 type="text"
@@ -92,6 +116,7 @@ function ContactPage() {
                 type="email"
                 name="Email"
                 id="email"
+                ref={email}
               />
             </div>
             <div className="p-2 ">
@@ -99,6 +124,7 @@ function ContactPage() {
                 Type of project
               </label>
               <select
+                ref={projectType}
                 id="project-type"
                 name="Project Type"
                 required
@@ -115,6 +141,7 @@ function ContactPage() {
                 Budget
               </label>
               <select
+                ref={budget}
                 id="budget"
                 name="Budget"
                 required
@@ -137,6 +164,7 @@ function ContactPage() {
               </label>
 
               <textarea
+                ref={message}
                 id="project-details"
                 className="w-full my-2  rounded border focus:outline-none h-48 focus:border-indigo-500 text-base px-4 py-2 resize-none block"
                 placeholder="Project Details"
