@@ -13,8 +13,12 @@ module.exports = {
   },
   plugins: [
     `@pauliescanlon/gatsby-mdx-embed`,
+    `gatsby-plugin-advanced-sitemap`,
+    `gatsby-plugin-robots-txt`,
+
     {
       resolve: `gatsby-plugin-mdx`,
+
       options: {
         defaultLayouts: {
           default: require.resolve("./src/layouts/post-layout.js"),
