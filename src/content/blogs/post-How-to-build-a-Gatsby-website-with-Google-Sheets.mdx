@@ -28,15 +28,27 @@ Recently I created a Gatsby website that uses Google sheets as Database and. It 
 
 First, install gatsby-cli globally
 
-yarn global add gatsby-cli
+```javascript
+
+ yarn global add gatsby-cli
+ 
+ ```
 
 Second, Create a new Gatsby website
 
+```javascript 
+
 gatsby new gatsby-google-sheets-starter 
+
+```
 
 Finally, run the Gatsby website
 
-cd gatsby-google-sheets-starte && yarn develop
+```javascript
+
+gatsby-google-sheets-starte && yarn develop
+
+````
 
 ### **Install and Config Gatsby Google Sheets Source Plugin**
 
@@ -52,11 +64,18 @@ First, you need to get Google Sheets API credentials to be able to read data fro
 
 Second, you need to install the gatsby source google sheets
 
-yarn add gatsby-source-google-sheets
+```javascript
 
+ yarn add gatsby-source-google-sheets
+
+```
 Third, add the plugin in gatsby-config.js
 
-spreadsheetId= the id is after the [https://docs.google.com/spreadsheets/d/](https://docs.google.com/spreadsheets/d/)YOUR ID/edit#gid=0
+```javascript
+
+spreadsheetId= // the id is after the [https://docs.google.com/spreadsheets/d/](https://docs.google.com/spreadsheets/d/)YOUR ID/edit#gid=0
+
+```
 
 ### Fetch remote images and make them ready to use in Gatbsy Image
 
@@ -64,7 +83,11 @@ Note: I’ll use this G[oogle Sheet](https://docs.google.com/spreadsheets/d/1L0a
 
 First, install gatsby-source-filesystem
 
-yarn add gatsby-source-filesystem
+```javascript 
+
+ yarn add gatsby-source-filesystem 
+ 
+ ```
 
 Second, add this code to gatsby-node.js
 
@@ -76,7 +99,11 @@ First, change pages/index.js file
 
 Second, run the gatsby website
 
+```javascript
+
 gatsby develop
+
+```
 
 Voila, You have a Gatsby website powered by Google Sheets
 

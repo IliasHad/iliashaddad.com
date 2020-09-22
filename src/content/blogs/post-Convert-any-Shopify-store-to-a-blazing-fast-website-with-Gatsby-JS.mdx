@@ -45,8 +45,11 @@ Demo Store: [https://ilias-shopify-gatsby.netlify.app/](https://ilias-shopify-ga
 
 ### **Setup new Gatsby Website**
 
-gatsby new shopify-store [https://github.com/IliasHad/gatsby-shopify-starter](https://github.com/IliasHad/gatsby-shopify-starter)
+```javascript
 
+ gatsby new shopify-store [https://github.com/IliasHad/gatsby-shopify-starter](https://github.com/IliasHad/gatsby-shopify-starter)
+
+```
 
 ### Get API access token to your Shopify shop
 
@@ -60,9 +63,14 @@ Allow Gatbsy to read your Shopify store data
 
 After the private app is created, you will get an API key to access your Shopify store data
 
-> SHOP\_NAME=YOUR SHOPIFY STORE NAME
+```javascript
 
-> SHOPIFY\_ACCESS\_TOKEN=YOUR API KEY
+ SHOP_NAME=YOUR SHOPIFY STORE NAME
+ SHOPIFY_ACCESS_TOKEN=YOUR API KEY
+
+```
+
+
 
 You need to change the environment variable in .env.development file (if you want to just test a demo) and in .env.production with production store API key and name
 
@@ -72,7 +80,11 @@ SHOPIFY\_ACCESS\_TOKEN is the API key you got when you created the private appli
 
 Finally, you need to run gatsby develop to run the website
 
-gatsby develop
+```javascript
+
+  gatsby develop
+
+```
 
 Voila, you have a Gatsby website powered by your Shopify store data
 
