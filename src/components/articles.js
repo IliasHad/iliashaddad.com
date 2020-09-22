@@ -18,7 +18,10 @@ export const Articles = () => {
         query={graphql`
           {
             featuredPost: allMdx(
-              filter: { fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" } }
+              filter: {
+                fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" }
+                frontmatter: { featured: { eq: true } }
+              }
               limit: 1
             ) {
               nodes {
