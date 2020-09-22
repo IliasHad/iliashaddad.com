@@ -5,7 +5,6 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import Img from "gatsby-image";
 import { Author } from "../components/author";
 import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
 
@@ -21,9 +20,6 @@ export default function Template({
         title={frontmatter.title}
       />
       <div>
-        <div className="py-10 ">
-          <Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
-        </div>
         <article
           className="my-12  px-12 md:flex "
           style={{
