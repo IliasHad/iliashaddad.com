@@ -42,6 +42,7 @@ const blockquote = (props) => (
       background: "rgb(242, 242, 242)",
       marginTop: "56px",
       padding: "5px 20px",
+      borderRadius: "5px",
     }}
     {...props}
   />

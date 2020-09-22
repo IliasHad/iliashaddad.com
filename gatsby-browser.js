@@ -1,9 +1,9 @@
 import "./src/css/style.css";
-import "gatsby-remark-vscode/styles.css";
 import PropTypes from "prop-types";
 import { MDXProvider } from "@mdx-js/react";
 import { components } from "./src/layouts/post-layout";
 import React from "react";
+import "gatsby-remark-vscode/styles.css";
 
 import { ThemeProvider } from "./src/context/ThemeContext";
 

@@ -29,7 +29,8 @@
     "react-dom": "16.13.1",
     "react-helmet": "6.1.0",
     "react-icons": "^3.10.0",
-    "slugify": "^1.4.5"
+    "slugify": "^1.4.5",
+    "tokyo-night": "enkia/tokyo-night-vscode-theme"
   },
   "keywords": [
     "gatsby",

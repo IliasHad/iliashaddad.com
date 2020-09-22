@@ -1,5 +1,6 @@
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require("./tailwind.config.js");
+const path = require("path");
 
 const fullConfig = resolveConfig(tailwindConfig);
 
@@ -21,16 +22,16 @@ module.exports = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-vscode`,
+            options: {
+              theme: `Tokyo Night`, // From package.json: contributes.themes[0].label
+              extensions: ["tokyo-night"], // From package.json: name
+            },
+          },
+          {
             resolve: `gatsby-transformer-remark`,
             options: {
-              plugins: [
-                {
-                  resolve: `gatsby-remark-vscode`,
-                  options: {
-                    theme: "Abyss", // Or install your favorite theme from GitHub
-                  },
-                },
-              ],
+              plugins: [],
             },
           },
           {

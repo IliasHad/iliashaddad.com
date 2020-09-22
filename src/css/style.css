@@ -53,3 +53,8 @@ color: rgba(117, 117, 117, 1);
         color: #fff !important;
     }
     
+    .dark-theme  blockquote {
+      color:#000 !important
+
+    }
+    
