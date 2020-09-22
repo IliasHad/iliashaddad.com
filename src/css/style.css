@@ -50,10 +50,10 @@ color: rgba(117, 117, 117, 1);
 
 
     .dark-theme a {
-        color: #fff !important;
+        color: #fff ;
     }
     
-    .dark-theme  blockquote {
+    .dark-theme  blockquote,  .dark-theme  blockquote a  {
       color:#000 !important
 
     }
