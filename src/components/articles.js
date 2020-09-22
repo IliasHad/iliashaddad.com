@@ -4,7 +4,7 @@ import Img from "gatsby-image";
 
 export const Articles = () => {
   return (
-    <section className="p-12">
+    <section className="px-12 py-4">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">My Articles</h5>
       </div>

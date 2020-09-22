@@ -3,7 +3,7 @@ import { StaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 export const Work = () => {
   return (
-    <section className="p-12">
+    <section className="px-12 py-4 ">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">What I&apos;ve been working on</h5>
       </div>
@@ -33,8 +33,8 @@ export const Work = () => {
                     featuredImage {
                       childImageSharp {
                         fluid(
-                          maxHeight: 250
-                          maxWidth: 500
+                          maxHeight: 200
+                          maxWidth: 450
                           quality: 100
                           fit: COVER
                           cropFocus: CENTER

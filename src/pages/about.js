@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-
+import { Link } from "gatsby";
 function AboutPage() {
   return (
     <Layout>
@@ -30,10 +30,15 @@ function AboutPage() {
             I&apos;m a 21-year-old student at Ibn Tofail University currently
             studying marketing and commerce.
           </p>
-
           <p className="py-4">
             As I&apos;ve grown as a developer, I&apos;ve worked on multiple side
             projects to improve my coding skills
+          </p>
+          <p className="py-4">
+            If you need a new custom-made website, a unique Shopify store or
+            have an idea of an engaging web application: Please feel free to
+            <Link to="/contact"> contact me </Link>
+            and we&apos;ll talk about the details!
           </p>
         </div>
       </section>

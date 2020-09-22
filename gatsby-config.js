@@ -22,6 +22,18 @@ module.exports = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            // Using gatsby-remark-embed-video before gatsby-remark-images & gatsby-remark-responsive-iframe plugins.
+            resolve: `gatsby-remark-embed-video`,
+            options: {
+              maxWidth: 800,
+              ratio: 1.77,
+              height: 400,
+              related: false,
+              noIframerder: true,
+            },
+          },
+
+          {
             resolve: `gatsby-remark-vscode`,
             options: {
               theme: `Tokyo Night`, // From package.json: contributes.themes[0].label
@@ -41,6 +53,12 @@ module.exports = {
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
               maxWidth: 1000,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
         ],

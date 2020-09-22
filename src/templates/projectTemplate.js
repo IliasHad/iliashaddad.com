@@ -4,33 +4,37 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
 
-import { Contact } from "../components/contact";
-import { Footer } from "../components/footer";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { mdx } = data; // data.mdx holds your post data
-  const { frontmatter, html } = mdx;
+  const { frontmatter, body } = mdx;
   return (
     <Layout>
       <SEO
         keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
         title={frontmatter.title}
       />
-      <div className=" p-12  grid grid-cols-1 items-center gap-4">
-        <div className="blog-post">
-          <h1 className="text-3xl">{frontmatter.title}</h1>
 
-          <h2>{frontmatter.date}</h2>
-          <div
-            className="blog-post-content"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+      <div>
+        <div
+          className="my-12  px-12 md:flex "
+          style={{
+            width: "100%",
+
+            justifyContent: "center",
+          }}
+        >
+          <div className="blog-post md:max-w-2xl max-w-3xl ">
+            <MdxEmbedProvider>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MdxEmbedProvider>
+          </div>
         </div>
       </div>
-      <Contact />
-      <Footer />
     </Layout>
   );
 }
@@ -38,7 +42,7 @@ export default function Template({
 export const pageQuery = graphql`
   query($slug: String!) {
     mdx(frontmatter: { slug: { eq: $slug } }) {
-      html
+      body
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug
