@@ -7,8 +7,8 @@ const fullConfig = resolveConfig(tailwindConfig);
 module.exports = {
   siteMetadata: {
     title: `Ilias Haddad`,
-    description: `Gatsby starter styled with Tailwind`,
-    siteUrl: `https://iliashaddad.netlify.com/`,
+    description: `Full Stack JavaScript Developer && Shopify Developer `,
+    siteUrl: `https://iliashaddad.com/`,
     author: `@iliashaddad`,
   },
   plugins: [

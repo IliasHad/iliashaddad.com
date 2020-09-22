@@ -15,10 +15,7 @@ export default function Template({
   const { frontmatter, body, timeToRead } = mdx;
   return (
     <Layout>
-      <SEO
-        keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
-        title={frontmatter.title}
-      />
+      <SEO keywords={frontmatter.keywords} title={frontmatter.title} />
       <div>
         <article
           className="my-12  px-12 md:flex "
@@ -52,7 +49,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         slug
         title
-
+        keywords
         featuredImage {
           childImageSharp {
             fluid(
