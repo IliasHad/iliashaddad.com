@@ -49,8 +49,8 @@ color: rgba(117, 117, 117, 1);
       }
 
 
-    .dark-theme a {
-        color: #fff ;
+    .dark-theme p > a {
+        color: #fff !important ;
     }
     
     .dark-theme  blockquote,  .dark-theme  blockquote a  {
