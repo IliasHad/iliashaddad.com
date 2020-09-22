@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { Contact } from "../components/contact";
 import axios from "axios";
 
 import {
@@ -212,8 +211,6 @@ function ContactPage() {
           </form>
         </div>
       </section>
-
-      <Contact />
     </Layout>
   );
 }

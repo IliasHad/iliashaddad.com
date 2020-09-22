@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { Contact } from "../components/contact";
 import { StaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 function BlogPage() {
@@ -144,7 +143,6 @@ function BlogPage() {
           />
         </div>
       </section>
-      <Contact />
     </Layout>
   );
 }

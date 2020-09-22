@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { Contact } from "../components/contact";
 
 function AboutPage() {
   return (
@@ -26,7 +25,6 @@ function AboutPage() {
           </p>
         </div>
       </section>
-      <Contact />
     </Layout>
   );
 }

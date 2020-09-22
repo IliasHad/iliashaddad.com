@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../components/header";
 import ThemeContext from "../context/ThemeContext";
 import { Footer } from "./footer";
+import { Contact } from "./contact";
 
 function Layout({ children }) {
   return (
@@ -16,6 +17,7 @@ function Layout({ children }) {
           <div className="flex flex-col min-h-screen font-sans ">
             <main>{children}</main>
           </div>
+          <Contact />
           <Footer />
         </div>
       )}

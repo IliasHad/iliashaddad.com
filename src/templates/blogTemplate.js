@@ -5,8 +5,6 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Contact } from "../components/contact";
-import { Footer } from "../components/footer";
 import Img from "gatsby-image";
 import { Author } from "../components/author";
 import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
@@ -45,8 +43,6 @@ export default function Template({
           </div>
         </article>
       </div>
-      <Contact />
-      <Footer />
     </Layout>
   );
 }
