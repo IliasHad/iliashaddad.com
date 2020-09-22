@@ -27,10 +27,10 @@ export default function Template({
           <Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
         </div>
         <article
-          className="my-12  md:px-12 px-5 "
+          className="my-12  px-12 md:flex "
           style={{
             width: "100%",
-            display: "flex",
+
             justifyContent: "center",
           }}
         >
