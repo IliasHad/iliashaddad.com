@@ -7,7 +7,7 @@ const fullConfig = resolveConfig(tailwindConfig);
 module.exports = {
   siteMetadata: {
     title: `Ilias Haddad`,
-    description: `Full Stack JavaScript Developer && Shopify Developer `,
+    description: `I'm a 21-year-old self taught developer. As I've grown as a developer, I've worked on multiple side projects to improve my coding skills `,
     siteUrl: `https://iliashaddad.com/`,
     author: `@iliashaddad`,
   },
