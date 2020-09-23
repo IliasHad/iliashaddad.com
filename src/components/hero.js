@@ -41,8 +41,8 @@ export const Hero = () => {
         <div className=" p-12  grid grid-cols-1 md:grid-cols-2 items-center">
           <div>
             <h1 className=" text-4xl font-bold ">
-              Hi there, I&apos;m Ilias. Full Stack Developer, Indie Maker, and
-              Freelancer.
+              Hi there, I&apos;m Ilias. Full Stack Developer, Shopify Developer,
+              and Freelancer.
             </h1>
 
             <div className="flex overflow-hidden max-w-full items-center relative mt-2">
