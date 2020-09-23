@@ -38,7 +38,7 @@ export const Contact = () => {
             className="grid grid-cols-6 py-6"
             style={{
               columnGap: "2rem",
-
+              gridTemplateColumns: "repeat(6, minmax(0, max-content))",
               justifyItems: "start",
             }}
           >
