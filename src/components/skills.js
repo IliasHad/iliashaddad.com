@@ -8,8 +8,8 @@ export const Skills = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 py-6 gap-12">
         <p>
-          I&apos;ve taken a number of online courses to taught myself how to
-          code. Some of these online courses I&apos;ve taken include{" "}
+          I have taken a number of online courses to teach myself how to code.
+          Some of these online courses I've taken include
           <a
             href="https://www.udemy.com/course/the-complete-javascript-course/"
             target="__blank"
