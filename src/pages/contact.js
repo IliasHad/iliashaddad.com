@@ -141,6 +141,7 @@ function ContactPage() {
                 placeholder="Name"
                 type="text"
                 name="Name"
+                required
                 id="name"
               />
             </div>
@@ -155,6 +156,7 @@ function ContactPage() {
                 type="email"
                 name="Email"
                 id="email"
+                required
                 ref={email}
               />
             </div>
@@ -207,6 +209,7 @@ function ContactPage() {
                 id="project-details"
                 className="w-full my-2  rounded border focus:outline-none h-48 focus:border-indigo-500 text-base px-4 py-2 resize-none block"
                 placeholder="Project Details"
+                required
               ></textarea>
             </div>
 
