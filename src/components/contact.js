@@ -35,9 +35,11 @@ export const Contact = () => {
           </p>
 
           <div
-            className="grid grid-cols-6 w-1/2 py-3"
+            className="grid grid-cols-6 py-6"
             style={{
               columnGap: "2rem",
+
+              justifyItems: "start",
             }}
           >
             <a href="https://web.facebook.com/iliasshaddad99/" target="__blank">
