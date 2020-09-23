@@ -19,6 +19,7 @@ const ProjectPage = () => {
           `Full Stack Developer Portfolio`,
           `Shopify Developer Portfolio`,
         ]}
+        description="My Portfolio"
         title="Projects"
       />
       <div className=" p-12  grid grid-cols-1 items-center gap-4">

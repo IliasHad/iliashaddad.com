@@ -20,6 +20,7 @@ function BlogPage() {
           `Full Stack Developer Portfolio`,
           `Shopify Developer Portfolio`,
         ]}
+        description="Developer Blog"
         title="Blog"
       />
       <section className="p-12 blog-page">

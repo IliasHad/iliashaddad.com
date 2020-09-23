@@ -20,6 +20,7 @@ function AboutPage() {
           `Shopify Developer Portfolio`,
         ]}
         title="About Me"
+        description="About Ilias Haddad"
       />
       <section className="p-12">
         <div className=" w-2/4 ">

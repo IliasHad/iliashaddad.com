@@ -15,7 +15,7 @@ export default function Template({
   const { frontmatter, body, timeToRead } = mdx;
   return (
     <Layout>
-      <SEO title={frontmatter.title} />
+      <SEO title={frontmatter.title} description={frontmatter.description} />
       <div>
         <article
           className="my-12  px-12 md:flex "

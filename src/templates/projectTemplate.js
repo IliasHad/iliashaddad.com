@@ -14,10 +14,7 @@ export default function Template({
   const { frontmatter, body } = mdx;
   return (
     <Layout>
-      <SEO
-        keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
-        title={frontmatter.title}
-      />
+      <SEO title={frontmatter.title} description={frontmatter.description} />
 
       <div>
         <div
