@@ -28,7 +28,7 @@ exports.handler = function (event, context, callback) {
         <h2> ${data.projectType} - ${data.budget} </h2>
         <p>${data.message}</p>
       <br>
-      This email sent by ${data.email}
+      This email sent by  ${data.name}  - ${data.email}
       ` || "[No message]",
     },
     function (error, info) {
