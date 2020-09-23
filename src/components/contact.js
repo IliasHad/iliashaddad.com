@@ -26,7 +26,7 @@ export const Contact = () => {
           <p className="py-2">
             Email:
             <a
-              href="mailto:iliasshaddaddev@gmail.com"
+              href="mailto:contact@iliashaddad.com"
               className="pl-2"
               target="__blank"
             >
