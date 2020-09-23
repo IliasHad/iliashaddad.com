@@ -2,7 +2,7 @@
   "name": "ilias-haddad",
   "description": "Ilias Haddad Personal Portfolio",
   "version": "1.0.0",
-  "author": "Ilias Haddad <iliashaddaddev@gmail.com>",
+  "author": "Ilias Haddad <contact@iliashaddad.com>",
   "dependencies": {
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
