@@ -21,6 +21,9 @@ function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.plausible("Project-Details-Sent", {
+      callback: () => console.info("Project details sent event"),
+    });
     const data = {
       projectType: projectType.current.value,
       budget: budget.current.value,
