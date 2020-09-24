@@ -25,7 +25,7 @@ function IndexPage() {
           `Full Stack Developer Portfolio`,
           `Shopify Developer Portfolio`,
         ]}
-        title="Ilias Haddad l Full Stack Developer, Shopify Developer, and Freelancer"
+        title="Full Stack Developer, Shopify Developer, and Freelancer"
       />
 
       <Hero />
