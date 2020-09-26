@@ -44,6 +44,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         slug
         title
+        description
       }
     }
   }
