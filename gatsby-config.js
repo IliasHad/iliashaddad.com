@@ -15,6 +15,14 @@ module.exports = {
     `@pauliescanlon/gatsby-mdx-embed`,
     `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-robots-txt`,
+    {
+      resolve: "gatsby-plugin-og-images",
+      options: {
+        template: "og",
+        domain: "iliashaddad.com",
+        debug: true,
+      },
+    },
 
     {
       resolve: `gatsby-plugin-mdx`,

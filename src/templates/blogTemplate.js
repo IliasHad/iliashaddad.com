@@ -7,12 +7,13 @@ import SEO from "../components/seo";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Author } from "../components/author";
 import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
+import OgImage from "gatsby-plugin-og-images";
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { mdx } = data; // data.mdx holds your post data
-  const { frontmatter, body, timeToRead } = mdx;
+  const { frontmatter, body, timeToRead, id } = mdx;
   return (
     <Layout>
       <SEO title={frontmatter.title} description={frontmatter.description} />
@@ -25,6 +26,7 @@ export default function Template({
             justifyContent: "center",
           }}
         >
+          <OgImage id={id} />
           <div className="blog-post md:max-w-2xl max-w-3xl ">
             <h1 className="md:text-4xl text-2xl  tracking-tighter">
               {frontmatter.title}
@@ -45,6 +47,7 @@ export const pageQuery = graphql`
     mdx(frontmatter: { slug: { eq: $slug } }) {
       body
       timeToRead
+      id
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug
