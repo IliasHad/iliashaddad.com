@@ -1,0 +1,1388 @@
+---
+title:  How I built the product hunt launch video gallery using Gatsby JS , Google Sheets and Product Hunt API
+description: >-
+ In this tutorial, I'll be sharing how I built the Product Hunt launch video gallery which use Product Hunt API, store the data in Google Sheets and display it using Gatsby JS. You can checkout the website from this link
+
+date: '2010-10-03T23:21:10.134Z'
+category: 'JAMStack'
+keywords: []
+featuredImage: ../../images/product-hunt-video-inspiration.png
+
+slug: /blog/how-i-built-the-product-hunt-launch-video-gallery-using-gatsby-js-google-sheets-and-product-hunt-api
+---
+
+
+
+
+
+
+
+
+
+In this tutorial, I'll be sharing how I built the Product Hunt launch video gallery which use Product Hunt API, store the data in Google Sheets and display it using Gatsby JS. You can checkout the website from this link
+
+What I'll be covering today:
+
+* Use Netlify functions to query data from Product Hunt API and store it in Google Sheets
+
+* Query data from Google Sheets and display it in Gatsby website
+
+* Download remote images to local folder to utilize the power of Gatsby Images
+
+* Send GET requests using IFTTT to get fresh product launch video
+
+Let's do it.
+
+### Use Netlify functions to query data from Product Hunt API and store it in Google Sheets
+
+* Install Gatsby CLI using Yarn
+
+
+```
+
+yarn global add gatsby-cli
+
+```
+
+or NPM
+
+```
+
+npm i gatsby-cli -g
+
+```
+
+* Install Netlify Dev CLI to test Netlify functions locally using Yarn
+
+yarn global add netlify-cli
+
+or NPM
+
+```
+
+npm i netlify-cli -g
+
+```
+
+
+
+* Create new gatsby website using CLI
+
+
+```
+
+gatsby new product-hunt-launch-video https://github.com/oddstronaut/gatsby-starter-tailwind
+
+```
+
+
+
+
+
+* Run the Gatsby website
+
+```
+
+cd product-hunt-launch-video && gatsby develop
+
+```
+
+* Create functions folder inside the root folder
+
+```
+
+cd src && mkdir functions
+
+```
+
+* Create product-hunt.js ﬁle inside functions folder
+
+```
+
+touch product-hunt.js
+
+```
+
+* In the root directory, install node-fetch to fetch data from GraphQl API, dotenv to load
+
+env variables
+
+```
+
+yarn add node-fetch dotenv
+
+```
+
+
+* We need to initialize a new netlify project
+
+```
+
+netlify init
+
+```
+
+and choose "No, I will connect this directory with GitHub ﬁrst" and follow the instructions
+
+mentioned the command line
+
+* Create netlify.toml ﬁle to conﬁg the netlﬁy website
+
+```
+
+[build]
+
+command = "yarn run build"
+
+functions = "functions" # netlify dev uses this directory to scaffold a
+
+publish = "public"
+
+```
+
+* Create env ﬁle to hold Product Hunt API Key
+
+``` 
+
+PH_ACCESS_TOKEN=
+
+```
+
+In order to get your Product Hunt API Key, you need to login with your Product Hunt account
+
+and check this [wesbite](https://api.producthunt.com/v2/oauth/applications)[ ](https://api.producthunt.com/v2/oauth/applications)and create new application and when you create a new application.
+
+you'll have a Developer Access Token which never expires and we'll use this token in env ﬁle
+
+In the product-hunt.js, we'll create the function to consume Product Hunt API
+
+```
+
+require("dotenv").config()
+
+const fetch = require("node-fetch")
+
+exports.handler = function (event, context, callback) {
+
+
+ const requestBody = {
+    query: `
+        {
+            posts(order:RANKING) {
+            
+              edges {
+                node {
+                  name
+                  url
+                  topics {
+                    edges {
+                      node {
+                         name
+                      }
+                    }
+                  }
+                  votesCount
+                  media {
+                    videoUrl
+                    url
+                  }
+                  tagline
+                
+                  createdAt
+                
+                  
+                }
+              }
+              
+            }
+          }
+            `,
+  };
+
+fetch("https://api.producthunt.com/v2/api/graphql", {
+
+method: "POST",
+
+headers: {
+
+authorization: `Bearer ${process.env.PH\_ACCESS\_TOKEN}`,
+
+"Content-type": "Application/JSON",
+
+},
+
+body: JSON.stringify(requestBody),
+
+})
+
+.then(res => res.json())
+
+
+
+
+
+.then(({ data }) => {
+
+callback(null, {
+
+statusCode: 200,
+
+body: JSON.stringify({
+
+message: "Success",
+
+data: data.posts.edges,
+
+}),
+
+})
+
+})
+
+.catch(err => console.log(err))
+
+}
+```
+
+You need to run this script and check http://localhost:8888/.netlify/functions/product-hunt
+
+to send a GET request to this netlify function and then send a POST request to Product
+
+Hunt GraphQl API
+
+```
+
+netlify dev
+
+```
+
+ * We need to filter the product that had a launch video 
+ 
+ ```
+     if (data) {
+        const filterData = data.posts.edges.filter(el => {
+       
+          return el.node.media.map(el => el.videoUrl)[0] !== null
+        })
+
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Success",
+            data: filterData,
+          }),
+        })
+      }
+ 
+ ```
+ 
+ In this function, We checked if data is defined, filter posts data, map each product media array and return the videoUrl value, then we check if the first array item isn't null because the launch video is the first item in the media array 
+ 
+ 
+Now, our code will look like this
+
+```
+
+require("dotenv").config()
+
+const fetch = require("node-fetch")
+
+exports.handler = function (event, context, callback) {
+  const requestBody = {
+    query: `
+        {
+            posts(order:RANKING) {
+            
+              edges {
+                node {
+                  name
+                  url
+                  topics {
+                    edges {
+                      node {
+                         name
+                      }
+                    }
+                  }
+                  votesCount
+                  media {
+                    videoUrl
+                    url
+                  }
+                  tagline
+                
+                  createdAt
+                
+                  
+                }
+              }
+              
+            }
+          }
+            `,
+  }
+  fetch("https://api.producthunt.com/v2/api/graphql", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${process.env.PH_ACCESS_TOKEN}`,
+      "Content-type": "Application/JSON",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then(res => res.json())
+    .then(({ data }) => {
+      if (data) {
+        const filterData = data.posts.edges.filter(el => {
+          return el.node.media.map(el => el.videoUrl)[0] !== null
+        })
+
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Success",
+            data: filterData,
+          }),
+        })
+      }
+    })
+    .catch(err => console.log(err))
+}
+
+
+```
+
+We're on the half way to ﬁnish the neltify function
+
+* You need create new Google spreadsheets at [Goo](https://docs.google.com/spreadsheets/)[g](https://docs.google.com/spreadsheets/)[le](https://docs.google.com/spreadsheets/)[ ](https://docs.google.com/spreadsheets/)[Sheets](https://docs.google.com/spreadsheets/)
+
+* You need to get Google Sheets API credentials to be able to read data from sheets
+
+* Go to the Google APIs Console.
+
+* Create a new project.
+
+* Click Enable API. Search for and enable the Google Drive API.
+
+* Create credentials for a Web Server to access Application Data.
+
+
+* Name the service account and grant it a Project Role of Editor.
+
+* Download the JSON ﬁle.
+
+* Install Google Sheets Node JS SDK to add Product Hunt data to it
+
+```
+
+yarn add google-spreadsheet util && netlify dev
+
+```
+
+
+
+* Access your Sheets using the Node JS SDK
+
+
+
+```
+
+ const acessSepreadSheet = async () => {
+    const doc = new GoogleSpreadsheet(
+      "YOUR GOOGLE SHEET ID"
+    )
+
+    await doc.useServiceAccountAuth({
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY,
+    })
+    const info = await doc.loadInfo() // loads document properties and worksheets
+    console.log(doc.title)
+  }
+
+
+```
+This function will access the Google Sheet and return the sheet title
+
+
+Now, we need this row to add new product data like mentioned the screenshots below.
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/1bbw0f9z3qphtjzwdlua.png)
+
+
+
+We need to write a function to add a new row 
+
+```
+
+ const accessSpreadSheet = async ({
+    productName,
+    topic,
+    votesCount,
+    videoUrl,
+    featuredImage,
+    url,
+    created_at,
+    description,
+  }) => {
+    const doc = new GoogleSpreadsheet(
+      "YOUR SHEET ID"
+    )
+
+    // use service account creds
+    await doc.useServiceAccountAuth({
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY,
+    })
+    await doc.loadInfo() // loads document properties and worksheets
+
+    const sheet = doc.sheetsByIndex[0] // or use doc.sheetsById[id]
+
+    const row = {
+      productName,
+      topic,
+      votesCount,
+      videoUrl,
+      featuredImage,
+      url,
+      created_at,
+      description,
+    }
+
+    await sheet.addRow(row)
+  }
+```
+
+
+and the final code will look like this
+
+
+```
+
+require("dotenv").config()
+
+const fetch = require("node-fetch")
+const { GoogleSpreadsheet } = require("google-spreadsheet")
+exports.handler = function (event, context, callback) {
+  const accessSpreadSheet = async ({
+    productName,
+    topic,
+    votesCount,
+    videoUrl,
+    featuredImage,
+    url,
+    created_at,
+    description,
+  }) => {
+    const doc = new GoogleSpreadsheet(
+      "YOUR SHEET ID"
+    )
+
+    // use service account creds
+    await doc.useServiceAccountAuth({
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY,
+    })
+    await doc.loadInfo() // loads document properties and worksheets
+
+    const sheet = doc.sheetsByIndex[0] // or use doc.sheetsById[id]
+
+    const row = {
+      productName,
+      topic,
+      votesCount,
+      videoUrl,
+      featuredImage,
+      url,
+      created_at,
+      description,
+    }
+
+    await sheet.addRow(row)
+  }
+  const requestBody = {
+    query: `
+        {
+            posts(order:RANKING) {
+            
+              edges {
+                node {
+                  name
+                  url
+                  topics {
+                    edges {
+                      node {
+                         name
+                      }
+                    }
+                  }
+                  votesCount
+                  media {
+                    videoUrl
+                    url
+                  }
+                  tagline
+                
+                  createdAt
+                
+                  
+                }
+              }
+              
+            }
+          }
+            `,
+  }
+  fetch("https://api.producthunt.com/v2/api/graphql", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${process.env.PH_ACCESS_TOKEN}`,
+      "Content-type": "Application/JSON",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then(res => res.json())
+    .then(async ({ data, status }) => {
+      if (data) {
+        const filterData = data.posts.edges.filter(el => {
+          return el.node.media.map(el => el.videoUrl)[0] !== null
+        })
+
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Success",
+            data: filterData.length,
+          }),
+        })
+        for (let index = 0; index < filterData.length; index++) {
+          const product = filterData[index]
+          await accessSpreadSheet({
+            productName: product.node.name,
+            topic: product.node.topics.edges
+              .map(({ node }) => node.name)
+              .toString(),
+            votesCount: product.node.votesCount,
+            videoUrl: product.node.media[0].videoUrl,
+            featuredImage: product.node.media[1].url,
+            url: product.node.url,
+            created_at: product.node.createdAt,
+            description: product.node.tagline,
+          })
+        }
+      }
+    })
+    .catch(err => console.log(err))
+}
+
+
+```
+
+And this the results
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/om7onj0dgid4rfh1320j.png)
+
+
+
+
+### Query data from Google Sheets and display it in Gatsby website
+
+* Add gatsby plugin to query Google Sheets Data
+
+
+```
+
+yarn add gatsby-source-google-sheets
+
+```
+
+* Add configuration to gatsby-config.js
+
+
+
+```
+
+  {
+      resolve: "gatsby-source-google-sheets",
+      options: {
+        spreadsheetId: "YOUR SPREAD SHEET ID",
+        worksheetTitle: "YOUR SHEET ID",
+        credentials: {
+          client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+          private_key: process.env.GOOGLE_PRIVATE_KEY,
+        },
+      },
+    },
+
+
+```
+
+Don't forget to add this line of code to load env varibale in gatsby-config.js
+
+```
+
+require("dotenv").config()
+
+```
+
+Et Voila, we can query data from Google Sheets in our Gatsby website
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/ehnhi67ibz6whliw0yid.png)
+
+
+
+*  We'll move the index.js page from the pages folder to a new folder called templates to add pagination
+
+```
+
+/* eslint-disable react/prop-types */
+
+import React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { graphql } from "gatsby";
+import { Link } from "gatsby";
+
+const IndexPage = ({ data, pageContext }) => {
+  const { currentPage, numPages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
+
+  const prevPage =
+    currentPage - 1 === 1 ? "/page" : "/page/" + (currentPage - 1).toString();
+  const nextPage = "/page/" + (currentPage + 1).toString();
+
+  return (
+    <Layout>
+      <SEO
+        keywords={[
+          `producthunt`,
+          `video`,
+          `inspiration`,
+          `product hunt launch video`,
+        ]}
+        title="Product Hunt Video Inspiration"
+      />
+
+      <section className="container grid-cols-1 sm:grid-cols-2 md:grid-cols-3  mx-auto md:row-gap-24 row-gap-12 px-4 py-10 grid md:gap-10 ">
+        {data.allGoogleSheetSheet1Row.edges
+          .filter(({ node }) => node.localFeaturedImage !== null)
+
+          .filter(
+            (el, i, array) =>
+              array.findIndex(
+                ({ node }, index) => node.productname !== index
+              ) !== i
+          )
+
+          .sort((a, b) => b.votescount - a.votescount)
+          .map(({ node }) => (
+            <div
+              className="md:flex flex-col"
+              rel="noreferrer"
+              data-videourl={node.videourl}
+              key={node.id}
+            >
+              <div className="md:flex-shrink-0 overflow-hidden relative	">
+                <div
+                  className="w-full h-full   absolute opacity-0 hover:opacity-100 "
+                  style={{
+                    zIndex: "99",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    backgroundColor: "rgba(0, 0, 0, 0.45)",
+                  }}
+                ></div>
+              </div>
+              <div className="mt-4 md:mt-3 ">
+                <div className="uppercase tracking-wide text-sm text-indigo-600 font-bold">
+                  {node.topic}
+                </div>
+                <a
+                  href={node.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block mt-2 text-lg leading-tight font-semibold text-gray-900 hover:underline"
+                >
+                  {node.productname}
+
+                  <span className="inline-block ml-4"></span>
+                </a>
+                <p className="mt-2 text-gray-600">{node.description}</p>
+              </div>
+            </div>
+          ))}
+      </section>
+
+      <div className="bg-white px-4 py-3 flex items-center justify-center w-full border-t border-gray-200 sm:px-6">
+        <div className="flex-1 flex justify-between ">
+          {!isFirst && (
+            <Link
+              to={prevPage}
+              rel="prev"
+              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Previous
+            </Link>
+          )}
+          {!isLast && (
+            <Link
+              to={nextPage}
+              rel="next"
+              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+            >
+              Next
+              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default IndexPage;
+export const query = graphql`
+  query ProductListQuery($skip: Int!, $limit: Int!) {
+    allGoogleSheetSheet1Row(
+      sort: { fields: votescount, order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          featuredimage
+          productname
+          topic
+          url
+          votescount
+          videourl
+          id
+          description
+        }
+      }
+    }
+    ProductSearch: allGoogleSheetSheet1Row(
+      sort: { fields: votescount, order: DESC }
+    ) {
+      edges {
+        node {
+          featuredimage
+          productname
+          topic
+          url
+          votescount
+          videourl
+          id
+          description
+        }
+      }
+    }
+  }
+`;
+
+
+
+```
+
+
+
+
+
+* We need to create a new file (gatsby-node.js) in the root folder and add this code to it 
+
+
+```
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+  const result = await graphql(
+    `
+      query MyQuery {
+        allGoogleSheetSheet1Row(sort: { fields: votescount, order: DESC }) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+    `
+  );
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const posts = result.data.allGoogleSheetSheet1Row.edges;
+  const postsPerPage = 50;
+  const numPages = Math.ceil(posts.length / postsPerPage);
+  console.log(numPages);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/` : `/page/${i + 1}`,
+      component: path.resolve("./src/templates/index.js"),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    });
+  });
+};
+
+```
+
+In this code, we create the index page and divide the data with 50 products per page
+
+
+Now, We have data in our Google SpreadSheet in Our Gatsby Website like in this screenshot
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/lljznqq5pc92n8asw2tm.png)
+
+
+
+
+
+### Download remote images to a local folder to utilize the power of Gatsby Images
+
+Now, we have the data available but no images. we can use the URL of the image in the img tag. If we do this, we'll not utilize the image processing power of Gatsby's image and in order to utilize it, we need to download images from the URL and store locally.
+
+
+* First, install the gatsby-source-filesystem plugin 
+
+```
+
+yarn add gatsby-source-filesystem gatsby-transformer-sharp gatsby-plugin-sharp
+
+```
+
+
+
+* Add config of this plugin to gatsby-config.js to the first of plugins array 
+
+```
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.join(__dirname, `src`, `images`),
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+
+
+```
+
+* Add this code to the gatsby-node.js file 
+
+```
+
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
+exports.onCreateNode = async ({
+  node,
+  actions,
+  store,
+  cache,
+  createNodeId,
+}) => {
+  const { createNode } = actions;
+
+  if (node.internal.type === "googleSheetSheet1Row") {
+    try {
+      const fileNode = await createRemoteFileNode({
+        url: node.featuredimage,
+        store,
+        cache,
+        createNode,
+        parentNodeId: node.id,
+        createNodeId,
+      });
+
+      if (fileNode) {
+        node.localFeaturedImage___NODE = fileNode.id;
+      }
+    } catch (err) {
+      node.localFeaturedImage = null;
+    }
+  }
+};
+
+
+```
+
+In this code, We listen to on creating node event and add like a proxy to download the remote image and we specify the field (node.featuredimage) .when it's downloaded we add a new node field called localFeaturedImage which will be available to query in GraphQl 
+
+
+* Install Gatsby Image
+
+
+```
+
+yarn add gatsby-image
+
+```
+
+Now, the index.js file will look like this
+
+
+```
+
+/* eslint-disable react/prop-types */
+
+import React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { graphql } from "gatsby";
+import { Link } from "gatsby";
+import Img from "gatsby-image";
+
+const IndexPage = ({ data, pageContext }) => {
+  const { currentPage, numPages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
+
+  const prevPage =
+    currentPage - 1 === 1 ? "/page" : "/page/" + (currentPage - 1).toString();
+  const nextPage = "/page/" + (currentPage + 1).toString();
+
+  return (
+    <Layout>
+      <SEO
+        keywords={[
+          `producthunt`,
+          `video`,
+          `inspiration`,
+          `product hunt launch video`,
+        ]}
+        title="Product Hunt Video Inspiration"
+      />
+
+      <section className="container grid-cols-1 sm:grid-cols-2 md:grid-cols-3  mx-auto md:row-gap-24 row-gap-12 px-4 py-10 grid md:gap-10 ">
+        {data.allGoogleSheetSheet1Row.edges
+          .filter(({ node }) => node.localFeaturedImage !== null)
+          .filter(
+            ({ node }) => node.localFeaturedImage.childImageSharp !== null
+          )
+
+          .filter(
+            (el, i, array) =>
+              array.findIndex(
+                ({ node }, index) => node.productname !== index
+              ) !== i
+          )
+
+          .sort((a, b) => b.votescount - a.votescount)
+          .map(({ node }) => (
+            <div
+              className="md:flex flex-col"
+              rel="noreferrer"
+              data-videourl={node.videourl}
+              key={node.id}
+            >
+              <div className="md:flex-shrink-0 overflow-hidden relative	">
+                <div
+                  className="w-full h-full   absolute opacity-0 hover:opacity-100 "
+                  style={{
+                    zIndex: "99",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    backgroundColor: "rgba(0, 0, 0, 0.45)",
+                  }}
+                ></div>
+                <Img
+                  fixed={node.localFeaturedImage.childImageSharp.fixed}
+                  objectFit="cover"
+                  objectPosition="50% 50%"
+                  className="cursor-pointer"
+                  imgStyle={{
+                    display: "block",
+                  }}
+                />
+              </div>
+              <div className="mt-4 md:mt-3 ">
+                <div className="uppercase tracking-wide text-sm text-indigo-600 font-bold">
+                  {node.topic}
+                </div>
+                <a
+                  href={node.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block mt-2 text-lg leading-tight font-semibold text-gray-900 hover:underline"
+                >
+                  {node.productname}
+
+                  <span className="inline-block ml-4"></span>
+                </a>
+                <p className="mt-2 text-gray-600">{node.description}</p>
+              </div>
+            </div>
+          ))}
+      </section>
+
+      <div className="bg-white px-4 py-3 flex items-center justify-center w-full border-t border-gray-200 sm:px-6">
+        <div className="flex-1 flex justify-between ">
+          {!isFirst && (
+            <Link
+              to={prevPage}
+              rel="prev"
+              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Previous
+            </Link>
+          )}
+          {!isLast && (
+            <Link
+              to={nextPage}
+              rel="next"
+              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+            >
+              Next
+              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default IndexPage;
+export const query = graphql`
+  query ProductListQuery($skip: Int!, $limit: Int!) {
+    allGoogleSheetSheet1Row(
+      sort: { fields: votescount, order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          featuredimage
+          productname
+          topic
+          url
+          votescount
+          videourl
+          id
+          description
+          localFeaturedImage {
+            childImageSharp {
+              # Specify the image processing specifications right in the query.
+              # Makes it trivial to update as your page's design changes.
+              fixed(width: 400, height: 250) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
+        }
+      }
+    }
+   
+  }
+`;
+
+```
+
+and this the results
+
+
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/43xk10sp580xq1272ae3.png)
+
+Now, will add the modal 
+
+
+* Create modal.js under components folder
+
+```
+
+import React, { useEffect } from "react";
+
+const Modal = ({
+  children,
+  handleClose,
+  show,
+  closeHidden,
+  video,
+  videoTag,
+  ...props
+}) => {
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    document.addEventListener("click", stopProgagation);
+    return () => {
+      document.removeEventListener("keydown", keyPress);
+      document.removeEventListener("click", stopProgagation);
+    };
+  });
+
+  useEffect(() => {
+    handleBodyClass();
+  }, [props.show]);
+
+  const handleBodyClass = () => {
+    if (document.querySelectorAll(".modal.is-active").length) {
+      document.body.classList.add("modal-is-active");
+    } else {
+      document.body.classList.remove("modal-is-active");
+    }
+  };
+
+  const keyPress = (e) => {
+    e.keyCode === 27 && handleClose(e);
+  };
+
+  const stopProgagation = (e) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <>
+      {show && (
+        <div
+          {...props}
+          className="modal is-active modal-video"
+          onClick={handleClose}
+        >
+          <div className="modal-inner " onClick={stopProgagation}>
+            {video ? (
+              <div className="responsive-video">
+                {videoTag === "iframe" ? (
+                  <iframe
+                    title="video"
+                    src={video}
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <video v-else controls src={video}></video>
+                )}
+              </div>
+            ) : (
+              <>
+                {!closeHidden && (
+                  <button
+                    className="modal-close"
+                    aria-label="close"
+                    onClick={handleClose}
+                  ></button>
+                )}
+                <div className="modal-content">{children}</div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Modal;
+
+```
+
+
+* Create new hero.js file under the components folder
+
+
+
+```
+
+import { Link } from "gatsby";
+import React from "react";
+
+export const Hero = () => {
+  return (
+    <div className="relative bg-white overflow-hidden">
+      <div className="max-w-screen-xl mx-auto ">
+        <div className="relative z-10 bg-white lg:w-full pb-8 text-center">
+          <div className="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 text-center">
+            <div className="sm:text-center lg:text-center">
+              <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+                <span className="text-indigo-600">Discover </span>
+                the best Product Hunt launch videos
+              </h2>
+              <p className="mt-3 text-center text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:my-8 md:text-xl ">
+                Curated product hunt launch videos to get inspiration for your
+                next PH launch
+                <br />
+                <span className="text-indigo-600 mt-2 block">
+                  {" "}
+                  Note: click on the product image to watch the PH launch video
+                </span>
+              </p>
+              <div className=" sm:flex sm:justify-center lg:justify-center">
+                <div className="rounded-md shadow">
+                  <Link
+                    to="/search"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                  >
+                    Search Videos
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+```
+
+
+Replace the CSS style to style.css file with this code to customize the video modal
+
+
+```
+/*! purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/*! purgecss end ignore */
+@tailwind utilities;
+
+.modal.is-active {
+  display: flex;
+}
+.modal {
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  z-index: 40;
+}
+.modal,
+.modal:before {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.modal.is-active .modal-inner {
+  animation: slideUpInModal 0.15s ease-in-out both;
+}
+.modal.is-active .modal-inner,
+.modal.is-active:before {
+  display: block;
+}
+.modal.modal-video .modal-inner {
+  padding: 0;
+  max-width: 1024px;
+}
+.modal .modal-inner,
+.modal:before {
+  display: none;
+}
+@media (min-width: 641px) {
+  .modal-inner {
+    margin: 0 auto;
+    max-height: calc(100vh - 96px);
+  }
+}
+.modal-inner {
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  position: relative;
+  width: calc(100% - 32px);
+  max-width: 520px;
+  margin-left: 16px;
+  margin-right: 16px;
+  background: #25282c;
+}
+.responsive-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.responsive-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal.is-active:before {
+  animation: slideUpInModalBg 0.15s ease-in-out both;
+}
+.modal.is-active .modal-inner,
+.modal.is-active:before {
+  display: block;
+}
+.modal:before {
+  content: "";
+  position: absolute;
+  background-color: rgba(21, 23, 25, 0.88);
+}
+.modal .modal-inner,
+.modal:before {
+  display: none;
+}
+.modal,
+.modal:before {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+
+```
+
+
+### Send GET requests using  IFTTT to get fresh product launch video
+
+We need to set up a cron job that will send a request data to the netlify function to get new product data and add it to Google Sheets. Then, run netlify build hook to rebuild the gatsby website 
+
+* You need to create a new free account at [IFTTT](https://ifttt.com/)
+
+* Create a new applet and choose date and time. set the time to 00:00 PST which is the time when the new product at PH is launched
+
+* Choose webhook for then and set the GET request 
+
+The GET request URL will be [your-netlify-wesbite/.netlify/functions/product-hunt]()
+
+After you need to create a new applet with the same services but in time will be 00:15 PST and POST request URL will be netlify build hook which you get it from netlify Build & Deploy settings 
+
+
+
+
+
+
+
