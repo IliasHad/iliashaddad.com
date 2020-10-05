@@ -19,15 +19,15 @@ slug: /blog/how-i-built-the-product-hunt-launch-video-gallery-using-gatsby-js-go
 
 
 
-In this tutorial, I'll be sharing how I built the Product Hunt launch video gallery which use Product Hunt API, store the data in Google Sheets and display it using Gatsby JS. You can checkout the website from this link
+In this tutorial, I'll be sharing how I built the Product Hunt launch video gallery which use Product Hunt API, store the data in Google Sheets and display it using Gatsby JS. You can check out the website from [this link](https://product-hunt-launch-video.netlify.app/)
 
 What I'll be covering today:
 
 * Use Netlify functions to query data from Product Hunt API and store it in Google Sheets
 
-* Query data from Google Sheets and display it in Gatsby website
+* Query data from Google Sheets and display it on Gatsby website
 
-* Download remote images to local folder to utilize the power of Gatsby Images
+* Download remote images to a local folder to utilize the power of Gatsby Images
 
 * Send GET requests using IFTTT to get fresh product launch video
 
@@ -289,10 +289,12 @@ require("dotenv").config()
 const fetch = require("node-fetch")
 
 exports.handler = function (event, context, callback) {
+  const date = new Date(event.queryStringParameters.date).toISOString();
+
   const requestBody = {
     query: `
         {
-            posts(order:RANKING) {
+            posts(order:RANKING,  postedBefore: ${date}) {
             
               edges {
                 node {
@@ -352,7 +354,7 @@ exports.handler = function (event, context, callback) {
 
 ```
 
-We're on the half way to ﬁnish the neltify function
+We're on the halfway to ﬁnish the netlify function
 
 * You need create new Google spreadsheets at [Goo](https://docs.google.com/spreadsheets/)[g](https://docs.google.com/spreadsheets/)[le](https://docs.google.com/spreadsheets/)[ ](https://docs.google.com/spreadsheets/)[Sheets](https://docs.google.com/spreadsheets/)
 
@@ -362,14 +364,12 @@ We're on the half way to ﬁnish the neltify function
 
 * Create a new project.
 
-* Click Enable API. Search for and enable the Google Drive API.
+* Click Enable API. Search for and enable the Google Sheet API.
 
-* Create credentials for a Web Server to access Application Data.
+* Create a new service account then, create a new API key and download the JSON file
 
 
-* Name the service account and grant it a Project Role of Editor.
 
-* Download the JSON ﬁle.
 
 * Install Google Sheets Node JS SDK to add Product Hunt data to it
 
@@ -464,6 +464,8 @@ require("dotenv").config()
 const fetch = require("node-fetch")
 const { GoogleSpreadsheet } = require("google-spreadsheet")
 exports.handler = function (event, context, callback) {
+  const date = new Date(event.queryStringParameters.date).toISOString();
+
   const accessSpreadSheet = async ({
     productName,
     topic,
@@ -503,7 +505,7 @@ exports.handler = function (event, context, callback) {
   const requestBody = {
     query: `
         {
-            posts(order:RANKING) {
+            posts(order:RANKING,  postedBefore: ${date}) {
             
               edges {
                 node {
@@ -1377,11 +1379,13 @@ We need to set up a cron job that will send a request data to the netlify functi
 
 * Choose webhook for then and set the GET request 
 
-The GET request URL will be [your-netlify-wesbite/.netlify/functions/product-hunt]()
+The GET request URL will be [your-netlify-wesbite/.netlify/functions/product-hunt?date=]() and check time as ingredient 
 
 After you need to create a new applet with the same services but in time will be 00:15 PST and POST request URL will be netlify build hook which you get it from netlify Build & Deploy settings 
 
 
+
+Source Code: https://github.com/IliasHad/product-hunt-launch-video-gallery-demo
 
 
 
