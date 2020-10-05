@@ -85,7 +85,8 @@ const li = (props) => (
   <li
     style={{
       listStyleType: "disc",
-      marginTop: "0.86em",
+      marginTop: "1rem",
+      marginBottom: "1rem",
     }}
     {...props}
   />
