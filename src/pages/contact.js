@@ -76,6 +76,9 @@ function ContactPage() {
                 contact@iliashaddad.com
               </a>
             </p>
+          
+           
+
 
             <div className="grid md:col-gap-4 col-gap-8 grid-cols-6  py-3">
               <a
@@ -98,6 +101,13 @@ function ContactPage() {
               </a>
               <a href="https://producthunt.com/@IliasHaddad3" target="__blank">
                 <FaProductHunt className="h-6 w-6" />
+              </a>
+            </div>
+
+            <div className="my-4">
+            <a  href="https://calendly.com/iliashaddad/15min"
+                target="__blank" className="pt-4 pb-1 text-lg border-b-2">
+                Book a meeting wit me
               </a>
             </div>
           </div>
