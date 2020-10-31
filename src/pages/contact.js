@@ -105,7 +105,9 @@ function ContactPage() {
             </div>
 
             <div className="my-4">
-            <a  href="https://calendly.com/iliashaddad/15min"
+            <a  onClick={() =>  window.plausible("Calendly-Meeting-Link", {
+      callback: () => console.info("Calendly Meeting clicked"),
+    })}  href="https://calendly.com/iliashaddad/15min"
                 target="__blank" className="pt-4 pb-1 text-lg border-b-2">
                 Book a meeting wit me
               </a>
