@@ -7,7 +7,7 @@ import SEO from "../components/seo";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Author } from "../components/author";
 import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
-
+import { components } from "../layouts/post-layout";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
@@ -30,7 +30,7 @@ export default function Template({
               {frontmatter.title}
             </h1>
             <Author date={frontmatter.date} timeToRead={timeToRead} />
-            <MdxEmbedProvider>
+            <MdxEmbedProvider components={components}>
               <MDXRenderer>{body}</MDXRenderer>
             </MdxEmbedProvider>
           </div>

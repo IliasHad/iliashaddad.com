@@ -20,10 +20,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
 
       options: {
-        defaultLayouts: {
-          default: require.resolve("./src/layouts/post-layout.js"),
-        },
-        extensions: [`.md`, `.mdx`],
+        extensions: [`.mdx`, "mdx"],
         gatsbyRemarkPlugins: [
           {
             // Using gatsby-remark-embed-video before gatsby-remark-images & gatsby-remark-responsive-iframe plugins.
