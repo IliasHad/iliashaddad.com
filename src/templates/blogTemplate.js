@@ -9,14 +9,14 @@ import { Author } from "../components/author";
 import { MDXProvider } from "@mdx-js/react";
 import { components } from "../layouts/post-layout";
 import { Disqus } from "gatsby-plugin-disqus";
-
+import { FaTwitter } from "react-icons/fa";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { mdx } = data; // data.mdx holds your post data
   const { frontmatter, body, timeToRead } = mdx;
   let disqusConfig = {
-    url: `${"iliashaddad.com" + frontmatter.slug}`,
+    url: window.location.href,
     identifier: frontmatter.slug,
     title: frontmatter.title,
   };
@@ -40,7 +40,18 @@ export default function Template({
             <MDXProvider components={components}>
               <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
+            <div className="my-4">
+              <a
+                className="flex gap-4 "
+                href={`http://www.twitter.com/share?url=${window.location.href}`}
+              >
+                {" "}
+                Let&apos;s discuss it on Twitter
+                <FaTwitter className="h-6 w-6" />
+              </a>
+            </div>
           </div>
+
           <Disqus config={disqusConfig} />
         </article>
       </div>
