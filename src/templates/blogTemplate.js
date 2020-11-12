@@ -8,18 +8,13 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Author } from "../components/author";
 import { MDXProvider } from "@mdx-js/react";
 import { components } from "../layouts/post-layout";
-import { Disqus } from "gatsby-plugin-disqus";
 import { FaTwitter } from "react-icons/fa";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { mdx } = data; // data.mdx holds your post data
   const { frontmatter, body, timeToRead } = mdx;
-  let disqusConfig = {
-    url: `iliashaddad.com/${frontmatter.slug}`,
-    identifier: frontmatter.slug,
-    title: frontmatter.title,
-  };
+
   return (
     <Layout>
       <SEO title={frontmatter.title} description={frontmatter.description} />
@@ -52,8 +47,6 @@ export default function Template({
               </a>
             </div>
           </div>
-
-          <Disqus config={disqusConfig} />
         </article>
       </div>
     </Layout>
