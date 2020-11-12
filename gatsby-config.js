@@ -130,5 +130,11 @@ module.exports = {
         domain: `iliashaddad.com`,
       },
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `iliashaddad`,
+      },
+    },
   ],
 };
