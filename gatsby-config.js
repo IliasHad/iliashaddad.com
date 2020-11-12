@@ -20,7 +20,10 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
 
       options: {
-        extensions: [`.mdx`, "mdx"],
+        defaultLayouts: {
+          default: require.resolve("./src/templates/blogTemplate.js"),
+        },
+        extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
             // Using gatsby-remark-embed-video before gatsby-remark-images & gatsby-remark-responsive-iframe plugins.
