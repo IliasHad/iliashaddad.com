@@ -43,6 +43,7 @@ export default function Template({
             <div className="my-4">
               <a
                 className="flex gap-4 "
+                target="__blank"
                 href={`http://www.twitter.com/share?url=iliashaddad.com/${frontmatter.slug}&text=${frontmatter.title} by @iliashaddad3`}
               >
                 {" "}
