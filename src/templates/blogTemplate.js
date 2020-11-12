@@ -16,7 +16,7 @@ export default function Template({
   const { mdx } = data; // data.mdx holds your post data
   const { frontmatter, body, timeToRead } = mdx;
   let disqusConfig = {
-    url: window.location.href,
+    url: `iliashaddad.com/${frontmatter.slug}`,
     identifier: frontmatter.slug,
     title: frontmatter.title,
   };
