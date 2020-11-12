@@ -43,7 +43,7 @@ export default function Template({
             <div className="my-4">
               <a
                 className="flex gap-4 "
-                href={`http://www.twitter.com/share?url=${window.location.href}`}
+                href={`http://www.twitter.com/share?url=${window.location.href}&text=${frontmatter.title} by @iliashaddad3`}
               >
                 {" "}
                 Let&apos;s discuss it on Twitter
