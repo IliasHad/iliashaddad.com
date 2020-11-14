@@ -5,8 +5,8 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
-
+import { MDXProvider } from "@mdx-js/react";
+import { components } from "../layouts/post-layout";
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
@@ -26,9 +26,9 @@ export default function Template({
           }}
         >
           <div className="blog-post md:max-w-2xl max-w-3xl ">
-            <MdxEmbedProvider>
+            <MDXProvider components={components}>
               <MDXRenderer>{body}</MDXRenderer>
-            </MdxEmbedProvider>
+            </MDXProvider>
           </div>
         </div>
       </div>
