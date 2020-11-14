@@ -58,7 +58,7 @@ function BlogPage() {
                             quality: 100
                             cropFocus: ATTENTION
                           ) {
-                            ...GatsbyImageSharpFluid
+                            ...GatsbyImageSharpFluid_withWebp_noBase64
                           }
                         }
                       }

@@ -19,7 +19,7 @@ export const Hero = () => {
                 quality: 100
                 cropFocus: ATTENTION
               ) {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }
@@ -31,7 +31,7 @@ export const Hero = () => {
                 quality: 100
                 cropFocus: ATTENTION
               ) {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }

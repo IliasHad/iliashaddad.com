@@ -39,7 +39,7 @@ export const Work = () => {
                           fit: COVER
                           cropFocus: CENTER
                         ) {
-                          ...GatsbyImageSharpFluid
+                          ...GatsbyImageSharpFluid_withWebp_noBase64
                         }
                       }
                     }

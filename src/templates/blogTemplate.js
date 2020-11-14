@@ -71,7 +71,7 @@ export const pageQuery = graphql`
               maxHeight: 400
               maxWidth: 1000
             ) {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp_noBase64
             }
           }
         }
