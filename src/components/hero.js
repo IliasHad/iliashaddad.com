@@ -23,7 +23,7 @@ export const Hero = () => {
               }
             }
           }
-          smallImage: file(base: { eq: "hero.jpeg" }) {
+          smallImage: file(base: { eq: "hero.png" }) {
             childImageSharp {
               fluid(
                 maxHeight: 40

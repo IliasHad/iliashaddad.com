@@ -13,7 +13,7 @@ export const Author = ({ date, timeToRead }) => {
                 title
               }
             }
-            smallImage: file(base: { eq: "hero.jpeg" }) {
+            smallImage: file(base: { eq: "hero.png" }) {
               childImageSharp {
                 fluid(
                   maxHeight: 60
