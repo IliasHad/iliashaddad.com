@@ -70,6 +70,7 @@ export const pageQuery = graphql`
               pngQuality: 100
               maxHeight: 400
               maxWidth: 1000
+              cropFocus: CENTER
             ) {
               ...GatsbyImageSharpFluid_withWebp_noBase64
             }
