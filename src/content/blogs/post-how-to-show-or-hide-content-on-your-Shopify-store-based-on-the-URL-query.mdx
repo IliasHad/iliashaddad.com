@@ -35,7 +35,25 @@ Let's start!
 
 * Create a new snippet called querystring paste this code on it
 
-* Include the snippet in the custom page we created before
+```
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign pageUrl = contentForQuerystring | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last |
+   replace:'\/','/' |
+   replace:'%20',' ' |
+   replace:'\u0026','&'
+-%}
+{%- assign itemShow = '' -%}
+{%- for i in (1..1) -%}
+  {%- unless pageUrl contains "?" -%}{% break %}{%- endunless -%}
+  {%- assign pageQuerystring = pageUrl | split:'?' | last -%}
+  {%- assign parts = pageQuerystring | split:'&' -%}
+  {%- for part in parts -%}
+    {%- assign keyAndValue = part | split:'=' -%}
+    {%- if keyAndValue.size > 1 -%}
+      {% if keyAndValue[0] == param %}{{keyAndValue[1]}}{% endif %}{%- endif -%}{%- endfor -%}{%- endfor -%}
+```
+
+- Include the snippet in the custom page we created before
 
 ```liquid
 {% capture view %}{%- render 'querystring', param: "refer" -%}{% endcapture %}
@@ -86,6 +104,24 @@ Let's do it!
 
 - Create a new snippet called querystring paste this code on it
 
+```
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign pageUrl = contentForQuerystring | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last |
+   replace:'\/','/' |
+   replace:'%20',' ' |
+   replace:'\u0026','&'
+-%}
+{%- assign itemShow = '' -%}
+{%- for i in (1..1) -%}
+  {%- unless pageUrl contains "?" -%}{% break %}{%- endunless -%}
+  {%- assign pageQuerystring = pageUrl | split:'?' | last -%}
+  {%- assign parts = pageQuerystring | split:'&' -%}
+  {%- for part in parts -%}
+    {%- assign keyAndValue = part | split:'=' -%}
+    {%- if keyAndValue.size > 1 -%}
+      {% if keyAndValue[0] == param %}{{keyAndValue[1]}}{% endif %}{%- endif -%}{%- endfor -%}{%- endfor -%}
+```
+
 - Include the snippet in the custom page we created before
 
 ```liquid
@@ -123,3 +159,7 @@ Let's do it!
 ```
 
 Now, if you visit the custom deals with the code in URL query string https://ilias-haddad-test.myshopify.com/pages/vip-deals?code=iliashaddad
+
+### References
+
+- [Access querystring in Liquid](https://community.shopify.com/c/Shopify-Discussion/Access-querystring-in-Liquid/td-p/75151/page/2)
