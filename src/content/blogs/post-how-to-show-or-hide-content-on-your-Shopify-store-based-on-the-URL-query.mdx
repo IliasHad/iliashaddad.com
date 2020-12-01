@@ -23,6 +23,16 @@ For example, a Shopify client want to show dynamic content based on the URL quer
 
 ![ How to show or hide content on your Shopify store based on the URL query (Serve Side)](https://cdn-images-1.medium.com/max/1600/1*EHD3GYdtmRnw1BaG8UbTpA.gif)
 
+### WARNINGS (SERIOUSLY)
+
+Shopify will cache the output of pages. If you use this querystring parsing code to show/hide content on the site you risk exposing the result to all customers. Imagine you have a discount code shown with the querystring. If Shopify caches that output version every single customer will see the code regardless of the querystring in place. The code attempts to avoid that risk by using the cache querystring value but the risk remains.
+
+By using the cache querystring value you're no longer making use of the Shopify cache. This is what helps keep your site fast, and perform well under load. Flushing the cache isn't a great idea - especially at scale.
+
+Also, you have no control over what content appears in content_for_header. Shopify could change the contents at any point so this code could stop working.
+
+It's for those reasons (and mainly the first two) that I would strongly caution you against using it on a production site. It's still an interesting idea in any case.
+
 Let's start!
 
 - Create a new Shopify page template
@@ -163,3 +173,4 @@ Now, if you visit the custom deals with the code in URL query string https://ili
 ### References
 
 - [Access querystring in Liquid](https://community.shopify.com/c/Shopify-Discussion/Access-querystring-in-Liquid/td-p/75151/page/2)
+- [Freak Design Blog Post](https://freakdesign.com.au/blogs/news/get-the-url-querystring-values-with-liquid-in-shopify)
