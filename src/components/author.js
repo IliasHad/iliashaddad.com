@@ -37,7 +37,10 @@ export const Author = ({ date, timeToRead }) => {
               />{" "}
             </div>
             <div>
-              <p className="text-md">{site.siteMetadata.title}</p>
+              <p className="text-md">
+                {site.siteMetadata.title} - Shopify Developer | Full Stack
+                Developer | Freelancer
+              </p>
               <p className="text-gray-700 block text-md">
                 {date} - {timeToRead} min read
               </p>
