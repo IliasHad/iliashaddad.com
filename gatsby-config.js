@@ -1,3 +1,7 @@
+// gatsby-config.js
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require("./tailwind.config.js");
 const path = require("path");
@@ -134,6 +138,13 @@ module.exports = {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `iliashaddad`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint:
+          "https://iliashaddad.us7.list-manage.com/subscribe/post?u=742d5d39e0d2ff7d7a7aafb2e&amp;id=11701e2032",
       },
     },
   ],
