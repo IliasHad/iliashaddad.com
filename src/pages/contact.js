@@ -76,9 +76,6 @@ function ContactPage() {
                 contact@iliashaddad.com
               </a>
             </p>
-          
-           
-
 
             <div className="grid md:col-gap-4 col-gap-8 grid-cols-6  py-3">
               <a
@@ -105,10 +102,16 @@ function ContactPage() {
             </div>
 
             <div className="my-4">
-            <a  onClick={() =>  window.plausible("Calendly-Meeting-Link", {
-      callback: () => console.info("Calendly Meeting clicked"),
-    })}  href="https://calendly.com/iliashaddad/15min"
-                target="__blank" className="pt-4 pb-1 text-lg border-b-2">
+              <a
+                onClick={() =>
+                  window.plausible("Calendly-Meeting-Link", {
+                    callback: () => console.info("Calendly Meeting clicked"),
+                  })
+                }
+                href="https://calendly.com/iliashaddad/15min"
+                target="__blank"
+                className="pt-4 pb-1 text-lg border-b-2"
+              >
                 Book a meeting wit me
               </a>
             </div>
@@ -190,7 +193,7 @@ function ContactPage() {
                 <option>Web app</option>
                 <option>Custom Shopify App</option>
                 <option>Custom Shopify Theme</option>
-                <option>Other</option>
+                <option>Custom Shopify Work</option>
               </select>
             </div>
             <div className="p-2 ">
@@ -204,7 +207,8 @@ function ContactPage() {
                 required
                 className="w-full  my-2 rounded border focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
               >
-                <option>Less than $1000</option>
+                <option>Less than $500</option>
+                <option>500$ - $1000</option>
                 <option>$1000 - $5000</option>
                 <option>More than$5000</option>
               </select>
