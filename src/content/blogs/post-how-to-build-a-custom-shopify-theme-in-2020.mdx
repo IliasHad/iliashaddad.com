@@ -1,0 +1,69 @@
+---
+title: How to build a custom Shopify theme in 2020
+description: How to build a custom Shopify theme in 2020
+date: "2020-12-04T23:46:05.440Z"
+category: "Shopify Development "
+keywords: []
+featuredImage: ../../images/shopify-table-decor.jpg
+
+slug: /blog/how-to-build-a-custom-shopify-theme-in-2020
+---
+
+In the fifth article of the #4weeksOfShopifyDev challenge, I'll be talking about how to build a custom Shopify theme in 2020
+
+### What is a Shopify theme?
+
+Shopify theme is a combination of HTML, CSS, and JavaScript code with liquid language which is a Shopify template language that adds dynamic to your HTML code on the server-side
+
+### Shopify theme architecture
+
+In a Shopify theme, we have several folders with specific files
+
+- Config folder which contains:
+  - settings_schema.json: Shopify themes global settings like font-family, primary color, and many other settings
+  - settings_data.json: a registry file of what you have done in the Shopify theme editor
+- Layout folder which contains:
+  - theme.liquid: all other templates are rendered inside this file and contain a static section like header and footer
+  - password.liquid: a template for password-protected Shopify store
+  - gift.liquid: a template renders the gift card issued to a customer upon purchase.
+- Templates folder which contains:
+  - product.liquid: a template renders the product page
+  - page.liquid: a template renders a Shopify page
+  - cart.liquid: a template renders the cart page
+  - customers/account.liquid: a template renders the account page
+  - customers/order.liquid: a template renders a specific order content
+  - customers/register.liquid: a template renders the create account page
+  - customers/login.liquid: a template renders the login page
+  - customers/reset_password.liquid: a template renders the reset password page
+  - and other templates
+- Assets folder which contains the CSS, JS, SVG files and images
+- Snippets folder which contains reusable code (components)
+- Sections folder which contains files to have a dynamic section in templates with data from Shopify theme editor
+
+### Local Shopify theme development
+
+To create a custom Shopify theme and from my research, you have 3 options
+
+- Shopify Theme Kit with webpack:
+
+You can write your webpack config that fit your needs and upload your theme files using themekit. for example, you can use [this repo](https://github.com/hayes0724/shopify-webpack-themekit) as a starting point or for inspiration
+
+- Shopify Slate v1:
+
+Even with Shopify ends support for Slate in January 2020. it still a great tool with great features out of the box like code splitting over templates and sections.
+
+With the launch of the new Shopify architecture, Shopify is planning to launch also a developer tool to work with this architecture
+
+If you want to start with Slate, you can use this [starter-theme](https://github.com/Shopify/starter-theme) with Shopify slate folders architecture
+
+- [The taproom build process](https://github.com/the-taproom/build-process):
+
+The taproom is a well known Shopify dev agency and I found their tool through a Shopify dev twitch Livestream. I think this tool will be very helpful for new Shopify theme developers because this tool used by Taproom themself in building custom Shopify themes
+
+### Ressource and tools to use
+
+- [Shopify Liquid Code Examples](https://shopify.github.io/liquid-code-examples/)—A searchable library of code examples based around theme components that can be added directly into themes, to allow you to build and customize themes faster and more reliably.
+- [Shopify Theme Template Documentation](https://shopify.dev/docs/themes/liquid/reference/objects)—The go-to resource for learning the ins and outs of building Shopify themes, including detailed breakdowns of typical Liquid template files used as the basis for most Shopify themes.
+- [The Shopify Liquid Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)—A simple and detailed cheat sheet for Liquid markup. This page includes examples of most Liquid syntactical elements and descriptions of their purpose.
+- [The Shopify Liquid Docs](https://shopify.github.io/liquid/basics/types/): The go-to resource for learning Shopify liquid language
+- [Official Shopify Twitch Channel:](https://www.twitch.tv/shopifydevs) I found many tips and tools through Shopify live streams
