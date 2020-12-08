@@ -2,10 +2,16 @@ const nodemailer = require("nodemailer");
 
 const contactAddress = process.env.EMAIL;
 const mailer = nodemailer.createTransport({
-  service: "SendPulse", // no need to set host or port etc.
+  service: "gmail", //smtp.gmail.com  //in place of service use host...	  service: "gmail", //smtp.gmail.com  //in place of service use host...	  service: "SendPulse", // no need to set host or port etc.
+  secure: false, //true
+  port: 25, //465
   auth: {
-    user: process.env.EMAIL_ADDRESS,
     pass: process.env.EMAIL_PASSWORD,
+    user: process.env.EMAIL_ADDRESS,
+  },
+
+  tls: {
+    rejectUnauthorized: false,
   },
 });
 
