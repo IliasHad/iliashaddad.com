@@ -112,7 +112,7 @@ function ContactPage() {
                 target="__blank"
                 className="pt-4 pb-1 text-lg border-b-2"
               >
-                Book a meeting wit me
+                Schedule a free meeting with me
               </a>
             </div>
           </div>
