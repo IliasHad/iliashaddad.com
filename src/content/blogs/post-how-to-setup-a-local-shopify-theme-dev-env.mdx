@@ -77,23 +77,21 @@ It's recommend to have config file, to prevent from overwiring the config/settin
 
 ```
 development:
-  password: 16ef663594568325d64408ebcdeef528
-  theme_id: "123"
-  store: can-i-buy-a-feeling.myshopify.com
-  proxy: http://localhost:3000
+  password: Password
+  theme_id: theme_id
+  store: example.myshopify.com
   ignore_files:
-    - "*.gif"
-    - "*.jpg"
     - config/settings_data.json
 production:
-  password: 16ef663594568325d64408ebcdeef528
-  theme_id: "456"
-  store: can-i-buy-a-feeling.myshopify.com
-  timeout: 60s
-  readonly: true
+  password: Password
+  theme_id: theme_id
+  store: example.myshopify.com
 test:
-  password: 16ef663594568325d64408ebcdeef528
-  theme_id: "789"
-  store: can-i-buy-a-feeling.myshopify.com
-  ignores: ignore.txt
+  password: Password
+  theme_id: theme_id
+  store: example.myshopify.com
 ```
+
+References:
+
+[Shopify ThemeKit Docs](https://shopify.github.io/themekit/)
