@@ -21,6 +21,13 @@ exports.handler = function (event, context, callback) {
   <br>
   This email sent by  ${data.name}  - ${data.email}
   ` || "[No message]",
+    text:
+      `  
+ ${data.projectType} - ${data.budget} 
+  ${data.message}
+
+This email sent by  ${data.name}  - ${data.email}
+` || "[No message]",
     subject: subject,
     from: {
       name: data.name,
@@ -36,7 +43,7 @@ exports.handler = function (event, context, callback) {
 
   sendpulse.smtpSendMail(function (error, info) {
     if (error) {
-      callback(error);
+      callback(JSON.parse(error));
     } else {
       callback(null, {
         statusCode: 200,
