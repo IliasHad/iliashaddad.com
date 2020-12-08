@@ -35,6 +35,7 @@
     "react-dom": "16.13.1",
     "react-helmet": "6.1.0",
     "react-icons": "^3.10.0",
+    "sendpulse-api": "^1.1.4",
     "slugify": "^1.4.5",
     "tokyo-night": "enkia/tokyo-night-vscode-theme"
   },

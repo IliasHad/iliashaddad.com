@@ -13211,6 +13211,11 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
+sendpulse-api@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/sendpulse-api/-/sendpulse-api-1.1.4.tgz#89d1f2b396ff3b6d79342a65219d5be98a54b00d"
+  integrity sha512-7FVWBczFfiXJww3Sxkom9m2Kziv1yclhLYhw+kj/CwgYBKbRRN1SQmVToGdDQyTUmx3PJeSHGhZvUycaOqlRng==
+
 sentence-case@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/sentence-case/-/sentence-case-2.1.1.tgz#1f6e2dda39c168bf92d13f86d4a918933f667ed4"
