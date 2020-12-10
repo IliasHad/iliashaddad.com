@@ -42,7 +42,11 @@ export default function Template({
   };
   return (
     <Layout>
-      <SEO title={frontmatter.title} description={frontmatter.description} />
+      <SEO
+        title={frontmatter.title}
+        description={frontmatter.description}
+        featuredImage={`https://iliashaddad.com${frontmatter.featuredImage.childImageSharp.original.src}`}
+      />
       <div>
         <article
           className="my-12  px-12 md:flex "
@@ -117,14 +121,8 @@ export const pageQuery = graphql`
         title
         featuredImage {
           childImageSharp {
-            fluid(
-              quality: 100
-              pngQuality: 100
-              maxHeight: 400
-              maxWidth: 1000
-              cropFocus: CENTER
-            ) {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
+            original {
+              src
             }
           }
         }
