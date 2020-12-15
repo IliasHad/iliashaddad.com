@@ -1,0 +1,52 @@
+---
+title: How to use JSON data in Shopify liquid code.
+description: "In the 11th article of #4weeksOfShopifydev challenge, I'll be talking about how to use JSON data in Shopify liquid code."
+date: "2020-15-01T23:26:05.440Z"
+category: "Shopify Development "
+keywords: []
+featuredImage: ../../images/student-works-on-laptop.jpg
+
+slug: /blog/how-to-use-JSON-with-Shopify-liquid
+---
+
+In the 11th article of #4weeksOfShopifydev challenge, I'll be talking about how to use JSON data in Shopify liquid code.
+
+In Shopify Liquid template language, they don't support JSON or objects (not product object), I have a tip tp use it in Liquid.
+
+- First, we need to install [Metafields Guru](https://apps.shopify.com/metafields-editor-2) app to create metafields
+- Create new metafield under Shop settings
+
+![How to use JSON data in Shopify liquid code](../../images/how-to-use-JSON-with-Shopify-liquid-1.png)
+
+- Select JSON string as type and type data as key
+  ![How to use JSON data in Shopify liquid code](../../images/how-to-use-JSON-with-Shopify-liquid-2.png)
+
+- Use this JSON sample data
+
+```json
+[
+  {
+    "firstName": "Ilias",
+    "lastName": "Haddad",
+    "email": "contact@iliashaddad.com"
+  }
+]
+```
+
+- To consume this JSON data in Liquid, you can use this code snippet to render this JSON data
+
+```
+{% assign users = shop.metafields.global %}
+
+{% for user in users.data  %}
+
+{{ user.firstName}}  {{ user.lastName}}  {{ user.email}}
+
+{% endfor %}
+```
+
+In this sinppet, we assign the global namespace metafield to users variable
+
+{% assign users = shop.metafields.global %}
+
+And we loop over the array of object in JSON by accessing the data key metafield
