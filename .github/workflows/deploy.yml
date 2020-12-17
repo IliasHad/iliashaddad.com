@@ -1,10 +1,12 @@
 on:
-  - push
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Build
+    name: Deploy
     steps:
       - uses: actions/checkout@v2
       - name: Yarn cache directory
@@ -31,3 +33,8 @@ jobs:
         run: "yarn install --pure-lockfile"
       - name: Build app
         run: "yarn run build:incremental"
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --dir public --site ${{ env.NETLIFY_SITE_ID }} --auth ${{ env.NETLIFY_AUTH_TOKEN }} --message "Publishing app" --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_SITE_ID }}
