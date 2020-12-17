@@ -207,10 +207,10 @@ function ContactPage() {
                 required
                 className="w-full  my-2 rounded border focus:outline-none focus:border-indigo-500 text-base px-4 py-2"
               >
-                <option>Less than $500</option>
+                <option>100$ - $500</option>
                 <option>500$ - $1000</option>
                 <option>$1000 - $5000</option>
-                <option>More than$5000</option>
+                <option>More than $5000</option>
               </select>
             </div>
 
