@@ -4,26 +4,38 @@ on:
   push:
     branches:
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    name: Build
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-        
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Gatsby Cache Folder
+        uses: actions/cache@v1
         with:
-          node-version: '12.18.0'
-      - run: yarn
-      - run: yarn clean
-      - run: yarn build 
-
+          key: gatsby-cache-folder
+          path: .cache
+      - name: Gatsby Public Folder
+        uses: actions/cache@v1
+        with:
+          key: gatsby-public-folder
+          path: public
+      - name: Yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Yarn install
+        run: "yarn install --pure-lockfile"
+      - name: Build app
+        run: "yarn run build:incremental"
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir public --site ${{ env.NETLIFY_SITE_ID }} --auth ${{ env.NETLIFY_AUTH_TOKEN }} --message "Publishing app" --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_SITE_ID }}
-  
