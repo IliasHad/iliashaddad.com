@@ -10,13 +10,18 @@ import { MDXProvider } from "@mdx-js/react";
 import { components } from "../layouts/post-layout";
 import { FaTwitter } from "react-icons/fa";
 import addToMailchimp from "gatsby-plugin-mailchimp";
+import { Disqus } from "gatsby-plugin-disqus";
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { mdx } = data; // data.mdx holds your post data
   const { frontmatter, body, timeToRead } = mdx;
-
+  let disqusConfig = {
+    url: `https://iliashaddad.com/${frontmatter.slug}`,
+    identifier: frontmatter.slug,
+    title: frontmatter.title,
+  };
   const [email, setEmail] = useState("");
 
   const [success, setSuccess] = useState(false);
@@ -105,6 +110,13 @@ export default function Template({
           </div>
         </article>
       </div>
+      <div>
+        <div className="m-auto py-8 md:max-w-2xl max-w-3xl ">
+          <h5 className="my-8 text-xl">Your comment</h5>
+
+          <Disqus config={disqusConfig} />
+        </div>
+      </div>
     </Layout>
   );
 }
@@ -119,6 +131,7 @@ export const pageQuery = graphql`
         slug
         description
         title
+
         featuredImage {
           childImageSharp {
             original {
