@@ -111,7 +111,7 @@ export default function Template({
         </article>
       </div>
       <div>
-        <div className="m-auto py-8 md:max-w-2xl max-w-3xl ">
+        <div className="m-auto px-12 md:px-2 py-8 md:max-w-2xl max-w-3xl ">
           <h5 className="my-8 text-xl">Your comment</h5>
 
           <Disqus config={disqusConfig} />
