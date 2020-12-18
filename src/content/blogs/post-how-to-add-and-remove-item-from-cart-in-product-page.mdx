@@ -1,0 +1,141 @@
+---
+title: how to add and remove the item from the cart on the product page using AJAX.
+description: "In the 13th article of the #4weeksOfShopifyDev challenge, I'll be talking about how to add and remove the item from the cart on the product page using AJAX."
+date: "2020-12-17T23:46:05.440Z"
+category: "Shopify Development "
+keywords: []
+featuredImage: ../../images/javascript-with-laptop-code.jpg
+
+slug: /blog/how-to-add-and-remove-item-from-cart-in-product-page
+---
+
+In the 13th article of the #4weeksOfShopifyDev challenge, I'll be talking about how to add and remove the item from the cart on the product page using AJAX.
+
+Let's do it!
+
+- First, We need to find the add to cart button and get their class name
+- Paste this code in the product template code
+
+```jsx
+<script>
+let cartBtn = document.querySelector("YOUR CART BUTTON CLASS NAME")
+
+const form =  document.getElementById("YOUR FORM ID")
+form.addEventListener("submit", (e)=>{
+e.preventDefault()
+
+addItem()
+
+function addItem() {
+
+$.ajax({
+type: 'POST',
+url: '/cart/add.js',
+dataType: 'json',
+data: $('#'+"YOUR FORM ID").serialize()
+})
+.then(data => {
+cartBtn.textContent = "Remove from cart"
+cartBtn.setAttribute("data-variant-id", data.variant_id);
+
+})
+
+      }
+
+</script>
+```
+
+In this code snippet, we have added to cart button and add to cart form.
+
+- We can add an event listener to handle add to cart form submit event and prevent adding product to cart and redirect to the cart page.
+- We have addItem function, it will handle get form data, add the item to the cart, change add to cart text and add the variant id of the product (we'll use in remove item)
+
+```jsx
+function removeItem() {
+  let variantId = cartBtn.getAttribute("data-variant-id");
+
+  $.ajax({
+    type: "POST",
+    url: "/cart/change.js",
+    dataType: "json",
+    data: {
+      id: parseFloat(variantId),
+      quantity: 0,
+    },
+  }).then((data) => {
+    cartBtn.textContent = "Add to cart";
+    cartBtn.removeAttribute("data-variant-id");
+  });
+}
+```
+
+- In this code snippet, we'll remove the same product from the cart.
+- First, we need to get the variant id of the product we want to remove which we set before in addItem function
+- Then, we make an API call to remove the item from the cart and remove the variant id attribute from the cart button
+
+Final code:
+
+```jsx
+<script>
+ let cartBtn = document.querySelector("YOUR CART BUTTON CLASS NAME")
+
+const form =  document.getElementById("YOUR FORM ID")
+
+ form.addEventListener("submit", (e)=>{
+  e.preventDefault()
+
+
+  if(cartBtn.getAttribute("data-variant-id")) {
+
+  removeItem()
+  }
+    else {
+
+      addItem()
+    }
+
+
+ })
+
+
+ function removeItem() {
+
+
+   let variantId =  cartBtn.getAttribute("data-variant-id")
+
+
+   $.ajax({
+      type: 'POST',
+      url: '/cart/change.js',
+      dataType: 'json',
+     data: {
+  'id': parseFloat(variantId),
+  'quantity': 0
+}
+
+   })
+   .then(data => {
+    cartBtn.textContent = "Add to cart"
+    cartBtn.removeAttribute("data-variant-id");
+
+})
+  }
+
+  function addItem() {
+
+
+   $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      dataType: 'json',
+      data: $('#'+"YOUR FORM ID").serialize()
+   })
+   .then(data => {
+    cartBtn.textContent = "Remove from cart"
+    cartBtn.setAttribute("data-variant-id", data.variant_id);
+
+})
+
+          }
+</script>
+```
