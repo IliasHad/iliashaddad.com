@@ -33,6 +33,20 @@ export const Contact = () => {
               contact@iliashaddad.com
             </a>
           </p>
+          <p className="py-2">
+            <a
+              onClick={() =>
+                window.plausible("Calendly-Meeting-Link", {
+                  callback: () => console.info("Calendly Meeting clicked"),
+                })
+              }
+              href="https://calendly.com/iliashaddad/15min"
+              target="__blank"
+              className="pt-4 pb-1 text-lg border-b-2"
+            >
+              Schedule a free meeting with me
+            </a>{" "}
+          </p>
 
           <div
             className="grid grid-cols-6 py-6"
