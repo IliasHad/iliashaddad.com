@@ -8,12 +8,13 @@ export const About = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 py-12 gap-12">
         <p>
-          I&apos;m a 21-year-old student at Ibn Tofail University currently
-          studying marketing and commerce.
+          I&apos;m a Full stack developer and mainly with the MERN stack
+          (MongoDB, Express JS, React JS and Node JS)
         </p>
         <p>
-          As I&apos;ve grown as a developer, I&apos;ve worked on multiple side
-          projects to improve my coding skills
+          I&apos;m also a Shopify developer. I help Shopify store owners with
+          their technical issues and needs (custom Shopify theme, add features
+          to their store, optimize their store performance ,...)
         </p>
       </div>
     </section>
