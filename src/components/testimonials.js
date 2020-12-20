@@ -78,7 +78,11 @@ export const Testimonials = () => {
             <h5 className="text-3xl font-bold">Testimonials</h5>
           </div>
           <div className="grid  grid-cols-1 md:grid-cols-2  py-12">
-            <p className="w-full">What my clients are saying:</p>
+            <p className="w-full">
+              I&apos;ve had the chance to work with some really great people,
+              here’s some of the super nice things they&apos;ve said about me
+              and my work.
+            </p>
           </div>
           <div className="flex flex-wrap  py-4">
             {clients.map((client, index) => (
