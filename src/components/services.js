@@ -1,0 +1,84 @@
+/* This example requires Tailwind CSS v2.0+ */
+import {
+  TerminalIcon,
+  CodeIcon,
+  AdjustmentsIcon,
+} from "@heroicons/react/outline";
+import React from "react";
+import { Calendar } from "../components/calendar";
+
+const supportLinks = [
+  {
+    name: "Store Setup & Theme Development",
+    href: "#",
+    description:
+      "Creating a stunning, responsive, and performant eCommerce Shopify store with the latest technologies and make it fully customizable, so you can play with it without a coding background.",
+    icon: CodeIcon,
+  },
+  {
+    name: "Shopify Custom Development",
+    href: "#",
+    description:
+      "Building a custom Shopify storefront using SSG (Static Site Generators) or adding a custom integration to your Shopify store ",
+    icon: AdjustmentsIcon,
+  },
+  {
+    name: "Web App Development",
+    href: "#",
+    description:
+      "Turning your idea into life using a modern tech stack (MERN Stack: Mongo, Express, React, and Node js) and help you achieve your business goals. ",
+    icon: TerminalIcon,
+  },
+];
+
+export const Services = () => {
+  return (
+    <div className="px-12 py-4 ">
+      <div className="w-2/4 ">
+        <h5 className="text-3xl font-bold">What I can help you with.</h5>
+      </div>
+
+      {/* Header */}
+
+      {/* Overlapping cards */}
+      <section
+        className="max-w-7xl mx-auto relative  py-20"
+        aria-labelledby="contact-heading"
+      >
+        <h2 className="sr-only" id="contact-heading">
+          Contact us
+        </h2>
+        <div className="grid grid-cols-1 gap-y-20 gap-10 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8">
+          {supportLinks.map((link) => (
+            <div key={link.name} className="bg-white rounded-2xl shadow-sm">
+              <div className="relative pt-16 px-6 pb-8 md:px-8">
+                <div className="absolute top-0 left-1/2 p-5 rounded-full inline-block bg-black rounded-xl shadow-lg transform -translate-y-1/2 -translate-x-1/2">
+                  <link.icon
+                    className="h-6 w-6 text-white"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900">
+                  {link.name}
+                </h3>
+                <p className="mt-4 text-base text-gray-500">
+                  {link.description}
+                </p>
+              </div>
+              <div className="p-6 rounded-bl-2xl rounded-br-2xl md:px-8">
+                <Calendar
+                  utm={{
+                    utmCampaign: "Services Section",
+                    utmContent: link.name,
+                    utmMedium: "Personal Blog",
+                    utmSource: "iliashaddad.com",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};

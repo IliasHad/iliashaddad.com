@@ -1,0 +1,84 @@
+---
+title: How to set price rules by a product variant id for a specific quantity (Shopify GraphQl API)
+description: How to set price rules by a product variant id for a specific quantity (Shopify GraphQl API)
+date: "2020-12-07T23:46:05.440Z"
+category: "Shopify Development "
+keywords: []
+featuredImage: ../../images/software-programming-plan.jpg
+
+slug: /blog/how-to-set-price-rules-by-a-product-variant-id-for-a-specific-quantity
+---
+
+We're now in the second week of the #4WeeksOfShopifyDev challenge.
+
+In the sixth article, As requested, I'll be talking about how to set price rules by a product variant id for a specific quantity using the Shopify GraphQl API
+
+We'll build a discount (80% OFF) that will be applied automatically when the user has a specific product variant with a minimum quantity of 2 items  
+Let do it!
+
+I'll be using the [Shopify Admin API explorer app](https://shopify-graphiql-app.shopifycloud.com/)
+
+- You need to install the Shopify Admin API app
+
+* Paste this code in GraphQl query
+
+```
+mutation discountAutomaticBasicCreate($automaticBasicDiscount: DiscountAutomaticBasicInput!) {
+  discountAutomaticBasicCreate(automaticBasicDiscount: $automaticBasicDiscount) {
+    automaticDiscountNode {
+      id
+    }
+    userErrors {
+      code
+      extraInfo
+      field
+      message
+    }
+  }
+}
+```
+
+In this code, we have this mutation function to creates a basic automatic discount and it's will return the id of the generated discount
+
+- Paste this JSON object in the query variables section
+
+```
+{
+  "automaticBasicDiscount": {
+    "title": "Ilias Challenge",
+    "startsAt": "2020-12-07T11:26:29.519Z",
+    "minimumRequirement": {
+      "quantity": {
+        "greaterThanOrEqualToQuantity": "2"
+      }
+    },
+    "customerGets": {
+
+      "value": {
+        "percentage": 0.8
+      },
+
+      "items": {
+        "products": {
+          "productVariantsToAdd": "gid://shopify/ProductVariant/YOUR-PRODUCT-VARIANT-ID"
+        }
+
+      }
+    }
+  }
+}
+```
+
+Notes:
+
+Percentage accepts value between 0.00 - 1.00 80% - 0.80
+
+Your Product Variant ID: you can get it when editing a product variant, you'll have in the URL
+
+In this example:
+
+https://ilias-demo.myshopify.com/admin/products/4805542674516/variants/32963135799380
+
+Variant_ID= 32963135799380
+
+You can also checkout this [screen cast video](https://www.loom.com/share/af6dd10253924a569f37bafdde942292) of how I create the discount

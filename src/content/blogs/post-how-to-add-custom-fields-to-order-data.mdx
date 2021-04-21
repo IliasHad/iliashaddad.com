@@ -1,0 +1,47 @@
+---
+title: How to add custom fields to the order data in the product page
+description: How to add custom fields to the order data in the product page
+date: "2020-12-02T23:46:05.440Z"
+category: "Shopify Development "
+keywords: []
+featuredImage: ../../images/javascript-with-laptop-code.jpg
+
+slug: /blog/how-to-add-custom-fields-to-order-data-in-product-page
+---
+
+In the third article of #4weeksShopifyDev, I'll be talking about how to add custom fields to the order data in the product page
+
+I'll adding engraving custom field in product page and display the output of the customer in order page (Shopify Admin)
+
+Demo Image
+![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-7.png)
+
+Note: I'm using the Debut theme, you may have different architecture
+
+## Create a product template
+
+- First, we need to create a custom product Shopify template and called product-custom.liquid
+  ![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-1.png)
+
+- Create a new Shopify section and called product-custom-template and paste the code from the product-template section
+  ![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-2.png)
+
+- On the product page , change the template suffix to the product.custom
+
+  ![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-3.png)
+
+## Create Custom Fields
+
+- Go to the [Shopify UI Elements Generator](https://ui-elements-generator.myshopify.com/pages/line-item-property).
+- Create a new custom field
+  ![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-8.png)
+
+- Copy the generated code
+  ![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-9.png)
+
+- Paste the code before <button type="submit"
+
+Now, you can test it by adding the product to the cart and add the custom field value and process the checkout.
+
+Et voila, the custom field value appear on the checkout page and order page
+![ How to add custom fields to the order data in the product page](../../images/how-to-add-custom-fields-to-order-data-in-product-page-6.png)
