@@ -15,8 +15,8 @@ module.exports = {
     {
       resolve: `gatsby-source-ghost`,
       options: {
-        apiUrl: `https://blog.iliashaddad.com`,
-        contentApiKey: `6d8d5ce6a429de0acb931a6247`,
+        apiUrl: process.env.GHOST_API_URL,
+        contentApiKey: process.env.CONTENT_API_KEY,
       },
     },
     `gatsby-plugin-advanced-sitemap`,

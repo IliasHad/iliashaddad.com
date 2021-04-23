@@ -48,6 +48,13 @@ jobs:
             ${{ runner.os }}-public-gatsby
       - run: yarn install --pure-lockfile
         name: Install dependencies
+      - name: Create env file
+        run: |
+          touch .env
+          echo GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN}} >> .env
+          echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
+          echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
+          cat .env
 
       - run: yarn build --log-pages
         name: Build
