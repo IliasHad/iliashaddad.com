@@ -57,7 +57,7 @@ jobs:
           echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
           cat .env
 
-      - run: yarn build --log-pages
+      - run: yarn build
         name: Build
         env:
           # incremental builds

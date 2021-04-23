@@ -78,7 +78,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "build": "npm run prod; npm run build:lambda",
+    "build": " npm run build:lambda && npm run prod",
     "start:lambda": "netlify-lambda serve functions",
     "build:lambda": "netlify-lambda build functions",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
