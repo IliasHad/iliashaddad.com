@@ -10,7 +10,7 @@
     "@pauliescanlon/gatsby-mdx-embed": "^0.0.29",
     "@tailwindcss/typography": "^0.4.0",
     "axios": "^0.21.1",
-    "gatsby": "^3.3.1",
+    "gatsby": "2.0.0",
     "gatsby-image": "^3.3.0",
     "gatsby-plugin-advanced-sitemap": "^1.6.0",
     "gatsby-plugin-disqus": "^1.2.2",
