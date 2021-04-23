@@ -1,5 +1,6 @@
 name: Node.js CI
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 on: [push]
 =======
@@ -9,6 +10,13 @@ on:
   repository_dispatch:
     types: [post_published]
 >>>>>>> Stashed changes
+=======
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [post_published]
+>>>>>>> 3929842f8879cfcaf7f76801f94a8f91066b07a4
 
 jobs:
   build:
@@ -32,7 +40,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       # In order to make gatsby incremental build works, it's necessary .cache
       # and public folder.
       - name: Gatsby Cache Folder
@@ -43,7 +50,6 @@ jobs:
           key: ${{ runner.os }}-cache-gatsby
           restore-keys: |
             ${{ runner.os }}-cache-gatsby
-
       - name: Gatsby Public Folder
         uses: actions/cache@v1
         id: gatsby-public-folder
@@ -52,9 +58,9 @@ jobs:
           key: ${{ runner.os }}-public-gatsby
           restore-keys: |
             ${{ runner.os }}-public-gatsby
-
       - run: yarn install --pure-lockfile
         name: Install dependencies
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
       - name: Create env file
@@ -65,6 +71,15 @@ jobs:
           echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
           cat .env
 >>>>>>> Stashed changes
+=======
+      - name: Create env file
+        run: |
+          touch .env
+          echo GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN}} >> .env
+          echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
+          echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
+          cat .env
+>>>>>>> 3929842f8879cfcaf7f76801f94a8f91066b07a4
 
       - run: yarn build --log-pages
         name: Build

@@ -60,7 +60,7 @@ function ContactPage() {
       />
       <section
         style={{ gridTemplateColumns: "30% 1fr" }}
-        className="p-12 contact-page grid sm:grid-cols-1 grid-cols-1 justify-center gap-x-10 gap-y-6 "
+        className="p-12 contact-page grid sm:grid-cols-1 grid-cols-1 justify-center gap-row-10 gap-col-6 "
       >
         <div className="">
           <h5 className="text-3xl font-bold">
@@ -78,7 +78,7 @@ function ContactPage() {
               </a>
             </p>
 
-            <div className="grid md:gap-x-4 gap-x-8 grid-cols-6  py-3">
+            <div className="grid md:gap-row-4 gap-row-8 grid-cols-6  py-3">
               <a
                 href="https://web.facebook.com/iliasshaddad99/"
                 target="__blank"

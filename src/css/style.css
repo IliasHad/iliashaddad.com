@@ -70,3 +70,7 @@ p + .gatsby-resp-image-wrapper {
 .light-theme main > .blog-page {
   background-color: #fff !important;
 }
+
+.kg-card.kg-embed-card iframe {
+  position: relative !important;
+}
