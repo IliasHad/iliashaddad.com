@@ -67,7 +67,7 @@ jobs:
           ENVIRONMENT: ${{ contains(github.ref, 'master') && 'production' || 'staging'}}
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.0
+        uses: nwtgck/actions-netlify@v1.1
         with:
           publish-dir: "./public"
           production-branch: master
