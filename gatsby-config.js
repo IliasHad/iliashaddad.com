@@ -12,66 +12,16 @@ module.exports = {
     author: `@iliashaddad`,
   },
   plugins: [
-    `@pauliescanlon/gatsby-mdx-embed`,
+    {
+      resolve: `gatsby-source-ghost`,
+      options: {
+        apiUrl: `https://blog.iliashaddad.com`,
+        contentApiKey: `6d8d5ce6a429de0acb931a6247`,
+      },
+    },
     `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-robots-txt`,
 
-    {
-      resolve: `gatsby-plugin-mdx`,
-
-      options: {
-        defaultLayouts: {
-          default: require.resolve("./src/templates/blogTemplate.js"),
-        },
-        extensions: [`.md`, `.mdx`],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-figure-caption`,
-            options: { imageClassName: "w-full rounded-lg" },
-          },
-          {
-            // Using gatsby-remark-embed-video before gatsby-remark-images & gatsby-remark-responsive-iframe plugins.
-            resolve: `gatsby-remark-embed-video`,
-            options: {
-              maxWidth: 800,
-              ratio: 1.77,
-              height: 400,
-              related: false,
-              noIframerder: true,
-            },
-          },
-
-          {
-            resolve: `gatsby-remark-vscode`,
-            options: {
-              theme: `Tokyo Night`, // From package.json: contributes.themes[0].label
-              extensions: ["tokyo-night"], // From package.json: name
-            },
-          },
-          {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-              plugins: [],
-            },
-          },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 1000,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-        ],
-      },
-    },
     `gatsby-plugin-eslint`,
     `gatsby-plugin-react-helmet`,
     {
@@ -98,6 +48,7 @@ module.exports = {
       },
     },
 
+    // sharp plugins are only needed if you want to use gatsby image processing tools
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
@@ -105,6 +56,60 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: `GhostPost`,
+        imagePath: `feature_image`,
+        name: `featureImageSharp`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: `GhostPage`,
+        imagePath: `feature_image`,
+        name: `featureImageSharp`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-rehype`,
+      options: {
+        // Condition for selecting an existing GrapghQL node (optional)
+        // If not set, the transformer operates on file nodes.
+        filter: (node) =>
+          node.internal.type === `GhostPost` ||
+          node.internal.type === `GhostPage`,
+        // Only needed when using filter (optional, default: node.html)
+        // Source location of the html to be transformed
+        source: (node) => node.html,
+        // Additional fields of the sourced node can be added here (optional)
+        // These fields are then available on the htmlNode on `htmlNode.context`
+        contextFields: [],
+        // Fragment mode (optional, default: true)
+        fragment: true,
+        // Space mode (optional, default: `html`)
+        space: `html`,
+        // EmitParseErrors mode (optional, default: false)
+        emitParseErrors: false,
+        // Verbose mode (optional, default: false)
+        verbose: false,
+        // Plugins configs (optional but most likely you need one)
+        plugins: [
+          {
+            resolve: `gatsby-rehype-inline-images`,
+            // all options are optional and can be omitted
+            options: {
+              // all images larger are scaled down to maxWidth (default: maxWidth = imageWidth)
+              // maxWidth: 2000,
+              withWebp: true,
+              // disable, if you need to save memory
+              useImageCache: true,
+            },
+          },
+        ],
+      },
+    },
 
     {
       resolve: `gatsby-source-filesystem`,
@@ -112,20 +117,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/content/blogs`,
-        name: `blogs`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/content/projects`,
-        name: `projects`,
-      },
-    },
+
     // The only required option is the domain
     {
       resolve: `gatsby-plugin-plausible`,

@@ -17,27 +17,23 @@ export const Articles = () => {
       <StaticQuery
         query={graphql`
           {
-            featuredPost: allMdx(
-              filter: {
-                fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" }
-                frontmatter: { featured: { eq: true } }
-              }
+            featuredPost: allGhostPost(
+              sort: { order: ASC, fields: published_at }
+              filter: { featured: { eq: true } }
               limit: 1
             ) {
-              nodes {
-                frontmatter {
-                  title
+              edges {
+                node {
                   slug
-                  category
-                  description
-                  featuredImage {
+                  title
+                  custom_excerpt
+                  primary_tag {
+                    name
+                    slug
+                  }
+                  featureImageSharp {
                     childImageSharp {
-                      fluid(
-                        maxHeight: 300
-                        maxWidth: 600
-                        quality: 100
-                        cropFocus: ATTENTION
-                      ) {
+                      fluid(maxWidth: 800, quality: 100, cropFocus: CENTER) {
                         ...GatsbyImageSharpFluid_withWebp_noBase64
                       }
                     }
@@ -46,26 +42,29 @@ export const Articles = () => {
               }
             }
 
-            allPosts: allMdx(
-              filter: { fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" } }
-              sort: { fields: frontmatter___date, order: DESC }
+            allGhostPost(
+              sort: { order: DESC, fields: created_at }
+              filter: { featured: { eq: false }, visibility: { eq: "public" } }
               limit: 3
             ) {
-              nodes {
-                frontmatter {
-                  title
+              edges {
+                node {
+                  custom_excerpt
                   slug
-                  description
-                  category
-                  featuredImage {
+                  title
+                  primary_tag {
+                    name
+                    slug
+                  }
+                  featureImageSharp {
                     childImageSharp {
                       fluid(
-                        maxHeight: 250
-                        maxWidth: 350
+                        maxHeight: 600
+                        maxWidth: 800
                         quality: 100
-                        cropFocus: ATTENTION
+                        cropFocus: CENTER
                       ) {
-                        ...GatsbyImageSharpFluid_withWebp_noBase64
+                        ...GatsbyImageSharpFluid
                       }
                     }
                   }
@@ -74,60 +73,73 @@ export const Articles = () => {
             }
           }
         `}
-        render={({ featuredPost, allPosts }) => (
+        render={({ featuredPost, allGhostPost }) => (
           <>
-            <div className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12">
-              <Img
-                imgStyle={{ objectFit: "cover" }}
-                fluid={
-                  featuredPost.nodes[0].frontmatter.featuredImage
-                    .childImageSharp.fluid
-                }
-                className="rounded"
-              />
-
-              <div>
-                <h5 className="text-xl  py-4 text-gray-600">
-                  {featuredPost.nodes[0].frontmatter.category}
-                </h5>
-                <h2 className="text-2xl font-semibold">
-                  {featuredPost.nodes[0].frontmatter.title}
-                </h2>
-                <p className="text-lg text-gray-500 py-4">
-                  {featuredPost.nodes[0].frontmatter.description}
-                </p>
-                <button className=" border-b-2 pt-4 pb-1 text-lg hover:border-b-2 focus:border-b-2">
-                  <Link to={featuredPost.nodes[0].frontmatter.slug}>
-                    Read Article
-                  </Link>
-                </button>
-              </div>
-            </div>
-
-            <div className="grid  grid-cols-1 md:grid-cols-3 py-12 gap-x-24 gap-y-8">
-              {allPosts.nodes.map((post, index) => (
-                <div key={index}>
+            {featuredPost.edges
+              .filter(({ node }) => node.featureImageSharp !== null)
+              .map(({ node }, index) => (
+                <div
+                  key={index}
+                  className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12"
+                >
                   <Img
                     imgStyle={{ objectFit: "cover" }}
-                    fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
+                    fluid={node.featureImageSharp.childImageSharp.fluid}
                     className="rounded"
                   />
 
-                  <h5 className="text-xl  py-4 text-gray-600">
-                    {" "}
-                    {post.frontmatter.category}
-                  </h5>
-                  <p className="text-2xl font-semibold">
-                    {post.frontmatter.title}
-                  </p>
-                  <p className="text-lg text-gray-500 py-4">
-                    {post.frontmatter.description}
-                  </p>
-                  <button className="pt-4 pb-1 text-lg border-b-2">
-                    <Link to={post.frontmatter.slug}>Read Article</Link>
-                  </button>
+                  <div>
+                    <div className="py-4">
+                      <Link
+                        to={`/tag/${node.primary_tag.slug}`}
+                        className="text-xl  py-4 text-gray-600"
+                      >
+                        <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                          {node.primary_tag.name}
+                        </span>{" "}
+                      </Link>
+                    </div>
+                    <h2 className="text-2xl font-semibold">{node.title}</h2>
+                    <p className="text-lg text-gray-500 py-4">
+                      {node.custom_excerpt}
+                    </p>
+                    <button className="pt-2 pb-1 text-lg border-b-2  border-indigo-100border-indigo-100">
+                      <Link to={`/blog/${node.slug}`}>Read Article</Link>
+                    </button>
+                  </div>
                 </div>
               ))}
+            <div className="grid  grid-cols-1 md:grid-cols-3 py-12 gap-x-24 gap-y-8">
+              {allGhostPost.edges
+                .filter(({ node }) => node.featureImageSharp !== null)
+
+                .map(({ node }, index) => (
+                  <div key={index}>
+                    <Img
+                      imgStyle={{ objectFit: "cover" }}
+                      fluid={node.featureImageSharp.childImageSharp.fluid}
+                      className="rounded"
+                    />
+                    <div className="py-4">
+                      <Link
+                        to={`/tag/${node.primary_tag.slug}`}
+                        className="text-xl  py-4 text-gray-600"
+                      >
+                        <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                          {node.primary_tag.name}
+                        </span>{" "}
+                      </Link>
+                    </div>
+
+                    <p className="text-2xl font-semibold">{node.title}</p>
+                    <p className="text-lg text-gray-500 py-4">
+                      {node.custom_excerpt}
+                    </p>
+                    <button className="pt-2 pb-1 text-lg border-b-2  border-indigo-100border-indigo-100">
+                      <Link to={`/blog/${node.slug}`}>Read Article</Link>
+                    </button>
+                  </div>
+                ))}
             </div>
           </>
         )}
