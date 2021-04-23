@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 export const Author = ({ date, timeToRead }) => {
   return (
-    <div className="grid  grid-cols-1 py-12 gap-x-24 gap-y-12">
+    <div className="grid  grid-cols-1 py-12 gap-row-24 gap-col-12">
       <StaticQuery
         query={graphql`
           query {

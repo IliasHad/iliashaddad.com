@@ -1,9 +1,31 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
-import { PopupText, CalendlyEventListener } from "react-calendly";
+import {
+  CalendlyEventListener,
+  openPopupWidget,
+  closePopupWidget,
+} from "react-calendly";
 
 export const Calendar = ({ utm }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        closePopupWidget();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
   return (
     <>
       <CalendlyEventListener
@@ -32,12 +54,19 @@ export const Calendar = ({ utm }) => {
           }
         }}
       ></CalendlyEventListener>
-      <PopupText
-        styles={{ color: "#4c51bf", fontWeight: "500" }}
-        text="Book a discovery call"
-        url="https://calendly.com/iliashaddad/discovery-call"
-        utm={utm}
-      />
+
+      <button
+        ref={ref}
+        className="text-indigo-700 underline font-semibold"
+        onClick={() =>
+          openPopupWidget({
+            utm,
+            url: "https://calendly.com/iliashaddad/discovery-call",
+          })
+        }
+      >
+        Book a discovery call
+      </button>
     </>
   );
 };

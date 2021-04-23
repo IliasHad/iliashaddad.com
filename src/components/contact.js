@@ -11,7 +11,7 @@ import { Calendar } from "../components/calendar";
 
 export const Contact = () => {
   return (
-    <section className="px-12 py-4">
+    <section className="px-12 py-12">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">
           Let&apos;s Build Something Together

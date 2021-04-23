@@ -1,18 +1,18 @@
 import React from "react";
 import { StaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-export const Work = () => {
+export const SideProject = () => {
   return (
     <section className="px-12 py-4 ">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">
-          What I&apos;ve been working on with my freelance clients.
+          What I&apos;ve been working on the side
         </h5>
       </div>
       <div className="grid  grid-cols-1 md:grid-cols-2 py-12">
         <p className="w-full text-lg">
-          I like to share what I worked on with my clients. Take a look at some
-          of the my work.
+          I like to stay busy and always have a project in the works. Take a
+          look at some of the my side projects.
         </p>
       </div>
 
@@ -22,7 +22,7 @@ export const Work = () => {
             query {
               allGhostPage(
                 filter: {
-                  tags: { elemMatch: { slug: { eq: "client-project" } } }
+                  tags: { elemMatch: { slug: { eq: "side-projects" } } }
                 }
               ) {
                 edges {
@@ -33,7 +33,7 @@ export const Work = () => {
 
                     featureImageSharp {
                       childImageSharp {
-                        fluid(maxWidth: 800, quality: 100, cropFocus: CENTER) {
+                        fluid(maxWidth: 850, quality: 100, cropFocus: CENTER) {
                           ...GatsbyImageSharpFluid
                         }
                       }

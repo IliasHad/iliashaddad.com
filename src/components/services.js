@@ -42,13 +42,13 @@ export const Services = () => {
 
       {/* Overlapping cards */}
       <section
-        className="max-w-7xl mx-auto relative  py-20"
+        className="mx-auto relative  py-20"
         aria-labelledby="contact-heading"
       >
         <h2 className="sr-only" id="contact-heading">
           Contact us
         </h2>
-        <div className="grid grid-cols-1 gap-y-20 gap-10 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8">
+        <div className="grid grid-cols-1 gap-col-20 gap-10 lg:grid-cols-3 lg:gap-col-0 lg:gap-row-8">
           {supportLinks.map((link) => (
             <div key={link.name} className="bg-white rounded-2xl shadow-sm">
               <div className="relative pt-16 px-6 pb-8 md:px-8">

@@ -1,3 +1,5 @@
+/* eslint-disable  */
+
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -5,7 +7,9 @@ import { Hero } from "../components/hero";
 import { About } from "../components/about";
 import { Articles } from "../components/articles";
 import { Testimonials } from "../components/testimonials";
+import { SideProject } from "../components/sideProject";
 import { Work } from "../components/work";
+
 import { Skills } from "../components/skills";
 import { Services } from "../components/services";
 import { StaticQuery, graphql } from "gatsby";
@@ -46,10 +50,13 @@ function IndexPage() {
           <Hero />
           <About />
           <Skills />
+
+          <SideProject />
+          <Work />
           <Services />
 
-          <Work />
           <Articles />
+
           <Testimonials />
         </Layout>
       )}

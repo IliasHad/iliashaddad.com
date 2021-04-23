@@ -1,48 +1,81 @@
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+const path = require(`path`);
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const postTemplate = path.resolve(`./src/templates/blogTemplate.js`);
+  const tagTemplate = path.resolve(`./src/templates/tagTemplate.js`);
+  const projectTemplate = path.resolve(`./src/templates/projectTemplate.js`);
 
-  const blogPostTemplate = require.resolve(`./src/templates/blogTemplate.js`);
-  const projectTemplate = require.resolve(`./src/templates/projectTemplate.js`);
+  // Query Ghost data  const tagTemplate = path.resolve(`./src/templates/tagTemplate.js`);
 
   const result = await graphql(`
     {
-      allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
+      allGhostPost(sort: { order: ASC, fields: published_at }) {
         edges {
           node {
-            frontmatter {
+            slug
+            primary_tag {
               slug
             }
           }
         }
       }
+      allGhostTag {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+      allGhostPage {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
     }
   `);
-
   // Handle errors
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
+  if (!result.data.allGhostPost && !result.data.allGhostTag) {
+    return;
+  }
+  // Create pages for each Ghost post
+  const items = result.data.allGhostPost.edges;
+  const tags = result.data.allGhostTag.edges;
+  const pages = result.data.allGhostPage.edges;
 
-  result.data.allMdx.edges.forEach(({ node }) => {
-    if (node.frontmatter.slug.includes("blog")) {
-      createPage({
-        path: node.frontmatter.slug,
-        component: blogPostTemplate,
-        context: {
-          // additional data can be passed via context
-          slug: node.frontmatter.slug,
-        },
-      });
-    } else {
-      createPage({
-        path: node.frontmatter.slug,
-        component: projectTemplate,
-        context: {
-          // additional data can be passed via context
-          slug: node.frontmatter.slug,
-        },
-      });
-    }
+  items.forEach(({ node }) => {
+    node.url = `/blog/${node.slug}/`;
+    actions.createPage({
+      path: node.url,
+      component: postTemplate,
+      context: {
+        slug: node.slug,
+        tag: node.primary_tag.slug,
+      },
+    });
+  });
+  tags.forEach(({ node }) => {
+    node.url = `/tag/${node.slug}/`;
+    actions.createPage({
+      path: node.url,
+      component: tagTemplate,
+      context: {
+        slug: node.slug,
+      },
+    });
+  });
+  pages.forEach(({ node }) => {
+    node.url = `/project/${node.slug}/`;
+    actions.createPage({
+      path: node.url,
+      component: projectTemplate,
+      context: {
+        slug: node.slug,
+      },
+    });
   });
 };

@@ -37,26 +37,27 @@ function BlogPage() {
           <StaticQuery
             query={graphql`
               {
-                allPosts: allMdx(
-                  filter: {
-                    fileAbsolutePath: { regex: "/(blogs)/.*\\\\.mdx$/" }
-                  }
-                  sort: { fields: frontmatter___date, order: DESC }
+                featuredPost: allGhostPost(
+                  sort: { order: ASC, fields: published_at }
+                  filter: { featured: { eq: true } }
+                  limit: 1
                 ) {
-                  nodes {
-                    frontmatter {
-                      title
+                  edges {
+                    node {
                       slug
-                      featured
-                      description
-                      category
-                      featuredImage {
+                      title
+                      custom_excerpt
+                      primary_tag {
+                        name
+                        slug
+                      }
+                      featureImageSharp {
                         childImageSharp {
                           fluid(
-                            maxHeight: 250
-                            maxWidth: 350
+                            maxHeight: 450
+                            maxWidth: 850
                             quality: 100
-                            cropFocus: ATTENTION
+                            cropFocus: CENTER
                           ) {
                             ...GatsbyImageSharpFluid_withWebp_noBase64
                           }
@@ -65,68 +66,109 @@ function BlogPage() {
                     }
                   }
                 }
+
+                allGhostPost(
+                  sort: { order: DESC, fields: created_at }
+                  filter: {
+                    featured: { eq: false }
+                    visibility: { eq: "public" }
+                  }
+                ) {
+                  edges {
+                    node {
+                      custom_excerpt
+                      slug
+                      title
+                      primary_tag {
+                        name
+                        slug
+                      }
+                      featureImageSharp {
+                        childImageSharp {
+                          fluid(
+                            maxHeight: 400
+                            maxWidth: 550
+                            quality: 100
+                            cropFocus: CENTER
+                          ) {
+                            ...GatsbyImageSharpFluid
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             `}
-            render={({ allPosts }) => (
+            render={({ featuredPost, allGhostPost }) => (
               <>
-                {allPosts.nodes
-                  .filter((post) => post.frontmatter.featured !== null)
-                  .map((post, index) => (
+                {featuredPost.edges
+                  .filter(({ node }) => node.featureImageSharp !== null)
+                  .map(({ node }, index) => (
                     <div
                       key={index}
                       className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12"
                     >
                       <Img
                         imgStyle={{ objectFit: "cover" }}
-                        fluid={
-                          post.frontmatter.featuredImage.childImageSharp.fluid
-                        }
+                        fluid={node.featureImageSharp.childImageSharp.fluid}
                         className="rounded"
                       />
 
                       <div>
-                        <h5 className="text-xl  py-4 text-gray-600">
-                          {post.frontmatter.category}
-                        </h5>
-                        <h2 className="text-2xl font-semibold">
-                          {post.frontmatter.title}
-                        </h2>
-                        <p className="text-lg text-gray-500 py-4">
-                          {post.frontmatter.description}
+                        <div className="pt-4">
+                          <Link
+                            to={`/tag/${node.primary_tag.slug}`}
+                            className="text-xl  py-4 text-gray-600"
+                          >
+                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                              {node.primary_tag.name}
+                            </span>{" "}
+                          </Link>
+                        </div>
+
+                        <p className="text-2xl my-0 py-4 font-semibold">
+                          {node.title}
                         </p>
-                        <button className=" border-b-2 pt-4 pb-1 text-lg hover:border-b-2 focus:border-b-2">
-                          <Link to={post.frontmatter.slug}>Read Article</Link>
+                        <p className="text-lg text-gray-500 py-4">
+                          {node.custom_excerpt}
+                        </p>
+                        <button className=" border-b-2  border-indigo-100pt-4 pb-1 text-lg hover:border-b-2  border-indigo-100focus:border-b-2">
+                          <Link to={node.slug}>Read Article</Link>
                         </button>
                       </div>
                     </div>
                   ))}
                 <div className="grid  grid-cols-1 md:grid-cols-3 py-12 gap-x-24 gap-y-8">
-                  {allPosts.nodes
+                  {allGhostPost.edges
+                    .filter(({ node }) => node.featureImageSharp !== null)
 
-                    .filter((post) => post.frontmatter.featured === null)
-
-                    .map((post, index) => (
+                    .map(({ node }, index) => (
                       <div key={index}>
                         <Img
                           imgStyle={{ objectFit: "cover" }}
-                          fluid={
-                            post.frontmatter.featuredImage.childImageSharp.fluid
-                          }
+                          fluid={node.featureImageSharp.childImageSharp.fluid}
                           className="rounded"
                         />
+                        <div className="pt-4">
+                          <Link
+                            to={`/tag/${node.primary_tag.slug}`}
+                            className="text-xl  py-4 text-gray-600"
+                          >
+                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                              {node.primary_tag.name}
+                            </span>{" "}
+                          </Link>
+                        </div>
 
-                        <h5 className="text-xl  py-4 text-gray-600">
-                          {" "}
-                          {post.frontmatter.category}
-                        </h5>
-                        <p className="text-2xl font-semibold">
-                          {post.frontmatter.title}
+                        <p className="text-2xl my-0 py-4 font-semibold">
+                          {node.title}
                         </p>
                         <p className="text-lg text-gray-500 py-4">
-                          {post.frontmatter.description}
+                          {node.custom_excerpt}
                         </p>
-                        <button className="pt-4 pb-1 text-lg border-b-2">
-                          <Link to={post.frontmatter.slug}>Read Article</Link>
+                        <button className="pt-2 pb-1 text-lg border-b-2">
+                          <Link to={`/blog/${node.slug}`}>Read Article</Link>
                         </button>
                       </div>
                     ))}

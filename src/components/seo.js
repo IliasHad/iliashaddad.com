@@ -3,7 +3,16 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Helmet } from "react-helmet";
 
-function SEO({ description, lang, meta, keywords, title, featuredImage }) {
+function SEO({
+  description,
+  lang,
+  meta,
+  keywords,
+  title,
+  featuredImage,
+  tag,
+  published_time,
+}) {
   const { site } = useStaticQuery(graphql`
     query DefaultSEOQuery {
       site {
@@ -60,6 +69,15 @@ function SEO({ description, lang, meta, keywords, title, featuredImage }) {
           property: `og:image`,
           content: featuredImage,
         },
+
+        {
+          property: `article:published_time`,
+          content: published_time,
+        },
+        {
+          property: `article:tag`,
+          content: tag,
+        },
       ]
         .concat(
           keywords.length > 0
@@ -89,6 +107,8 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.array,
   title: PropTypes.string.isRequired,
+  published_time: PropTypes.date,
+  tag: PropTypes.string,
 };
 
 export default SEO;
