@@ -1,22 +1,17 @@
 name: Node.js CI
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 on: [push]
-=======
 on:
   push:
     branches: [master]
   repository_dispatch:
     types: [post_published]
->>>>>>> Stashed changes
-=======
+
 on:
   push:
     branches: [main]
   repository_dispatch:
     types: [post_published]
->>>>>>> 3929842f8879cfcaf7f76801f94a8f91066b07a4
 
 jobs:
   build:
@@ -60,9 +55,7 @@ jobs:
             ${{ runner.os }}-public-gatsby
       - run: yarn install --pure-lockfile
         name: Install dependencies
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
+
       - name: Create env file
         run: |
           touch .env
@@ -70,8 +63,7 @@ jobs:
           echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
           echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
           cat .env
->>>>>>> Stashed changes
-=======
+
       - name: Create env file
         run: |
           touch .env
@@ -79,7 +71,6 @@ jobs:
           echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
           echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
           cat .env
->>>>>>> 3929842f8879cfcaf7f76801f94a8f91066b07a4
 
       - run: yarn build --log-pages
         name: Build
@@ -89,10 +80,7 @@ jobs:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
           NODE_ENV: production
           ENVIRONMENT: ${{ contains(github.ref, 'master') && 'production' || 'staging'}}
-          GATSBY_ALGOLIA_APP_ID: ${{ secrets.GATSBY_ALGOLIA_APP_ID }}
-          GATSBY_ALGOLIA_SEARCH_KEY: ${{ secrets.GATSBY_ALGOLIA_SEARCH_KEY }}
-          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{ secrets.GATSBY_ALGOLIA_INDEX_NAME }}
+
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
