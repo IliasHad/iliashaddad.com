@@ -37,5 +37,10 @@ exports.handler = function (event, context, callback) {
       .catch(function (error) {
         console.log(error);
       });
+  } else {
+    callback(null, {
+      statusCode: 500,
+      body: "Server error",
+    });
   }
 };

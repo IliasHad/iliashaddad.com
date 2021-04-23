@@ -72,6 +72,7 @@ jobs:
           publish-dir: "./public"
           production-branch: master
           deploy-message: "Deploy from GitHub Actions"
+          functions-dir: "./functions"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_SITE_ID }}
