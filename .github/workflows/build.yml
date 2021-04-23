@@ -1,6 +1,14 @@
 name: Node.js CI
 
+<<<<<<< Updated upstream
 on: [push]
+=======
+on:
+  push:
+    branches: [master]
+  repository_dispatch:
+    types: [post_published]
+>>>>>>> Stashed changes
 
 jobs:
   build:
@@ -47,6 +55,16 @@ jobs:
 
       - run: yarn install --pure-lockfile
         name: Install dependencies
+<<<<<<< Updated upstream
+=======
+      - name: Create env file
+        run: |
+          touch .env
+          echo GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} >> .env
+          echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
+          echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
+          cat .env
+>>>>>>> Stashed changes
 
       - run: yarn build --log-pages
         name: Build
