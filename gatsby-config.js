@@ -1,6 +1,6 @@
 // gatsby-config.js
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 });
 const tailwindConfig = require("./tailwind.config.js");
 

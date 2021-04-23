@@ -52,14 +52,6 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} >> .env
-          echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
-          echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
-          cat .env
-
-      - name: Create env file
-        run: |
-          touch .env
           echo GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN}} >> .env
           echo CONTENT_API_KEY=${{ secrets.CONTENT_API_KEY }} >> .env
           echo GHOST_API_URL=${{ secrets.GHOST_API_URL }} >> .env
