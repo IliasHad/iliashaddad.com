@@ -92,7 +92,7 @@ export default function Template({
             {renderAst(ghostPost.childHtmlRehype.htmlAst)}{" "}
           </div>
           <div className="mt-6 mx-auto" style={{ maxWidth: "70ch" }}>
-            <div className="flex  gap-4 ">
+            <div className="flex md:flex-row sm:flex-col  gap-4 ">
               {ghostPost.tags.map((tag) => (
                 <Link
                   to={`/tag/${tag.slug}`}
