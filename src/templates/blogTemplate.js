@@ -48,6 +48,10 @@ export default function Template({
         // but you can do whatever you want (including ignoring this `then()` altogether)
         setSuccess(true);
         setMessage("Thank you for subscribing! ");
+
+        window.plausible("New-Subscriber", {
+          callback: () => console.info("New Subscriber event"),
+        });
       })
       .catch(() => {
         // unnecessary because Mailchimp only ever
@@ -92,7 +96,7 @@ export default function Template({
             {renderAst(ghostPost.childHtmlRehype.htmlAst)}{" "}
           </div>
           <div className="mt-6 mx-auto" style={{ maxWidth: "70ch" }}>
-            <div className="flex md:flex-row sm:flex-col  gap-4 ">
+            <div className="flex md:flex-row flex-col  gap-4  ">
               {ghostPost.tags.map((tag) => (
                 <Link
                   to={`/tag/${tag.slug}`}
