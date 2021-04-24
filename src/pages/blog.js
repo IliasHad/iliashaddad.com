@@ -91,7 +91,7 @@ function BlogPage() {
                             quality: 100
                             cropFocus: CENTER
                           ) {
-                            ...GatsbyImageSharpFluid
+                            ...GatsbyImageSharpFluid_withWebp_noBase64
                           }
                         }
                       }

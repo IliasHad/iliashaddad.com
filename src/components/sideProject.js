@@ -34,7 +34,7 @@ export const SideProject = () => {
                     featureImageSharp {
                       childImageSharp {
                         fluid(maxWidth: 850, quality: 100, cropFocus: CENTER) {
-                          ...GatsbyImageSharpFluid
+                          ...GatsbyImageSharpFluid_withWebp_noBase64
                         }
                       }
                     }

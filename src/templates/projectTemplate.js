@@ -79,7 +79,7 @@ export const postQuery = graphql`
       featureImageSharp {
         childImageSharp {
           fluid(maxWidth: 700, quality: 100) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
       }

@@ -18,7 +18,7 @@ export const Work = () => {
                 featureImageSharp {
                   childImageSharp {
                     fluid(maxWidth: 800, quality: 100, cropFocus: CENTER) {
-                      ...GatsbyImageSharpFluid
+                      ...GatsbyImageSharpFluid_withWebp_noBase64
                     }
                   }
                 }
