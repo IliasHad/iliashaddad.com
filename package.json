@@ -94,6 +94,7 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-react": "7.23.2",
     "gatsby-plugin-eslint": "3.0.0",
+    "gatsby-plugin-remove-trailing-slashes": "^3.3.0",
     "prettier": "2.2.1",
     "tailwindcss": "^2.1.1"
   },

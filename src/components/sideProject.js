@@ -58,7 +58,7 @@ export const SideProject = () => {
                     {node.custom_excerpt}
                   </p>
                   <button className=" pb-1 pt-2 text-lg border-b-2  border-indigo-100border-indigo-100">
-                    <Link to={`/project/${node.slug}`}>Read the story</Link>
+                    <Link to={`/project/${node.slug}/`}>Read the story</Link>
                   </button>
                 </div>
               ))}

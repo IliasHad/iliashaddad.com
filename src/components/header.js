@@ -47,16 +47,16 @@ function Header() {
         >
           {[
             {
-              route: `/about`,
+              route: `/about/`,
               title: `About`,
             },
 
             {
-              route: `/blog`,
+              route: `/blog/`,
               title: `Blog`,
             },
             {
-              route: `/contact`,
+              route: `/contact/`,
               title: `Contact`,
             },
           ].map((link) => (

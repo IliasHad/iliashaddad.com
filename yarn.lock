@@ -7122,6 +7122,13 @@ gatsby-plugin-remote-images@^2.4.0:
     gatsby-source-filesystem "^2.3.14"
     lodash "^4.17.15"
 
+gatsby-plugin-remove-trailing-slashes@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-remove-trailing-slashes/-/gatsby-plugin-remove-trailing-slashes-3.3.0.tgz#d06f2e39ead01200882ae0e639571b09ed3859d0"
+  integrity sha512-Lwkxj75SDxn24DqbwOOGCzFW6Zb1bkOL0qJvMrbhHZr1eUMo9DqhF/SnbQTyyfRoNGqoFAckF3iTYbrj6qM5Yw==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 gatsby-plugin-robots-txt@^1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-robots-txt/-/gatsby-plugin-robots-txt-1.5.6.tgz#5a0d7ac47240ad538d988615a8a8ec648a6b641f"

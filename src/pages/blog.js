@@ -118,7 +118,7 @@ function BlogPage() {
                       <div>
                         <div className="pt-4">
                           <Link
-                            to={`/tag/${node.primary_tag.slug}`}
+                            to={`/tag/${node.primary_tag.slug}/`}
                             className="text-xl  py-4 text-gray-600"
                           >
                             <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -134,7 +134,7 @@ function BlogPage() {
                           {node.custom_excerpt}
                         </p>
                         <button className=" border-b-2  border-indigo-100pt-4 pb-1 text-lg hover:border-b-2  border-indigo-100focus:border-b-2">
-                          <Link to={node.slug}>Read Article</Link>
+                          <Link to={`/blog/${node.slug}/`}>Read Article</Link>
                         </button>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ function BlogPage() {
                         />
                         <div className="pt-4">
                           <Link
-                            to={`/tag/${node.primary_tag.slug}`}
+                            to={`/tag/${node.primary_tag.slug}/`}
                             className="text-xl  py-4 text-gray-600"
                           >
                             <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -168,7 +168,7 @@ function BlogPage() {
                           {node.custom_excerpt}
                         </p>
                         <button className="pt-2 pb-1 text-lg border-b-2">
-                          <Link to={`/blog/${node.slug}`}>Read Article</Link>
+                          <Link to={`/blog/${node.slug}/`}>Read Article</Link>
                         </button>
                       </div>
                     ))}

@@ -45,7 +45,7 @@ function AboutPage() {
             <p className="py-4">
               If you need a new custom-made website, a unique Shopify store or
               have an idea of an engaging web application: Please feel free to
-              <Link style={{ borderBottom: "1px solid #000" }} to="/contact">
+              <Link style={{ borderBottom: "1px solid #000" }} to="/contact/">
                 {" "}
                 contact me{" "}
               </Link>

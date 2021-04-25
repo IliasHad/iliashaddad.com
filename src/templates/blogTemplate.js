@@ -99,7 +99,7 @@ export default function Template({
             <div className="flex md:flex-row flex-col  gap-4  ">
               {ghostPost.tags.map((tag) => (
                 <Link
-                  to={`/tag/${tag.slug}`}
+                  to={`/tag/${tag.slug}/`}
                   key={tag.slug}
                   className="inline-block"
                 >
@@ -177,7 +177,7 @@ export default function Template({
                         />
                         <div className="pt-4">
                           <Link
-                            to={`/tag/${node.primary_tag.slug}`}
+                            to={`/tag/${node.primary_tag.slug}/`}
                             className="text-xl  py-4 text-gray-600"
                           >
                             <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -193,7 +193,7 @@ export default function Template({
                           {node.custom_excerpt}
                         </p>
                         <button className="pt-2 pb-1 border-b-2  border-indigo-100text-lg ">
-                          <Link to={`/blog/${node.slug}`}>Read Article</Link>
+                          <Link to={`/blog/${node.slug}/`}>Read Article</Link>
                         </button>
                       </div>
                     ))}
