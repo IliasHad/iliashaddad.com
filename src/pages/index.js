@@ -9,7 +9,7 @@ import { Articles } from "../components/articles";
 import { Testimonials } from "../components/testimonials";
 import { SideProject } from "../components/sideProject";
 import { Work } from "../components/work";
-
+import { Logos } from "../components/logos";
 import { Skills } from "../components/skills";
 import { Services } from "../components/services";
 import { StaticQuery, graphql } from "gatsby";
@@ -48,11 +48,13 @@ function IndexPage() {
           />
 
           <Hero />
+          <Logos />
           <About />
           <Skills />
 
           <SideProject />
           <Work />
+
           <Services />
 
           <Articles />
