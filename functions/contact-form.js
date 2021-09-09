@@ -33,7 +33,7 @@ exports.handler = function (event, context, callback) {
           {
             from: "contact@iliashaddad.com",
             to: data.email,
-            subject: `${subject} - Iliashaddad.com`,
+            subject: `Confirmation Email - Iliashaddad.com`,
             html:
               `  
               <h1>Confirmation Email</h1>
@@ -42,6 +42,8 @@ exports.handler = function (event, context, callback) {
               <h2> ${data.projectType} - ${data.budget} </h2>
               <p>${data.message}</p>
               <p>You can schedule a discovery call to discuss your project. <a href="https://calendly.com/iliashaddad/discovery-call">Here's my availability </a> </p>
+
+              <p>Thank you, <br> Ilias Haddad</p>
             <br>            `,
           },
           function (error) {
