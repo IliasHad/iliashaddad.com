@@ -25,10 +25,36 @@ exports.handler = function (event, context, callback) {
       This email sent by  ${data.name}  - ${data.email}
       ` || "[No message]",
     },
-    function (error, info) {
+    function (error) {
       if (error) {
         callback(error);
       } else {
+        mailer.sendMail(
+          {
+            from: "contact@iliashaddad.com",
+            to: data.email,
+            subject: `${subject} - Iliashaddad.com`,
+            html:
+              `  
+              <h1>Confirmation Email</h1>
+              <p>Hi ${data.name}, Thank you for your submitting your project. I'll check your project and get back to you within 24-48 hrs.</p>
+              <p>Here's your project details:</p>
+              <h2> ${data.projectType} - ${data.budget} </h2>
+              <p>${data.message}</p>
+              <p>You can schedule a discovery call to discuss your project. <a href="https://calendly.com/iliashaddad/discovery-call">Here's my availability </a> </p>
+            <br>            `,
+          },
+          function (error) {
+            if (error) {
+              callback(error);
+            } else {
+              callback(null, {
+                statusCode: 200,
+                body: JSON.stringify({ success: true }),
+              });
+            }
+          }
+        );
         callback(null, {
           statusCode: 200,
           body: JSON.stringify({ success: true }),
