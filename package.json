@@ -56,7 +56,7 @@
     "react-icons": "^4.2.0",
     "rehype-react": "^7.0.1",
     "sendpulse-api": "^1.1.5",
-    "sharp": "^0.29.1",
+    "sharp": "^0.30.5",
     "slugify": "^1.6.0",
     "tokyo-night": "enkia/tokyo-night-vscode-theme"
   },
