@@ -5,32 +5,38 @@ import React, { useState, useContext } from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import { FaTwitter } from "react-icons/fa";
 import addToMailchimp from "gatsby-plugin-mailchimp";
 import { Disqus } from "gatsby-plugin-disqus";
 import ThemeContext from "../context/ThemeContext";
 import Img from "gatsby-image";
-import rehypeReact from "rehype-react";
 import { ImgSharpInline } from "../components/gatsby-image";
+import Block from "../components/block";
 
-const renderAst = new rehypeReact({
-  Fragment: React.Fragment,
-  createElement: React.createElement,
-  components: { "img-sharp-inline": ImgSharpInline },
-}).Compiler;
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
-  const { ghostPost, allGhostPost } = data; // data.mdx holds your post data
-
+  const { blogPost, allBlogPost } = data; // data.mdx holds your post data
+  console.log(
+    JSON.parse(blogPost.blocks)
+      .filter((block) => block.type === "paragraph")
+      .map((block) => {
+        return block.paragraph.rich_text
+          .map(({ text }) => text.content)
+          .join(" ");
+      })
+      .join(" ")
+      .slice(0, 100)
+  );
   console.log(data);
   console.log(useContext(ThemeContext));
   const theme = useContext(ThemeContext);
   let disqusConfig = {
-    url: `https://iliashaddad.com/blog/${ghostPost.slug}`,
-    identifier: `/blog/${ghostPost.slug}`,
-    title: ghostPost.title,
+    url: `https://iliashaddad.com/blog/${blogPost.slug}`,
+    identifier: `/blog/${blogPost.slug}`,
+    title: blogPost.title,
   };
   const [email, setEmail] = useState("");
 
@@ -41,7 +47,7 @@ export default function Template({
   const handleSubmit = (e) => {
     e.preventDefault();
     addToMailchimp(email, {
-      PATHNAME: `/blog/${ghostPost.slug}`,
+      PATHNAME: `/blog/${blogPost.slug}`,
     })
       .then(() => {
         // I recommend setting data to React state
@@ -62,10 +68,10 @@ export default function Template({
   return (
     <Layout>
       <SEO
-        published_time={ghostPost.created_at}
-        tag={ghostPost.primary_tag.name}
-        title={ghostPost.title}
-        description={ghostPost.description}
+        published_time={blogPost.created_at}
+        tag={blogPost.tags[0].name}
+        title={blogPost.title}
+        description={blogPost.excerpt}
       />
       <div className="relative blog-page py-16  overflow-hidden">
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full"></div>
@@ -79,11 +85,16 @@ export default function Template({
                     : "mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
                 }
               >
-                {ghostPost.title}
+                {blogPost.title}
               </span>
             </h1>
             <div className="py-8">
-              <Img fluid={ghostPost.featureImageSharp.childImageSharp.fluid} />
+              <GatsbyImage
+                image={blogPost.featuredImage?.childImageSharp?.gatsbyImageData}
+                alt="Ilias"
+                className="rounded"
+                imgStyle={{ objectFit: "cover" }}
+              />
             </div>
           </div>
           <div
@@ -93,17 +104,19 @@ export default function Template({
                 : "mt-6 prose prose-indigo prose-lg text-gray-700 mx-auto"
             }
           >
-            {renderAst(ghostPost.childHtmlRehype.htmlAst)}{" "}
+            {JSON.parse(blogPost.blocks).map((block) => (
+              <Block key={block.id} block={block} />
+            ))}
           </div>
           <div className="mt-6 mx-auto" style={{ maxWidth: "70ch" }}>
             <div className="flex md:flex-row flex-col  gap-4  ">
-              {ghostPost.tags.map((tag) => (
+              {blogPost.tags.map((tag) => (
                 <Link
                   to={`/tag/${tag.slug}/`}
                   key={tag.slug}
                   className="inline-block"
                 >
-                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
                     {tag.name}
                   </span>
                 </Link>
@@ -113,7 +126,7 @@ export default function Template({
               <a
                 className="flex gap-4 "
                 target="__blank"
-                href={`http://www.twitter.com/share?url=iliashaddad.com/blog/${ghostPost.slug}&text=${ghostPost.title} by @iliashaddad3`}
+                href={`http://www.twitter.com/share?url=iliashaddad.com/blog/${blogPost.slug}&text=${blogPost.title} by @iliashaddad3`}
               >
                 {" "}
                 Let&apos;s discuss it on Twitter
@@ -151,7 +164,7 @@ export default function Template({
             <div className="my-8">
               <Disqus config={disqusConfig} />
             </div>
-            {allGhostPost.edges.length > 0 && (
+            {allBlogPost && allBlogPost.edges.length > 0 && (
               <h1>
                 <h1>
                   <span
@@ -165,23 +178,27 @@ export default function Template({
                   </span>
                 </h1>
                 <div className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-8">
-                  {allGhostPost.edges
+                  {allBlogPost.edges
                     .filter(({ node }) => node.featureImageSharp !== null)
 
                     .map(({ node }, index) => (
                       <div key={index}>
-                        <Img
-                          imgStyle={{ objectFit: "cover" }}
-                          fluid={node.featureImageSharp.childImageSharp.fluid}
+                        <GatsbyImage
+                          image={
+                            node.featuredImage?.childImageSharp?.gatsbyImageData
+                          }
+                          alt="Ilias"
                           className="rounded"
+                          imgStyle={{ objectFit: "cover" }}
                         />
+
                         <div className="pt-4">
                           <Link
-                            to={`/tag/${node.primary_tag.slug}/`}
+                            to={`/tag/${node.tags[0].slug}`}
                             className="text-xl  py-4 text-gray-600"
                           >
-                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                              {node.primary_tag.name}
+                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
+                              {node.tags[0].name}
                             </span>{" "}
                           </Link>
                         </div>
@@ -189,11 +206,12 @@ export default function Template({
                         <p className="text-2xl my-0 py-4 font-semibold">
                           {node.title}
                         </p>
-                        <p className="text-lg py-4 lg:text-gray-500">
-                          {node.custom_excerpt}
-                        </p>
+                        <p
+                          className="text-lg py-4 lg:text-gray-500"
+                          dangerouslySetInnerHTML={{ __html: node.excerpt }}
+                        ></p>
                         <button className="pt-2 pb-1 border-b-2  border-indigo-100text-lg ">
-                          <Link to={`/blog/${node.slug}/`}>Read Article</Link>
+                          <Link to={`/blog/${node.slug}`}>Read Article</Link>
                         </button>
                       </div>
                     ))}
@@ -208,59 +226,57 @@ export default function Template({
 }
 
 export const postQuery = graphql`
-  query($slug: String!, $tag: String!) {
-    ghostPost(slug: { eq: $slug }) {
+  query ($slug: String!, $tag: String!) {
+    blogPost(slug: { eq: $slug }) {
       title
       slug
-      childHtmlRehype {
-        htmlAst
-        html
-      }
+      excerpt
       created_at
-      featureImageSharp {
+      blocks
+      featuredImage {
         childImageSharp {
-          fluid(maxWidth: 700, quality: 100) {
-            ...GatsbyImageSharpFluid_withWebp_noBase64
-          }
+          gatsbyImageData(
+            height: 600
+            width: 800
+            quality: 100
+            transformOptions: { cropFocus: CENTER }
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+          )
         }
-      }
-      primary_tag {
-        name
       }
       tags {
         name
         slug
       }
-      html
     }
-    allGhostPost(
+    allBlogPost(
       filter: {
         tags: { elemMatch: { slug: { eq: $tag } } }
         slug: { ne: $slug }
       }
-
       sort: { fields: created_at, order: DESC }
       limit: 3
     ) {
       edges {
         node {
-          custom_excerpt
+          excerpt
           slug
           title
-          primary_tag {
+          tags {
             name
             slug
           }
-          featureImageSharp {
+          featuredImage {
             childImageSharp {
-              fluid(
-                maxHeight: 200
-                maxWidth: 350
+              gatsbyImageData(
+                height: 600
+                width: 800
                 quality: 100
-                cropFocus: CENTER
-              ) {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
+                transformOptions: { cropFocus: CENTER }
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
         }

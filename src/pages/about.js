@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { StaticQuery, graphql, Link } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 function AboutPage() {
   return (
     <Layout>
@@ -30,49 +30,62 @@ function AboutPage() {
           </div>
           <div className="py-12">
             <p className="py-4">
-              I&apos;m a Full stack developer and mainly with the MERN stack
-              (MongoDB, Express JS, React JS and Node JS)
+              I&apos;m an experienced and self-taught software engineer with
+              more than 3 years of experience in full-stack dev. I&apos;ve been
+              working with the most popular front-end frameworks(Vue and React),
+              and NodeJs on the backend.
             </p>
             <p className="py-4">
-              I&apos;m also a Shopify developer. I help Shopify store owners
-              with their technical issues and needs (custom Shopify theme, add
-              features to their store, optimize their store performance ,...)
+              I&apos;m also a Shopify developer. I help Shopify store owners and
+              clients with their technical needs (custom Shopify theme dev,
+              custom Shopify app dev and speed optimization).
             </p>
             <p className="py-4">
-              As I&apos;ve grown as a developer, I&apos;ve worked on multiple
-              side projects to improve my coding skills and keep myself busy.
+              I love mountain biking, especially long trips where I can visit
+              new places!
             </p>
             <p className="py-4">
               If you need a new custom-made website, a unique Shopify store or
-              have an idea of an engaging web application: Please feel free to
+              app, have an idea of an engaging web application: Please feel free
+              to
               <Link style={{ borderBottom: "1px solid #000" }} to="/contact/">
                 {" "}
                 contact me{" "}
               </Link>
               and we&apos;ll talk about the details!
             </p>
+            PS: I love{" "}
+            <Link style={{ borderBottom: "1px solid #000" }} to="/cycling/">
+              cycling{" "}
+            </Link>{" "}
+            in my free time
           </div>
         </div>
         <div>
           <StaticQuery
             query={graphql`
               query {
-                heroImage: file(base: { eq: "ilias-image.jpg" }) {
+                heroImage: file(base: { eq: "IMG_7434.jpg" }) {
                   childImageSharp {
-                    fluid(maxWidth: 550, quality: 100, cropFocus: ATTENTION) {
-                      ...GatsbyImageSharpFluid_withWebp_noBase64
-                    }
+                    gatsbyImageData(
+                      height: 600
+                      width: 800
+                      quality: 100
+                      transformOptions: { cropFocus: CENTER }
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP, AVIF]
+                    )
                   }
                 }
               }
             `}
             render={(data) => (
               <div>
-                <Img
-                  imgStyle={{ objectFit: "cover" }}
-                  fluid={data.heroImage.childImageSharp.fluid}
+                <GatsbyImage
+                  image={data.heroImage?.childImageSharp?.gatsbyImageData}
                   className="rounded"
-                />{" "}
+                  imgStyle={{ objectFit: "cover" }}
+                />
               </div>
             )}
           />

@@ -1,6 +1,6 @@
 // See https://tailwindcss.com/docs/configuration for details
 module.exports = {
-  purge: ["./src/**/*.js"],
+  content: ["./src/**/*.js"],
   darkMode: "class",
   theme: {
     fontFamily: {
@@ -11,6 +11,10 @@ module.exports = {
       margin: {
         96: "24rem",
         128: "32rem",
+      },
+      colors: {
+        "stone-light": "rgb(255, 255, 255)",
+        stone: "rgb(95, 94, 92)",
       },
     },
   },

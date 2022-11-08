@@ -6,6 +6,7 @@ import {
   FaMedium,
   FaGithub,
   FaLinkedin,
+  FaYoutube,
 } from "react-icons/fa";
 import { Calendar } from "../components/calendar";
 
@@ -72,6 +73,13 @@ export const Contact = () => {
             </a>
             <a href="https://github.com/IliasHad" target="__blank">
               <FaGithub className="h-6 w-6" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCxv_k9zRHdz5L1av2xgEAMA"
+              target="__blank"
+              className="mt-4"
+            >
+              <FaYoutube className="h-6 w-6" />
             </a>
           </div>
         </div>

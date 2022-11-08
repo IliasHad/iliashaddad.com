@@ -1,9 +1,10 @@
 import React from "react";
 import { StaticQuery, graphql, Link } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
+
 export const SideProject = () => {
   return (
-    <section className="px-12 py-4 ">
+    <section className="px-12 py-4">
       <div className="w-2/4 ">
         <h5 className="text-3xl font-bold">
           What I&apos;ve been working on the side
@@ -20,22 +21,28 @@ export const SideProject = () => {
         <StaticQuery
           query={graphql`
             query {
-              allGhostPage(
-                filter: {
-                  tags: { elemMatch: { slug: { eq: "side-projects" } } }
-                }
+              allSideProject(
+                sort: { order: DESC, fields: created_at }
+                filter: { featured: { eq: true }, published: { eq: true } }
+                limit: 3
               ) {
                 edges {
                   node {
-                    title
-                    custom_excerpt
                     slug
-
-                    featureImageSharp {
+                    title
+                    description
+                    tags {
+                      name
+                      slug
+                    }
+                    featuredImage {
                       childImageSharp {
-                        fluid(maxWidth: 850, quality: 100, cropFocus: CENTER) {
-                          ...GatsbyImageSharpFluid_withWebp_noBase64
-                        }
+                        gatsbyImageData(
+                          transformOptions: { cropFocus: CENTER }
+                          width: 850
+                          placeholder: BLURRED
+                          formats: [AUTO, WEBP, AVIF]
+                        )
                       }
                     }
                   }
@@ -43,22 +50,34 @@ export const SideProject = () => {
               }
             }
           `}
-          render={({ allGhostPage }) => (
+          render={({ allSideProject }) => (
             <>
-              {allGhostPage.edges.map(({ node }, index) => (
+              {allSideProject.edges.map(({ node }, index) => (
                 <div key={index}>
-                  <Img
-                    imgStyle={{ objectFit: "cover" }}
-                    fluid={node.featureImageSharp.childImageSharp.fluid}
+                  <GatsbyImage
+                    image={node.featuredImage?.childImageSharp?.gatsbyImageData}
+                    alt="Ilias"
                     className="rounded"
+                    imgStyle={{ objectFit: "cover" }}
                   />
-
                   <p className="text-2xl font-semibold pt-4">{node.title}</p>
-                  <p className="text-lg text-gray-500 py-2">
-                    {node.custom_excerpt}
+                  <div className="my-4">
+                    <span
+                      style={{
+                        backgroundColor: "#5F5E5C",
+                        color: "#fff",
+                      }}
+                      className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light"
+                    >
+                      {node.tags[0].name}
+                    </span>
+                  </div>
+                  <p className="text-lg text-gray-500 pb-2 dark:text-white">
+                    {node.description}
                   </p>
-                  <button className=" pb-1 pt-2 text-lg border-b-2  border-indigo-100border-indigo-100">
-                    <Link to={`/project/${node.slug}/`}>Read the story</Link>
+
+                  <button className=" pb-1  text-lg border-b-2  border-indigo-100border-indigo-100">
+                    <Link to={`/project/${node.slug}`}>Read the story</Link>
                   </button>
                 </div>
               ))}

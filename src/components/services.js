@@ -50,18 +50,18 @@ export const Services = () => {
         </h2>
         <div className="grid grid-cols-1 gap-col-20 gap-10 lg:grid-cols-3 lg:gap-col-0 lg:gap-row-8">
           {supportLinks.map((link) => (
-            <div key={link.name} className="bg-white rounded-2xl shadow-sm">
+            <div key={link.name} className="bg-stone text-center rounded-2xl shadow-sm">
               <div className="relative pt-16 px-6 pb-8 md:px-8">
-                <div className="absolute top-0 left-1/2 p-5 rounded-full inline-block bg-black rounded-xl shadow-lg transform -translate-y-1/2 -translate-x-1/2">
+                <div className="absolute top-0 left-1/2 p-5 rounded-full inline-block bg-black shadow-lg transform -translate-y-1/2 -translate-x-1/2">
                   <link.icon
                     className="h-6 w-6 text-white"
                     aria-hidden="true"
                   />
                 </div>
-                <h3 className="text-xl font-medium text-gray-900">
+                <h3 className="text-xl  font-medium text-white">
                   {link.name}
                 </h3>
-                <p className="mt-4 text-base text-gray-500">
+                <p className="mt-4 text-base text-white">
                   {link.description}
                 </p>
               </div>
@@ -73,6 +73,7 @@ export const Services = () => {
                     utmMedium: "Personal Blog",
                     utmSource: "iliashaddad.com",
                   }}
+                  textColor="text-white"
                 />
               </div>
             </div>

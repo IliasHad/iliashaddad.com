@@ -8,27 +8,40 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     {
-      allGhostPost(sort: { order: ASC, fields: published_at }) {
+      allBlogPost: allBlogPost(sort: { order: ASC, fields: published_at }) {
         edges {
           node {
             slug
-            primary_tag {
+            tags {
               slug
+              name
             }
           }
         }
       }
-      allGhostTag {
+      allClientProject: allClientProject(
+        sort: { order: ASC, fields: published_at }
+      ) {
         edges {
           node {
             slug
+            tags {
+              slug
+              name
+            }
           }
         }
       }
-      allGhostPage {
+      allSideProject: allSideProject(
+        sort: { order: ASC, fields: published_at }
+      ) {
         edges {
           node {
             slug
+            tags {
+              slug
+              name
+            }
           }
         }
       }
@@ -39,42 +52,50 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
-  if (!result.data.allGhostPost && !result.data.allGhostTag) {
+  if (!result.data.allBlogPost) {
     return;
   }
   // Create pages for each Ghost post
-  const items = result.data.allGhostPost.edges;
-  const tags = result.data.allGhostTag.edges;
-  const pages = result.data.allGhostPage.edges;
+  const sideProjects = result.data.allSideProject.edges;
+  const clientProjects = result.data.allClientProject.edges;
+  const blogPosts = result.data.allBlogPost.edges;
+  const tags = [];
 
-  items.forEach(({ node }) => {
-    node.url = `/blog/${node.slug}/`;
+  blogPosts.forEach(({ node }) => {
+    node.tags.forEach((tag) => {
+      if (tags.findIndex((item) => item.slug === tag.slug) < 0) {
+        tags.push({ slug: tag.slug, name: tag.name });
+        console.log(tags)
+      }
+    });
+    node.url = `/blog/${node.slug}`;
     actions.createPage({
       path: node.url,
       component: postTemplate,
       context: {
         slug: node.slug,
-        tag: node.primary_tag.slug,
+        tag: node.tags[0]?.slug,
       },
     });
   });
-  tags.forEach(({ node }) => {
-    node.url = `/tag/${node.slug}/`;
-    actions.createPage({
-      path: node.url,
-      component: tagTemplate,
-      context: {
-        slug: node.slug,
-      },
-    });
-  });
-  pages.forEach(({ node }) => {
-    node.url = `/project/${node.slug}/`;
+
+  clientProjects.concat(sideProjects).forEach(({ node }) => {
+    node.url = `/project/${node.slug}`;
     actions.createPage({
       path: node.url,
       component: projectTemplate,
       context: {
         slug: node.slug,
+      },
+    });
+  });
+  tags.forEach((tag) => {
+    actions.createPage({
+      path: `/tag/${tag.slug}`,
+      component: tagTemplate,
+      context: {
+        slug: tag.slug,
+        name: tag.name
       },
     });
   });

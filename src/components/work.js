@@ -1,25 +1,35 @@
 import React from "react";
 import { StaticQuery, graphql, Link } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
+
 export const Work = () => {
   return (
     <StaticQuery
       query={graphql`
         query {
-          allGhostPage(
-            filter: { tags: { elemMatch: { slug: { eq: "client-project" } } } }
+          allClientProject(
+            sort: { order: DESC, fields: created_at }
+            filter: { featured: { eq: true }, published: { eq: true } }
+            limit: 3
           ) {
             edges {
               node {
-                title
-                custom_excerpt
                 slug
+                title
+                description
+                tags {
+                  name
+                  slug
+                }
 
-                featureImageSharp {
+                featuredImage {
                   childImageSharp {
-                    fluid(maxWidth: 800, quality: 100, cropFocus: CENTER) {
-                      ...GatsbyImageSharpFluid_withWebp_noBase64
-                    }
+                    gatsbyImageData(
+                      transformOptions: { cropFocus: CENTER }
+                      width: 850
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP, AVIF]
+                    )
                   }
                 }
               }
@@ -27,9 +37,9 @@ export const Work = () => {
           }
         }
       `}
-      render={({ allGhostPage }) => (
+      render={({ allClientProject }) => (
         <section className="px-12 py-4 ">
-          {allGhostPage.edges.length > 0 && (
+          {allClientProject.edges.length > 0 && (
             <>
               <div className="w-2/4 ">
                 <h5 className="text-3xl font-bold">
@@ -44,19 +54,31 @@ export const Work = () => {
               </div>
 
               <div className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12">
-                {allGhostPage.edges.map(({ node }, index) => (
+                {allClientProject.edges.map(({ node }, index) => (
                   <div key={index}>
-                    <Img
-                      imgStyle={{ objectFit: "cover" }}
-                      fluid={node.featureImageSharp.childImageSharp.fluid}
+                    <GatsbyImage
+                      image={
+                        node.featuredImage?.childImageSharp?.gatsbyImageData
+                      }
+                      alt="Ilias"
                       className="rounded"
+                      tyle={{ objectFit: "cover" }}
                     />
 
                     <p className="text-2xl font-semibold pt-4">{node.title}</p>
-                    <p className="text-lg text-gray-500 py-2">
-                      {node.custom_excerpt}
+                    <div className="my-4">
+
+                      <span style={{
+                          backgroundColor: "#5F5E5C",
+                          color:"#fff"
+                        }} className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
+                      {node.tags[0].name}
+                      </span>
+                      </div>
+                    <p className="text-lg text-gray-500 pb-2 dark:text-white">
+                      {node.description}
                     </p>
-                    <button className=" pb-1 pt-2 text-lg border-b-2  border-indigo-100border-indigo-100">
+                    <button className=" pb-1 text-lg border-b-2  border-indigo-100border-indigo-100">
                       <Link to={`/project/${node.slug}/`}>Read the story</Link>
                     </button>
                   </div>

@@ -20,6 +20,13 @@ const ThemeProvider = ({ children }) => {
     console.log(darkMode);
     let dark = !darkMode;
     localStorage.setItem("dark", JSON.stringify(dark));
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (dark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
     setDarkMode(dark);
   };
 

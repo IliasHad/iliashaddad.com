@@ -50,11 +50,16 @@ p + .gatsby-resp-image-wrapper {
 .dark-theme blockquote a {
   color: #000 !important;
 }
-
-.light-theme {
-  background-color: #f7fbfc;
+.bg-gradient {
+      background: linear-gradient(rgba(255, 55, 100, 0.0),rgba(29, 38, 113, 0.8));
 }
 
+.light-theme {
+  background-color: #D4D2CE;
+}
+.service  {
+   background-color: #f7fbfc;
+}
 .dark-theme h2,
 .dark-theme .prose strong,
 .dark-theme h3,
@@ -67,9 +72,7 @@ p + .gatsby-resp-image-wrapper {
   color: #fff !important;
 }
 
-.light-theme main > .blog-page {
-  background-color: #fff !important;
-}
+
 
 .kg-card.kg-embed-card iframe {
   position: relative !important;
