@@ -7,7 +7,7 @@ import {
   closePopupWidget,
 } from "react-calendly";
 
-export const Calendar = ({ utm }) => {
+export const Calendar = ({ utm, textColor = 'text-black' }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const Calendar = ({ utm }) => {
 
       <button
         ref={ref}
-        className="text-indigo-700 underline font-semibold"
+        className={`${textColor} underline font-semibold`}
         onClick={() =>
           openPopupWidget({
             utm,
