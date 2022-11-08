@@ -1,0 +1,31 @@
+{
+  "name": "gatsby-starter-plugin",
+  "version": "1.0.0",
+  "description": "A minimal boilerplate for the essential files Gatsby looks for in a plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build script setup\""
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "author": "Kyle Gill <kyle.robert.gill@gmail.com>",
+  "license": "0BSD",
+  "dependencies": {
+    "@brianmmdev/notion-to-html": "^0.0.4",
+    "@notionhq/client": "^1.0.4",
+    "chroma-js": "^2.4.2",
+    "color-name-list": "^9.7.1",
+    "gatsby-source-filesystem": "^4.13.0",
+    "gray-matter": "^4.0.3",
+    "node-fetch": "^3.2.4",
+    "notion-markdown": "^0.0.1",
+    "notion-page-to-html": "^1.1.4",
+    "notion-rendering": "^1.0.2",
+    "notion-to-md": "^2.3.2",
+    "showdown": "^2.1.0",
+    "slugify": "^1.6.5"
+  }
+}
