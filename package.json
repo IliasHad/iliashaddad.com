@@ -42,7 +42,7 @@
     "gatsby-source-filesystem": "^3.13.0",
     "gatsby-source-ghost": "^4.2.4",
     "gatsby-transformer-rehype": "^2.0.0",
-    "gatsby-transformer-remark": "^4.10.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^3.13.0",
     "netlify-lambda": "^2.0.14",
     "node-mailer": "^0.1.1",
