@@ -26,7 +26,7 @@ function generateSiteMap(posts) {
                 return `
        <url>
            <loc>${`https://iliashaddad.com/${slug}`}</loc>
-           <lastmod>${new Date(lastModified).toISOString()}</lastmod>
+           <lastmod>${lastModified}</lastmod>
            <changefreq>weekly</changefreq>
            <priority>1</priority>
        </url>
@@ -46,9 +46,9 @@ export async function getServerSideProps({ res }) {
     const posts = await getAllPublished();
     const sideProjects = await getAllSideProjects();
     const clientProjects = await getAllClientsProjects();
-    const postSlugs = posts.map(({ slug, date }) => ({ slug: `/blog/${slug}`, lastModified: date }))
-    const sideProjectSlugs = sideProjects.map(({ slug, date })  => ({ slug: `/project/${slug}`, lastModified: date }))
-    const clientProjectSlugs = clientProjects.map(({ slug, date }) => ({ slug: `/project/${slug}`, lastModified: date }))
+    const postSlugs = posts.map(({ slug, lastModified}) => ({ slug: `/blog/${slug}`, lastModified}))
+    const sideProjectSlugs = sideProjects.map(({ slug, lastModified })  => ({ slug: `/project/${slug}`, lastModified }))
+    const clientProjectSlugs = clientProjects.map(({ slug, lastModified}) => ({ slug: `/project/${slug}`, lastModified }))
 
     // We generate the XML sitemap with the posts data
     const sitemap = generateSiteMap(postSlugs.concat(sideProjectSlugs).concat(clientProjectSlugs));
