@@ -134,6 +134,7 @@ const Post = ({ post }) => {
             <div className="my-8">
               <DiscussionEmbed
                 config={disqusConfig}
+                shortname={disqusShortname}
               />
             </div>
             {post.relatedPosts.length > 0 && (
