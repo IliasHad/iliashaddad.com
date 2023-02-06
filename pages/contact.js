@@ -35,9 +35,6 @@ export default function Contact({ posts, featuredPost, sideProjects, clientProje
             message: message.current.value,
         };
         axios.post(`/api/contact`, { data }).then((res) => {
-            console.log(res);
-            console.log(res.data);
-
             setSuccess(JSON.parse(res.data.success));
         });
     };
