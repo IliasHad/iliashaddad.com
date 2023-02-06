@@ -10,11 +10,8 @@ const mailer = nodemailer.createTransport({
 });
 
 export default function handler(req, res) {
-  console.log(req.body)
   const { data } = req.body;
-  console.log(data)
   const subject = `New ${data.projectType} Project with ${data.budget}`;
-  console.log(subject)
   mailer.sendMail(
     {
       from: "contact@iliashaddad.com",
