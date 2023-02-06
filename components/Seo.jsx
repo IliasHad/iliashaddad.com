@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { NextSeo } from 'next-seo';
 
@@ -17,6 +16,12 @@ export function SEO({
     <NextSeo
       title={title}
       description={description}
+      additionalLinkTags={[
+        {
+          rel: 'icon',
+          href: '/images/hero.png',
+        },
+      ]}
     />
 
   );
