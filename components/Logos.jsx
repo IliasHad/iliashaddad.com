@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import ThemeContext from "../context/ThemeContext";
 
 export const Logos = () => {
