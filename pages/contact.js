@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 import { SEO } from "../components/Seo";
 import axios from "axios";
-import { Calendar } from "../components/calendar";
+import { Calendar } from "../components/Calendar";
 
 import {
     FaFacebook,

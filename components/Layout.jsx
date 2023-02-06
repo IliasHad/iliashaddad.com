@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Header from "./header";
+import Header from "./Header";
 import ThemeContext from "../context/ThemeContext";
 import { Footer } from "./Footer";
 import { Contact } from "./Contact";

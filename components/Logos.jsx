@@ -32,6 +32,7 @@ export const Logos = () => {
                   className="w-full"
                   width={100}
                   height={70}
+                  alt="StoreTasker"
                 />
               </div>
             </a>
@@ -50,6 +51,7 @@ export const Logos = () => {
                   width={100}
                   height={50}
                   className="rounded px-4 object-center dark:bg-white"
+                  alt="Built in africa"
                 />
               </div>
             </a>
