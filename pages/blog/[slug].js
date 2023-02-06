@@ -22,9 +22,9 @@ const Post = ({ post }) => {
   const { toggleDark, darkMode } = useContext(ThemeContext);
   const disqusShortname = "iliashaddad"
   const disqusConfig = {
-    url: `https://iliashaddad.com/blog/${post.slug}`,
-    identifier: `/blog/${post.slug}`, // Single post id
-    title: post.title // Single post title
+    url: `https://iliashaddad.com/blog/${post.metadata.slug}`,
+    identifier: `/blog/${post.metadata.slug}`, // Single post id
+    title: post.metadata.title // Single post title
   }
 
   return (
