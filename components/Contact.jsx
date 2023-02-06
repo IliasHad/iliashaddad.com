@@ -8,7 +8,7 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
-import { Calendar } from "./calendar";
+import { Calendar } from "./Calendar";
 
 export const Contact = () => {
   return (
