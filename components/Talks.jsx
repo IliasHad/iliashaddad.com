@@ -6,10 +6,10 @@ import YouTube from 'react-youtube';
 export const Talks = () => {
     const talks = [
         {
-            talkId: "BtPi44U6e4E",
+            id: "BtPi44U6e4E",
             title: "How To Create Your First Shopify App With Node.Js by Ilias Haddad | BlaBlaConf 2022",
         }, {
-            talkId: "0rUj_ECGQ6I",
+           id: "0rUj_ECGQ6I",
             title: "Headless eCommerce: Shopify + NextJs = ❤️ with Ilias Haddad | BlaBlaConf 2021",
         }
     ];
@@ -28,12 +28,11 @@ export const Talks = () => {
 
 
 
-            <div className="grid  grid-cols-1 md:grid-cols-2 items-center py-12 gap-x-24 gap-y-8">
+            <div className="grid  grid-cols-1 md:grid-cols-2 items-center py-12 gap-x-24 gap-y-8 overflow-hidden">
                 {talks
                     .map(talk => (
-                        <div key={talk.talkId}>
-
-                            <YouTube talkId={talk.talkId} opts={{
+                        <div key={talk.id} >
+                            <YouTube videoId={talk.id} className="flex lg:block" opts={{
                                height: '500',
                                width: '800',
                             }} />
