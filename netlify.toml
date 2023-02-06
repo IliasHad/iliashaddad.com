@@ -5,3 +5,5 @@
 [template.environment]
   NOTION_TOKEN = "Set notion token"
   DATABASE_ID = "Set the database ID"
+  CLIENT_PROJECTS_DATABASE_ID = "Set the database ID"
+  SIDE_PROJECTS_DATABASE_ID = "Set the database ID"

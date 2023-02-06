@@ -1,26 +1,33 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+/*! purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/*! purgecss end ignore */
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
-* {
-  box-sizing: border-box;
-}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+
+@media only screen and (max-width: 600px) {
+  .contact-page {
+    grid-template-columns: 1fr !important;
   }
-  body {
-    color: white;
-    background: black;
-  }
+}
+
+
+
+
+.bg-gradient {
+      background: linear-gradient(rgba(255, 55, 100, 0.0),rgba(29, 38, 113, 0.8));
+}
+
+.light-theme {
+  background-color: #D4D2CE;
+}
+.service  {
+   background-color: #f7fbfc;
+}
+
+
+.kg-card.kg-embed-card iframe {
+  position: relative !important;
 }
