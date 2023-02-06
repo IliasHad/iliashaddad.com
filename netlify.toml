@@ -7,3 +7,10 @@
   DATABASE_ID = "Set the database ID"
   CLIENT_PROJECTS_DATABASE_ID = "Set the database ID"
   SIDE_PROJECTS_DATABASE_ID = "Set the database ID"
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+  exclude = [
+    './.next/server/**',
+  ]
