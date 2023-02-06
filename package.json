@@ -1,6 +1,6 @@
 {
-  "name": "my-blog",
-  "version": "0.1.0",
+  "name": "iliashaddad.com",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,6 +18,7 @@
     "next": "12.3.1",
     "next-plausible": "^3.7.1",
     "next-seo": "^5.15.0",
+    "nodemailer": "^6.9.1",
     "notion-to-md": "^2.5.5",
     "react": "18.2.0",
     "react-calendly": "^4.1.1",

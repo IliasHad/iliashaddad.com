@@ -3,6 +3,7 @@ import { Layout } from "../components/Layout";
 import { SEO } from "../components/Seo";
 import axios from "axios";
 import { Calendar } from "../components/Calendar";
+import { usePlausible } from 'next-plausible'
 
 import {
     FaFacebook,
@@ -12,7 +13,7 @@ import {
     FaGithub,
     FaLinkedin,
     FaYoutube,
-  } from "react-icons/fa";
+} from "react-icons/fa";
 
 export default function Contact({ posts, featuredPost, sideProjects, clientProjects }) {
     const projectType = useRef();
@@ -21,12 +22,11 @@ export default function Contact({ posts, featuredPost, sideProjects, clientProje
     const email = useRef();
     const message = useRef();
     const [success, setSuccess] = useState(false);
+    const plausible = usePlausible()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        window.plausible("Project-Details-Sent", {
-            callback: () => console.info("Project details sent event"),
-        });
+        plausible("Project-Details-Sent");
         const data = {
             projectType: projectType.current.value,
             budget: budget.current.value,
@@ -34,7 +34,7 @@ export default function Contact({ posts, featuredPost, sideProjects, clientProje
             email: email.current.value,
             message: message.current.value,
         };
-        axios.post(`/.netlify/functions/contact-form`, { data }).then((res) => {
+        axios.post(`/api/contact`, { data }).then((res) => {
             console.log(res);
             console.log(res.data);
 
