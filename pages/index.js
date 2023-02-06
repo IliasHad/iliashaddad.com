@@ -9,6 +9,7 @@ import { Work } from "../components/Work";
 import { Logos } from "../components/Logos";
 import { Skills } from "../components/Skills";
 import { Services } from "../components/Services";
+import { Talks } from "../components/Talks";
 import { SEO } from "../components/Seo";
 
 export default function Home({ posts, featuredPost, sideProjects,  clientProjects }) {
@@ -39,6 +40,7 @@ export default function Home({ posts, featuredPost, sideProjects,  clientProject
       <Services />
       <Articles posts={posts} featuredPost={featuredPost} />
       <Testimonials />
+      <Talks />
     </Layout>
 
   )
