@@ -22,7 +22,6 @@ export const SideProject = ({ sideProjects }) => {
               src={sideProject.featuredImage}
               alt={sideProject.title}
               placeholder="blur"
-              blurDataURL={`/_next/image?url=${sideProject.featuredImage}&w=16&q=1`}
               objectFit="cover"
               quality={100}
               layout="responsive"

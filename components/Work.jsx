@@ -24,7 +24,6 @@ export const Work = ({ clientProjects = [] }) => {
               src={clientProject.featuredImage}
               alt={clientProject.title}
               placeholder="blur"
-              blurDataURL={`/_next/image?url=${clientProject.featuredImage}&w=16&q=1`}
               objectFit="cover"
               quality={100}
               layout="responsive"

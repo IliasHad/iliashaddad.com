@@ -75,7 +75,6 @@ export const Articles = ({ posts, featuredPost }) => {
                 src={post.featuredImage}
                 alt={post.title}
                 placeholder="blur"
-                blurDataURL={`/_next/image?url=${post.featuredImage}&w=16&q=1`}
                 objectFit="cover"
                 quality={100}
                 layout="responsive"
