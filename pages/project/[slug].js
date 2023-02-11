@@ -54,7 +54,6 @@ const Project = ({ project }) => {
                             <Image
                                 src={project.metadata.featuredImage}
                                 alt={project.metadata.title}
-                                placeholder="blurred"
                                 objectFit="cover"
                                 quality={100}
                                 layout="responsive"

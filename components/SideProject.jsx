@@ -21,7 +21,6 @@ export const SideProject = ({ sideProjects }) => {
             <Image
               src={sideProject.featuredImage}
               alt={sideProject.title}
-              placeholder="blur"
               objectFit="cover"
               quality={100}
               layout="responsive"

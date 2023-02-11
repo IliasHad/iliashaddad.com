@@ -46,7 +46,6 @@ const Blog = ({ posts, featuredPost }) => {
                         <Image
                             src={featuredPost.featuredImage}
                             alt={featuredPost.title}
-                            placeholder="blurred"
                             objectFit="cover"
                             quality={100}
                             layout="responsive"
@@ -91,7 +90,6 @@ const Blog = ({ posts, featuredPost }) => {
                                 <Image
                                     src={post.featuredImage}
                                     alt={post.title}
-                                    placeholder="blurred"
                                     objectFit="cover"
                                     quality={100}
                                     layout="responsive"

@@ -26,7 +26,6 @@ export const Logos = () => {
 
                 <Image
                   src={darkMode ? "/images/storetasker-dark.png" : "/images/storetasker.png"}
-                  placeholder="blurred"
                   quality={100}
                   layout="responsive"
                   className="w-full"
@@ -45,7 +44,6 @@ export const Logos = () => {
 
                 <Image
                   src={"/images/builtinafrica.png"}
-                  placeholder="blurred"
                   quality={100}
                   layout="responsive"
                   width={100}

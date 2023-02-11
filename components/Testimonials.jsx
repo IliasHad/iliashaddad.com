@@ -103,7 +103,6 @@ export const Testimonials = () => {
                 <Image
                   src={client.imagePath}
                   alt={client.fullName}
-                  placeholder="blurred"
                   objectFit="cover"
                   quality={100}
                   layout="responsive"

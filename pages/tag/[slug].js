@@ -47,7 +47,6 @@ const Tag = ({ posts, title }) => {
                                 <Image
                                     src={post.featuredImage}
                                     alt={post.title}
-                                    placeholder="blurred"
                                     objectFit="cover"
                                     quality={100}
                                     layout="responsive"

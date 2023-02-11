@@ -63,7 +63,6 @@ const Post = ({ post }) => {
               <Image
                 src={post.metadata.featuredImage}
                 alt={post.metadata.title}
-                placeholder="blurred"
                 objectFit="cover"
                 quality={100}
                 layout="responsive"
@@ -157,7 +156,6 @@ const Post = ({ post }) => {
                         <Image
                           src={relatedPost.featuredImage}
                           alt={relatedPost.title}
-                          placeholder="blurred"
                           objectFit="cover"
                           quality={100}
                           layout="responsive"

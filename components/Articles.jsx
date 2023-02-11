@@ -22,7 +22,6 @@ export const Articles = ({ posts, featuredPost }) => {
         <Image
           src={featuredPost.featuredImage}
           alt={featuredPost.title}
-          placeholder="blurred"
           objectFit="cover"
           quality={100}
           layout="responsive"
@@ -74,7 +73,6 @@ export const Articles = ({ posts, featuredPost }) => {
               <Image
                 src={post.featuredImage}
                 alt={post.title}
-                placeholder="blur"
                 objectFit="cover"
                 quality={100}
                 layout="responsive"

@@ -23,7 +23,6 @@ export const Work = ({ clientProjects = [] }) => {
             <Image
               src={clientProject.featuredImage}
               alt={clientProject.title}
-              placeholder="blur"
               objectFit="cover"
               quality={100}
               layout="responsive"
