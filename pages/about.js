@@ -1,7 +1,7 @@
 import { Layout } from "../components/Layout";
 import { SEO } from "../components/Seo";
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import Img from "../public/images/IMG_7434.jpg"
 export default function About({ posts, featuredPost, sideProjects, clientProjects }) {
     return (
@@ -48,7 +48,10 @@ export default function About({ posts, featuredPost, sideProjects, clientProject
                             If you need a new custom-made website, a unique Shopify store or
                             app, have an idea of an engaging web application: Please feel free
                             to{" "}
-                            <Link style={{ borderBottom: "1px solid #000" }} href="/contact/">
+                            <Link
+                                style={{ borderBottom: "1px solid #000" }}
+                                href="/contact/"
+                                legacyBehavior>
                               
                                 <span className="font-bold underline cursor-pointer"> contact me</span>
                             </Link>{" "}
@@ -74,7 +77,6 @@ export default function About({ posts, featuredPost, sideProjects, clientProject
                 </div>
             </div>
         </Layout>
-
-    )
+    );
 }
 
