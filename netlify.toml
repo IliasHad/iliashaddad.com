@@ -1,7 +1,10 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  
+
+[functions]
+  node_bundler = "esbuild"
+
 [template.environment]
   NOTION_TOKEN = "Set notion token"
   DATABASE_ID = "Set the database ID"
