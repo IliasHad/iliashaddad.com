@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { getAllPublished, getSingleBlogPostBySlug } from "../../lib/notion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Layout } from "../../components/Layout";
 import ThemeContext from "../../context/ThemeContext";
 import { useContext } from "react";
@@ -104,7 +104,7 @@ const Post = ({ post }) => {
                   href={`/tag/${encodeURIComponent(tag)}`}
                   className="text-xl  py-4 text-gray-600 cursor-pointer"
                   key={index}
-                  legacyBehavior>
+                  >
                   <span
                     style={{
                       backgroundColor: "#5F5E5C",
@@ -168,7 +168,7 @@ const Post = ({ post }) => {
                             href={`/tag/${encodeURIComponent(relatedPost.tags[0])}`}
                             className="text-xl  py-4 text-gray-600"
                             key={index}
-                            legacyBehavior>
+                            >
                             <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
                               {relatedPost.tags[0]}
                             </span>

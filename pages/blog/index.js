@@ -1,5 +1,5 @@
 import { getAllPublished, getRecentFeaturedPost } from "../../lib/notion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Layout } from "../../components/Layout";
 import ThemeContext from "../../context/ThemeContext";
 import { useContext } from "react";
@@ -58,7 +58,7 @@ const Blog = ({ posts, featuredPost }) => {
                                 <Link
                                     href={`/tag/${featuredPost.tags[0]}`}
                                     className="text-xl  py-4 text-gray-600"
-                                    legacyBehavior>
+                                    >
                                     <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
                                         {featuredPost.tags[0]}
                                     </span>
@@ -101,7 +101,7 @@ const Blog = ({ posts, featuredPost }) => {
                                     <Link
                                         href={`/tag/${post.tags[0]}`}
                                         className="text-xl  py-4 text-gray-600"
-                                        legacyBehavior>
+                                        >
                                         <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
                                             {post.tags[0]}
                                         </span>

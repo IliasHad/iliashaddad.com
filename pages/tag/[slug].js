@@ -1,5 +1,5 @@
 import { getAllPublished, getBlogPostsByTag} from "../../lib/notion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Layout } from "../../components/Layout";
 import ThemeContext from "../../context/ThemeContext";
 import { useContext } from "react";
@@ -58,7 +58,7 @@ const Tag = ({ posts, title }) => {
                                     <Link
                                         href={`/tag/${post.tags[0]}`}
                                         className="text-xl  py-4 text-gray-600"
-                                        legacyBehavior>
+                                        >
                                         <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light">
                                             {post.tags[0]}
                                         </span>
