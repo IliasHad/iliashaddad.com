@@ -39,8 +39,7 @@ export const Calendar = ({ utm, textColor = 'text-black' }) => {
     };
   }, [ref]);
   return (
-    <div ref={ref}   >
-
+    <div ref={ref}>
       <Transition.Root show={openPopupWidget} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpenPopupWidget}>
           <Transition.Child
