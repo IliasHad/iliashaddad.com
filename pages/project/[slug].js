@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { getAllSideProjects, getAllClientsProjects, getProjectBySlug } from "../../lib/notion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Layout } from "../../components/Layout";
 import ThemeContext from "../../context/ThemeContext";
 import { useContext } from "react";

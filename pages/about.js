@@ -1,7 +1,7 @@
 import { Layout } from "../components/Layout";
 import { SEO } from "../components/Seo";
 import Link from 'next/link'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Img from "../public/images/IMG_7434.jpg"
 export default function About({ posts, featuredPost, sideProjects, clientProjects }) {
     return (
@@ -51,7 +51,7 @@ export default function About({ posts, featuredPost, sideProjects, clientProject
                             <Link
                                 style={{ borderBottom: "1px solid #000" }}
                                 href="/contact/"
-                                legacyBehavior>
+                                >
                               
                                 <span className="font-bold underline cursor-pointer"> contact me</span>
                             </Link>{" "}
