@@ -5,6 +5,9 @@
 [functions]
   node_bundler = "esbuild"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [template.environment]
   NOTION_TOKEN = "Set notion token"
   DATABASE_ID = "Set the database ID"
