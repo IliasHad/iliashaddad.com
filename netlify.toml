@@ -9,3 +9,5 @@
   SIDE_PROJECTS_DATABASE_ID = "Set the database ID"
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+[functions]
+  included_files = ["public/images/posts/*", "public/images/**/*"]
