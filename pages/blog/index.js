@@ -27,6 +27,8 @@ const Blog = ({ posts, featuredPost }) => {
                 ]}
                 description="Developer Blog"
                 title="Blog"
+                featuredImage={featuredPost.featuredImage}
+                url={"blog/" + featuredPost.slug}
             />
             <section className="p-12 blog-page">
                 <div className="mx-auto max-w-7xl py-16 sm:py-24 lg:px-8">

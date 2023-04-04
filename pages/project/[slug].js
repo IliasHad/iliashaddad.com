@@ -35,6 +35,8 @@ const Project = ({ project }) => {
                     `Shopify Developer Portfolio`,
                 ]}
                 title={project.metadata.title}
+                featuredImage={project.metadata.featuredImage}
+                url={"project/" + project.metadata.slug}
             />
             <div className="relative blog-page py-16  overflow-hidden">
                 <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full"></div>
