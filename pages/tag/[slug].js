@@ -28,6 +28,8 @@ const Tag = ({ posts, title }) => {
                 ]}
                 description="Developer Blog"
                 title="Blog"
+                featuredImage={posts[0].featuredImage}
+                url={"tag/" +  title}
             />
             <section className="p-12 blog-page">
                 <div className="mx-auto max-w-7xl py-16 sm:py-24 lg:px-8">

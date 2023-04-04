@@ -22,6 +22,8 @@ export default function About({ posts, featuredPost, sideProjects, clientProject
                 ]}
                 title="About Me"
                 description="About Ilias Haddad"
+                featuredImage={"/images/IMG_7434.jpg"}
+                url={""}
             />
             <div className=" p-12 gap-12  grid grid-cols-1 md:grid-cols-2 items-center">
                 <div>
