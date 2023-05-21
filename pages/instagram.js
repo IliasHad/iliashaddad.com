@@ -62,7 +62,7 @@ export default function Instagram({
 
             <div class="flex flex-col mx-auto text-black text-center">
               <a
-                href="https://twitter.com/KennKibadi"
+                href="https://twitter.com/iliashaddad3"
                 target="__blank"
                 class="flex flex-row  justify-center mx-auto my-2 bg-white hover:bg-gray-100  w-2/4 text-mirage-500 py-2 pl-2 rounded-md border-r-4"
               >
