@@ -10,6 +10,7 @@ import { SEO } from "../../components/Seo";
 import Link from 'next/link'
 import { FaTwitter } from "react-icons/fa";
 import { DiscussionEmbed } from "disqus-react"
+import rehypeRaw from "rehype-raw";
 
 const CodeBlock = ({ language, codestring }) => {
   return (
@@ -51,16 +52,18 @@ const Post = ({ post }) => {
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full"></div>
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-lg max-w-prose mx-auto">
-            <h1>
-              <span
-                className={
+            <h1 className={"mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-white sm:text-4xl"}>
 
-                  "mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-white sm:text-4xl"
-                }
-              >
-                {post.metadata.title}
-              </span>
+              {post.metadata.title}
             </h1>
+            <div className="pt-4 text-center">
+              <p className="text-md my-2 text-gray-500 ">Published Date: {post.metadata.date}</p>
+              {post.metadata.updatedAt && (
+                <p className="text-md my-2 text-gray-500 ">
+                  Updated Date: {post.metadata.updatedAt}
+                </p>
+              )}
+            </div>
             <div className="py-8">
               <Image
                 src={post.metadata.featuredImage}
@@ -83,6 +86,7 @@ const Post = ({ post }) => {
             }
           >
             <ReactMarkdown
+              rehypePlugins={[rehypeRaw]}
               components={{
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '')
@@ -96,7 +100,7 @@ const Post = ({ post }) => {
                       {children}
                     </code>
                   );
-                }
+                },
               }}>{post.markdown}</ReactMarkdown>
           </div>
           <div className="mt-6 mx-auto" style={{ maxWidth: "70ch" }}>
