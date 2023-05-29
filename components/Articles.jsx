@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 import Image from "next/legacy/image";
 
 export const Articles = ({ posts, featuredPost }) => {
@@ -15,10 +15,7 @@ export const Articles = ({ posts, featuredPost }) => {
         </div>
       </div>
 
-      <div
-        className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12"
-      >
-
+      <div className="grid  grid-cols-1 md:grid-cols-2 py-12 gap-x-24 gap-y-12">
         <Image
           src={featuredPost.featuredImage}
           alt={featuredPost.title}
@@ -40,7 +37,7 @@ export const Articles = ({ posts, featuredPost }) => {
               <span
                 style={{
                   backgroundColor: "#5F5E5C",
-                  color: "#fff"
+                  color: "#fff",
                 }}
                 className="inline-flex dark:text-white items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light"
               >
@@ -52,8 +49,8 @@ export const Articles = ({ posts, featuredPost }) => {
           <p className="text-md my-2 text-gray-500 ">{featuredPost.date}</p>
 
           <p
-              className="text-lg text-gray-500 py-2 dark:text-gray-300"
-              dangerouslySetInnerHTML={{
+            className="text-lg text-gray-500 py-2 dark:text-gray-300"
+            dangerouslySetInnerHTML={{
               __html: featuredPost.description,
             }}
           ></p>
@@ -63,13 +60,11 @@ export const Articles = ({ posts, featuredPost }) => {
         </div>
       </div>
 
-
       <div className="grid  grid-cols-1 md:grid-cols-3 py-12 gap-x-24 gap-y-8">
         {posts
-          .filter(post => post.slug !== featuredPost.slug)
-          .map(post => (
+          .filter((post) => post.slug !== featuredPost.slug)
+          .map((post) => (
             <div key={post.id}>
-
               <Image
                 src={post.featuredImage}
                 alt={post.title}
@@ -88,7 +83,7 @@ export const Articles = ({ posts, featuredPost }) => {
                   <span
                     style={{
                       backgroundColor: "#5F5E5C",
-                      color: "#fff"
+                      color: "#fff",
                     }}
                     className="inline-flex dark:text-white items-center px-3 py-0.5 rounded-full text-sm font-medium bg-stone text-stone-light"
                   >
@@ -98,12 +93,15 @@ export const Articles = ({ posts, featuredPost }) => {
               </div>
 
               <p className="text-2xl font-semibold">{post.title}</p>
-              <p className="text-md my-2 text-gray-500 ">  {post.date}</p>
-
-
+              <p className="text-md my-2 text-gray-500 ">{post.date}</p>
+              {post.updatedAt && (
+                <p className="text-md my-2 text-gray-500 ">
+                  Updated: {post.updatedAt}
+                </p>
+              )}
               <p
-              className="text-lg text-gray-500 py-2 dark:text-gray-300"
-              dangerouslySetInnerHTML={{
+                className="text-lg text-gray-500 py-2 dark:text-gray-300"
+                dangerouslySetInnerHTML={{
                   __html: post.description,
                 }}
               ></p>
@@ -113,8 +111,6 @@ export const Articles = ({ posts, featuredPost }) => {
             </div>
           ))}
       </div>
-
-
-    </section >
+    </section>
   );
 };
