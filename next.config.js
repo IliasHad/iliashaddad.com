@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    domains: ['s3.us-west-2.amazonaws.com', 'ik.imagekit.io', 'uc4a401a2eb5216fa6fb0e3bcab9.previews.dropboxusercontent.com'],
+    domains: ['s3.us-west-2.amazonaws.com', 'iliashaddad.nyc3.digitaloceanspaces.com', 'uc4a401a2eb5216fa6fb0e3bcab9.previews.dropboxusercontent.com'],
   },
   staticPageGenerationTimeout: 60 * 10,
   webpack: (config, { isServer }) => {
