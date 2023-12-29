@@ -1,0 +1,53 @@
+{
+  "name": "tailwindui-studio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "browserslist": "defaults, not ie <= 11",
+  "dependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@headlessui/react": "^1.7.16",
+    "@leafac/rehype-shiki": "^2.2.1",
+    "@mdx-js/loader": "^2.3.0",
+    "@mdx-js/mdx": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
+    "@next/mdx": "^13.4.8",
+    "@notionhq/client": "^2.2.10",
+    "acorn": "^8.10.0",
+    "acorn-jsx": "^5.3.2",
+    "autoprefixer": "^10.4.7",
+    "aws-sdk": "^2.1446.0",
+    "clsx": "^1.2.0",
+    "dotenv": "^16.3.1",
+    "escape-string-regexp": "^5.0.0",
+    "fast-glob": "^3.2.12",
+    "framer-motion": "^10.12.16",
+    "gray-matter": "^4.0.3",
+    "next": "13.4.12",
+    "notion-to-md": "^3.1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
+    "recma-import-images": "0.0.3",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
+    "remark-rehype-wrap": "0.0.3",
+    "remark-unwrap-images": "^3.0.1",
+    "shiki": "^0.11.1",
+    "tailwindcss": "^3.3.2",
+    "unified-conditional": "0.0.2"
+  },
+  "devDependencies": {
+    "eslint": "8.26.0",
+    "eslint-config-next": "13.4.12",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.6"
+  }
+}
