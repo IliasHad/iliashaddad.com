@@ -2,9 +2,7 @@ import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
 import { GridList, GridListItem } from '@/components/GridList'
 import { PageIntro } from '@/components/PageIntro'
-import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
-import { StatList, StatListItem } from '@/components/StatList'
 
 function Culture() {
   return (
@@ -38,7 +36,6 @@ function Culture() {
   )
 }
 
-
 export const metadata = {
   title: 'About Us',
   description:
@@ -46,45 +43,29 @@ export const metadata = {
 }
 
 export default async function About() {
-
   return (
     <>
-      <PageIntro eyebrow="About me" title="Our strength is collaboration">
+      <PageIntro eyebrow="About me" title="A Problem solver">
         <p>
-          We believe that our strength lies in our collaborative approach, which
-          puts our clients at the center of everything we do.
+          I&apos;m an experienced and self-taught software engineer with more
+          than 3 years of experience in full-stack dev. I&apos;ve been working with
+          the most popular front-end frameworks(Vue and React), and NodeJs on
+          the backend.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            Studio was started by three friends who noticed that developer
-            studios were charging clients double what an in-house team would
-            cost. Since the beginning, we have been committed to doing things
-            differently by charging triple instead.
+            I&apos;m also a Shopify developer. I help Shopify store owners and
+            clients with their technical needs (custom Shopify theme dev, custom
+            Shopify app dev and speed optimization).
           </p>
           <p>
-            At Studio, we’re more than just colleagues — we’re a family. This
-            means we pay very little and expect people to work late. We want our
-            employees to bring their whole selves to work. In return, we just
-            ask that they keep themselves there until at least 6:30pm.
+            I love mountain biking, especially long trips where I can visit new
+            places! If you need a new custom-made website, a unique Shopify
+            store or app, have an idea of an engaging web application: Please
+            feel free to contact me and we&apos;ll talk about the details!
           </p>
         </div>
       </PageIntro>
-      <Container className="mt-16">
-        <StatList>
-          <StatListItem value="35" label="Underpaid employees" />
-          <StatListItem value="52" label="Placated clients" />
-          <StatListItem value="$25M" label="Invoices billed" />
-        </StatList>
-      </Container>
-
-      <Culture />
-
-
-      <PageLinks
-        className="mt-24 sm:mt-32 lg:mt-40"
-        title="From the blog"
-        intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
-      />
 
       <ContactSection />
     </>
