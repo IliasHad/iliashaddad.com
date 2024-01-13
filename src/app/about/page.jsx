@@ -49,7 +49,7 @@ export default async function About() {
 
   return (
     <>
-      <PageIntro eyebrow="About us" title="Our strength is collaboration">
+      <PageIntro eyebrow="About me" title="Our strength is collaboration">
         <p>
           We believe that our strength lies in our collaborative approach, which
           puts our clients at the center of everything we do.

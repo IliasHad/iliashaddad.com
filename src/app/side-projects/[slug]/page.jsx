@@ -9,7 +9,7 @@ import { TagList, TagListItem } from '@/components/TagList'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
 export default async function Page({ params }) {
-  const project = await getProjectBySlug(params.slug, 'clientProject')
+  const project = await getProjectBySlug(params.slug, 'sideProject')
   return (
     <>
       <article className="mt-24 sm:mt-32 lg:mt-40">

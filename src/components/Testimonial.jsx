@@ -31,11 +31,10 @@ export function Testimonial({ children, client, className }) {
                 alt={client.name}
                 objectFit="cover"
                 quality={100}
-                layout="responsive"
-                height={20}
-                width={60}
+                layout="fixed"
+                height={150}
+                width={200}
                 imgStyle={{ objectFit: 'cover' }}
-                className="rounded-full w-12 h-12"
               />
             </figcaption>
           </figure>

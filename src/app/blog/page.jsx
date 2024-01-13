@@ -16,7 +16,7 @@ export const metadata = {
 }
 
 export default async function Blog() {
-  const articles = await getAllPublished()
+  const articles = await  getAllPublished()
   const featuredArticle = await getRecentFeaturedPost()
 
   return (

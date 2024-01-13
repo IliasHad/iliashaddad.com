@@ -6,27 +6,12 @@ import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
 const navigation = [
-
-  {
-    title: 'Work',
-    links: [
-      { title: 'Makerlapse', href: '/work/makerlapse' },
-      { title: 'Pepiniere Khaoula', href: '/work/pepinere-khaoula' },
-    ],
-  },
-  {
-    title: 'Side projects',
-    links: [
-      { title: 'Makerlapse', href: '/work/makerlapse' },
-      { title: 'Pepiniere Khaoula', href: '/work/pepinere-khaoula' },
-    ],
-  },
   {
     title: 'Me',
     links: [
       { title: 'About', href: '/about' },
       { title: 'Blog', href: '/blog' },
-      { title: 'Contact us', href: '/contact' },
+      { title: 'Contact me', href: '/contact' },
     ],
   },
   {
@@ -38,7 +23,7 @@ const navigation = [
 function Navigation() {
   return (
     <nav>
-      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-2">
         {navigation.map((section) => (
           <li key={section.title}>
             <div className="font-display text-sm font-semibold tracking-wider text-neutral-950">
@@ -125,7 +110,7 @@ export function Footer() {
               </Link>
           </Link>
           <p className="text-sm text-neutral-700">
-            © Ilias Haddad. {new Date().getFullYear()}
+            © Ilias Haddad {new Date().getFullYear()}
           </p>
         </div>
       </FadeIn>

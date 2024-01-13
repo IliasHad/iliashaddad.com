@@ -53,7 +53,7 @@ function Header({
           <Link href="/" legacyBehavior>
             <span
               className={clsx(
-                'relative h-10 w-10 flex-none cursor-pointer overflow-hidden rounded-full transition-all duration-200'
+                'relative h-10 w-10 flex-none cursor-pointer overflow-hidden  transition-all duration-200'
               )}
             >
               <h1>Ilias Haddad</h1>
@@ -62,7 +62,7 @@ function Header({
         </div>
         <div className="flex items-center gap-x-8">
           <Button href="/contact" invert={invert}>
-            Contact us
+            Contact me
           </Button>
           <button
             ref={toggleRef}
@@ -117,12 +117,12 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem href="/work">My Projects</NavigationItem>
+        <NavigationItem href="/work">Work</NavigationItem>
         <NavigationItem href="/about">About Me</NavigationItem>
       </NavigationRow>
       <NavigationRow>
         <NavigationItem href="/blog">Blog</NavigationItem>
-        <NavigationItem href="/blog">Side Projects</NavigationItem>
+        <NavigationItem href="/side-projects">Side Projects</NavigationItem>
       </NavigationRow>
     </nav>
   )
@@ -202,7 +202,7 @@ function RootLayoutInner({ children }) {
                 <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
                     <h2 className="font-display text-base font-semibold text-white">
-                      Follow us
+                      Follow me
                     </h2>
                     <SocialMedia className="mt-6" invert />
                   </div>
