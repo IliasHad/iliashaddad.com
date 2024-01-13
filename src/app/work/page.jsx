@@ -27,7 +27,7 @@ function Projects({ projects }) {
                     <span className="absolute inset-0 rounded-3xl" />
                     <Image
                       src={project.logo}
-                      alt={project.client.plain_text}
+                      alt={project.client}
                       className="h-12 w-16"
                       width={50}
                       height={100}
